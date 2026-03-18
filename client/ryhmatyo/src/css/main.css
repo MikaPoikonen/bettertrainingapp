@@ -1,0 +1,71 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* 1️⃣ Pääflex: vasen + oikea */
+.layout {
+  display: flex;
+  min-height: 100vh;
+  font-size: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  
+}
+
+/* Vasen navigaatio */
+.sidebar {
+  width: 220px;
+  background: linear-gradient(to bottom, rgb(43, 43, 223), rgb(129, 129, 207));
+  padding: 15px;
+  list-style: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  
+}
+
+.sidebar ul {
+    display: flex;
+  list-style: none;
+  font-size: 30px;
+  flex-direction: column;
+  gap: 40px;
+  
+}
+
+
+/* 2️⃣ Oikea puoli = pystysuuntainen flex */
+.right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+}
+
+/* Header */
+.header {
+  background: linear-gradient(to right, rgb(43, 43, 223), rgb(129, 129, 207));
+    display: flex;
+  justify-content: end; /* työntää ääripäihin */
+  align-items: center;
+  height: 10%;
+}
+
+.header button {
+    margin-right: 50px;
+    height: 40px;
+    width: 100px;
+    text-align: center;
+}
+
+
+/* Content täyttää välin */
+.content {
+  flex: 1;
+  padding: 15px;
+}
+
+/* Footer alas */
+.footer {
+  background: #eee;
+  padding: 15px;
+}
+
