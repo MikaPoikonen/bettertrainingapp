@@ -1,0 +1,13 @@
+## Test HTTp requests
+
+@apiurl = http://localhost:3000/api
+
+
+
+
+################################
+###### users endpoints
+
+### GET user by id:
+
+GET {{apiurl}}/users/1

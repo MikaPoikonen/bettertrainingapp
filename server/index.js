@@ -1,12 +1,26 @@
-const express = require("express");
+import express from 'express';
+import userRouter from './src/routes/user-router.js';
 
+
+const hostname = '127.0.0.1';
 const app = express();
 const PORT = 3000;
 
-app.get("/", (req, res) => {
-  res.send("Backend toimii");
+app.use(express.json());
+app.use('/', express.static('public'));
+
+//app.use(requestLogger);
+
+
+
+
+// Api root
+app.get('/api', (req, res) => {
+  res.send('This is dummy items API!');
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+app.use('/api/users', userRouter)
+
+app.listen(PORT,hostname, () => {
+  console.log(`Server running on http://${hostname}:${PORT}/`);
 });
