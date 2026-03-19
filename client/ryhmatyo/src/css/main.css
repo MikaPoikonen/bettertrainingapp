@@ -69,3 +69,25 @@ html, body {
   padding: 15px;
 }
 
+/*login laatikko*/
+.laatikko {
+height: 100px;
+width: 100px;
+border: 5px solid black;
+}
+
+/*login formi*/
+.loginform {
+  background-color: gray;
+  color:white;
+  width: 300px;
+  height: 200px;
+}
+
+/*rekisteröinti nappi*/
+.login_button {
+box-sizing: border-box;
+
+}
+
+
