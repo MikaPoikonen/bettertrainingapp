@@ -30,4 +30,18 @@ const addUser = async (user) => {
     }
 };
 
-export {getUserById, addUser};
+
+const putUser = async (user) => {
+    const {user_id,password} = user;
+    const sql = 'UPDATE users SET  password = ? WHERE user_id = ?'
+    const params = [password,user_id];
+    try {
+    const rows = await promisePool.execute(sql,params);
+        return {rows}; 
+  } catch (e) {
+    console.error('error', e.message);
+    return {error: e.message};
+  }
+};   
+
+export {getUserById, addUser,putUser};

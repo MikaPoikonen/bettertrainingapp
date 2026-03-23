@@ -7,6 +7,13 @@ const hostname = '127.0.0.1';
 const app = express();
 const PORT = 3000;
 
+// app.use((req, res, next) => {
+//   console.log("BODY RAW TEST:", req.headers["content-type"]);
+//   next();
+// });
+
+
+
 app.use(express.json());
 app.use('/', express.static('public'));
 

@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 
 import {
-    getUserById, addUser
+    getUserById, addUser,putUser
 } from '../models/user-model.js';
 
 const getUserByIdController = async (req, res) => {
@@ -27,4 +27,21 @@ const addUserController = async (req, res) => {
     res.status(201).json({message: 'new user added', user_id: newUserId});
 };
 
-export {getUserByIdController, addUserController};
+const updateUserController = async (req, res) => {
+const user_id = req.params.id;
+const { password } = req.body;
+
+
+  const result = await putUser ({
+    user_id,
+    password
+  });
+     if (!result.error) {
+      res.status(200).json({ message: 'Entry updated.', result });
+    } else {
+      res.status(500).json(result);
+    }
+};
+  
+
+export {getUserByIdController, addUserController,updateUserController};

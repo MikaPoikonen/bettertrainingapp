@@ -17,9 +17,19 @@ POST {{apiurl}}/users
 Content-Type: application/json
 
 {
-    "username": "testuser",
-    "password": "testpassword",
-    "email": "toka@maili.fi",
+    "username": "testimika1",
+    "password": "salasana123",
+    "email": "toka1@maili1.fi",
     "start_weight": 90,
     "birth_year": "2000-02-02"
 }
+
+### PUT user
+PUT {{apiurl}}/users/2
+Content-Type: application/json
+
+{
+  "password": "enomistasalasanaa"
+}
+
+
