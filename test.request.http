@@ -11,3 +11,15 @@
 ### GET user by id:
 
 GET {{apiurl}}/users/1
+
+### POST user
+POST {{apiurl}}/users
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "password": "testpassword",
+    "email": "toka@maili.fi",
+    "start_weight": 90,
+    "birth_year": "2000-02-02"
+}

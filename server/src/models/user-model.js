@@ -14,4 +14,20 @@ const getUserById = async (id) => {
     }
 };
 
-export {getUserById}
+// POST - add a new user
+
+const addUser = async (user) => {
+    const {username, password, email, start_weight, birth_year} = user;
+    const sql = `INSERT Users (username, password, email, start_weight, birth_year)
+                 VALUES (?, ?, ?, ?, ?)`;
+    const params = [username, password, email, start_weight, birth_year];
+    try {
+        const result = await promisePool.execute(sql, params);
+        return {user_id: result[0].insertId};
+    } catch (e) {
+        console.error('error', e.message);
+        return {error: e.message};
+    }
+};
+
+export {getUserById, addUser};

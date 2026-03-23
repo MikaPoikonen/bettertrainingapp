@@ -1,5 +1,6 @@
 import express from 'express';
 import userRouter from './src/routes/user-router.js';
+import 'dotenv/config';
 
 
 const hostname = '127.0.0.1';
