@@ -1,5 +1,37 @@
 import promisePool from "../utils/database.js";
 
+
+
+const findUserByUserName = async (username) => {
+    const sql = 'SELECT * FROM users where username = ?';
+    const [rows] = await promisePool.execute(sql, [username]);
+    return rows[0];
+}
+
+// Kubioksen hakua varten
+ const selectUserByEmail = async (email) => {
+   try {
+     const sql = 'SELECT * FROM Users WHERE email=?';
+     const params = [email];
+     const [rows] = await promisePool.query(sql, params);
+     // console.log(rows);
+     // if nothing is found with the user id, result array is empty []
+     if (rows.length === 0) {
+       return {error: 404, message: 'user not found'};
+     }
+     // Remove password property from result
+     delete rows[0].password;
+     return rows[0];
+   } catch (error) {
+     console.error('selectUserByEmail', error);
+     return {error: 500, message: 'db error'};
+   }
+ };
+
+
+
+
+
 // get usr by id
 
 const getUserById = async (id) => {
@@ -44,6 +76,13 @@ const putUser = async (user) => {
   }
 };
 
+const deleteUser = async (user_id) => {
+    const sql = 'DELETE FROM users WHERE user_id = ?'
+    const [result] = await promisePool.execute(sql, [user_id]);
+    return result.affectedRows;
+};
 
 
-export {getUserById, addUser,putUser};
+
+
+export {getUserById, addUser,putUser, deleteUser,findUserByUserName,selectUserByEmail};

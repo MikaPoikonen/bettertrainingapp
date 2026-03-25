@@ -1,7 +1,17 @@
 import express from 'express';
-import { getUserByIdController, addUserController,updateUserController } from '../controllers/user-controller.js';
+// import { authenticateToken } from '../middlewares/authentication.js';
+
+// Käytetään kubios controlleria
+import { 
+  //getUserByIdController, 
+  addUserController,
+  updateUserController, 
+  deleteUserController, 
+  //postLogin 
+} from '../controllers/user-controller.js';
 import { userValidation, updateUserValidation } from '../middlewares/userValidation.js';
 import validationErrorHandler from '../middlewares/error-handler.js';
+import { postLogin,getMe } from '../controllers/kubios-auth-controller.js';
 
 const userRouter = express.Router();
 
@@ -11,15 +21,18 @@ const userRouter = express.Router();
 
 userRouter
   .route('/:id')
-  .get(getUserByIdController)
+  //.get(getUserByIdController)
   .put(
     updateUserValidation,
     validationErrorHandler,
-    updateUserController
-);
+    updateUserController)
+  .delete(deleteUserController);  
+
+userRouter.post('/login', postLogin)  
 
 userRouter
   .route('/')
+  .get(getMe)
   .post(
     userValidation,
     validationErrorHandler,

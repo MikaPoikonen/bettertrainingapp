@@ -1,6 +1,7 @@
 import express from 'express';
 import userRouter from './src/routes/user-router.js';
 import 'dotenv/config';
+import requestLogger from './src/middlewares/logger.js'
 
 
 const hostname = '127.0.0.1';
@@ -32,6 +33,9 @@ app.use('/api/users', userRouter)
 app.listen(PORT,hostname, () => {
   console.log(`Server running on http://${hostname}:${PORT}/`);
 });
+
+
+app.use(requestLogger)
 
 app.use((err, req, res, next) => {
   console.error(err);

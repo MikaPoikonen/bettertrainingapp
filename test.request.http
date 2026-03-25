@@ -1,6 +1,12 @@
-## Test HTTp requests
+
+
+
+## Test HTTp request
+
 
 @apiurl = http://localhost:3000/api
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxOCwidXNlcm5hbWUiOiJsb2dpbnRlc3RpIiwiZW1haWwiOiJsb2dpbkB0ZXN0aS5maSIsInN0YXJ0X3dlaWdodCI6IjkwLjAwIiwiYmlydGhfeWVhciI6IjIwMDAtMDItMDFUMjI6MDA6MDAuMDAwWiIsImNyZWF0ZWRfYXQiOiIyMDI2LTAzLTI1VDA5OjU2OjQ4LjAwMFoiLCJ1c2VyX2xldmVsIjoicmVndWxhciIsImlhdCI6MTc3NDQzMjg2OCwiZXhwIjoxNzc0NTE5MjY4fQ.I1osFIrx8v5D8GG5sgP9P21RNMgdCWItrJoSDIXmGCw
 
 
 
@@ -17,22 +23,34 @@ POST {{apiurl}}/users
 Content-Type: application/json
 
 {
-    "username": "testioikein3",
+    "username": "logintesti",
     "password": "Salasana123",
-    "email": "toka31@maili1.fi",
+    "email": "login@testi.fi",
     "start_weight": 90,
     "birth_year": "2000-02-02"
 }
+
+
+########### User logIn
+POST {{apiurl}}/users/login
+Content-Type: application/json
+
+{
+"username": "",
+"password": ""
+}
+
 
 ### PUT user
 PUT {{apiurl}}/users/17
 Content-Type: application/json
 
 {
-"username": "muutettu_username11123",
-"password": "enomistasalasanaa111231231",
-"email": "muutettu@muutettu111231313.fi"
+"username": "muutettu",
+"password": "Salasana123",
+"email": "muutettu@muutettu11.fi"
 }
 
 
-
+### Delete user by id
+DELETE {{apiurl}}/users/3
