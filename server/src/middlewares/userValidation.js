@@ -59,4 +59,35 @@ const userValidation = [
     })
 ];
 
-export default userValidation
+const updateUserValidation = [
+  body('username')
+    .optional({ checkFalsy: true })
+    .trim()
+    .isLength({ min: 3, max: 25 })
+    .withMessage('Username 3-25 merkkiä')
+    .matches(/^[a-zA-Z0-9_]+$/)
+    .withMessage('Vain kirjaimet, numerot ja _ sallittu'),
+
+  body('password')
+    .optional({ checkFalsy: true })
+    .trim()
+    .notEmpty()
+    .withMessage('Salasana ei voi olla tyhjä')
+    .isLength({ min: 8, max: 50 })
+    .withMessage('Salasana vähintään 8 merkkiä')
+    .matches(/[A-Z]/)
+    .withMessage('Vähintään yksi iso kirjain')
+    .matches(/[a-z]/)
+    .withMessage('Vähintään yksi pieni kirjain')
+    .matches(/[0-9]/)
+    .withMessage('Vähintään yksi numero'),
+
+  body('email')
+    .optional({ checkFalsy: true })
+    .trim()
+    .isEmail()
+    .withMessage('Virheellinen sähköposti')
+    .normalizeEmail(),
+];
+
+export { userValidation, updateUserValidation };

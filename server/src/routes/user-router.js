@@ -1,6 +1,6 @@
 import express from 'express';
 import { getUserByIdController, addUserController,updateUserController } from '../controllers/user-controller.js';
-import userValidation from '../middlewares/userValidation.js';
+import { userValidation, updateUserValidation } from '../middlewares/userValidation.js';
 import validationErrorHandler from '../middlewares/error-handler.js';
 
 const userRouter = express.Router();
@@ -12,7 +12,11 @@ const userRouter = express.Router();
 userRouter
   .route('/:id')
   .get(getUserByIdController)
-  .put(updateUserController);
+  .put(
+    updateUserValidation,
+    validationErrorHandler,
+    updateUserController
+);
 
 userRouter
   .route('/')

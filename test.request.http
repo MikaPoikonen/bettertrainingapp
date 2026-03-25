@@ -17,19 +17,21 @@ POST {{apiurl}}/users
 Content-Type: application/json
 
 {
-    "username": "testioikein",
+    "username": "testioikein3",
     "password": "Salasana123",
-    "email": "toka11@maili1.fi",
+    "email": "toka31@maili1.fi",
     "start_weight": 90,
     "birth_year": "2000-02-02"
 }
 
 ### PUT user
-PUT {{apiurl}}/users/2
+PUT {{apiurl}}/users/17
 Content-Type: application/json
 
 {
-  "password": "enomistasalasanaa"
+  "username": "",
+  "password": "Uusisalis2",
+  "email": ""
 }
 
 
