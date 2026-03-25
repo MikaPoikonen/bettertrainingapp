@@ -29,9 +29,10 @@ PUT {{apiurl}}/users/17
 Content-Type: application/json
 
 {
-  "username": "",
-  "password": "Uusisalis2",
-  "email": ""
+"username": "muutettu_username11123",
+"password": "enomistasalasanaa111231231",
+"email": "muutettu@muutettu111231313.fi"
 }
+
 
 
