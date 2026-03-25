@@ -1,5 +1,7 @@
 import express from 'express';
 import { getUserByIdController, addUserController,updateUserController } from '../controllers/user-controller.js';
+import userValidation from '../middlewares/userValidation.js';
+import validationErrorHandler from '../middlewares/error-handler.js';
 
 const userRouter = express.Router();
 
@@ -13,9 +15,13 @@ userRouter
   .put(updateUserController);
 
 userRouter
-.route('/')
-// POST - new user
-.post(addUserController);
+  .route('/')
+  .post(
+    userValidation,
+    validationErrorHandler,
+    addUserController
+  );
+
 
 
 
