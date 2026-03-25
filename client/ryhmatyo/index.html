@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,39 +9,72 @@
 <body>
 <div class="layout">
 
-    <nav class="sidebar">
-      <ul>
-        <li>Kissa</li>
-        <li>Kala</li>
-        <li>Koiranpentu</li>
-        <li>Hamsteri</li>
-      </ul>
-    </nav>
-
     <div class="right">
 
       <header class="header">
-        <button>Mitä tähän 
-        </button>
+        <img id="better_training_logo" src="public/img/bettertrainngapplogo_nobackground.jpg" alt="Better Training Logo">
+        <span class="app-name">Better Training App</span>
+
+        <button>Asetukset</button>
       </header>
 
       <main class="content">
-        <h1>Sisältö</h1>
-        <p>Tähän tulee kontenttia</p>
+        <div class="hero">
+          <div class="inner_box">
+            Welcame to Better Treinin app
+          </div>
+          <img id="olympiakuva" src="public/img/olympiakuva.jpg" alt="Olympic image">
+        </div>
         <h2>Login</h2>
-        <form class="loginform">
-        <label for="username">Username</label>
-        <input required>
-        <label for="password">Password</label>
-        <input required>
-        <button class="login_button">Kirjaudu sisään</button>
-        <button class="register_button">Rekisteröidy</button>
-        </form>
-        <!-- <div class="laatikko" id="login_laatikko">Login</div> -->
+        
+<form class="loginform">
+
+  <div class="form-row">
+    <label for="username">Username</label>
+    <input required>
+  </div>
+
+  <div class="form-row">
+    <label for="password">Password</label>
+    <input required>
+  </div>
+
+  <div class="button-row">
+    <button class="login_button">Kirjaudu sisään</button>
+    <button type="button" class="register_button" id="open_register_dialog">Rekisteröidy</button>
+  </div>
+
+</form>
       </main>
 
-      
+      <!-- Rekisteröitymistä varten kirjattavat tiedot -->
+      <dialog id="register_form">
 
+        <h2>Create User</h2>
+
+        <button type="button" id="close_register_dialog">×</button>
+
+        <form class="registerform">
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="username">Username</label>
+          <input type="text" id="reg_username" name="username" required>
+
+          <label for="password">Password</label>
+          <input type="password" id="reg_password" name="password" required>
+
+          <label for="birth_year">Syntymävuosi</label>
+          <input type="number" id="birth_year" name="birth_year" required>
+
+          <label for="start_weight">Aloituspaino (kg)</label>
+          <input type="number" id="start_weight" name="start_weight" required>
+
+          <button class="register_button">Rekisteröidy</button>
+        </form>
+      </dialog>
+      
       <footer class="footer">
         Footer
       </footer>
@@ -48,6 +82,8 @@
     </div>
   </div>
 </body>
+
 <script type="module" src="/src/main.js"></script>
 <script type="module" src="/src/js/register.js"></script>
 </html>
+``
