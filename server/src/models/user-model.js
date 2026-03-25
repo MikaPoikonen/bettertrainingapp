@@ -32,9 +32,9 @@ const addUser = async (user) => {
 
 
 const putUser = async (user) => {
-    const {user_id,password} = user;
-    const sql = 'UPDATE users SET  password = ? WHERE user_id = ?'
-    const params = [password,user_id];
+    const {username,user_id,password,email} = user;
+    const sql = 'UPDATE users SET username=?, password=?, email=? WHERE user_id = ?';
+    const params = [username,password,email,user_id];
     try {
     const rows = await promisePool.execute(sql,params);
         return {rows}; 

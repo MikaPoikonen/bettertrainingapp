@@ -27,14 +27,18 @@ const addUserController = async (req, res) => {
     res.status(201).json({message: 'new user added', user_id: newUserId});
 };
 
+
+// PUT USER
 const updateUserController = async (req, res) => {
 const user_id = req.params.id;
-const { password } = req.body;
+const {username, password, email} = req.body;
 
 
   const result = await putUser ({
     user_id,
-    password
+    username,
+    password,
+    email
   });
      if (!result.error) {
       res.status(200).json({ message: 'Entry updated.', result });
