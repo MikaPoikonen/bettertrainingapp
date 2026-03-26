@@ -37,6 +37,7 @@ CREATE TABLE Kubios_payload (
     bpm VARCHAR(3),
     mood VARCHAR(50),
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    kubios_id VARCHAR(64) NOT NULL UNIQUE,
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 

@@ -80,9 +80,12 @@ const postLogin = async (req, res) => {
     if (await bcrypt.compare(password, user.password)) {
       delete user.password;
       // TÄssä kohtaa luodaan JWT token käyttämällä sercret fron .env file
-      const token = jwt.sign(user, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRES_IN,
-      }); // tehdään muuttuja, jwt käyttöön. Haetaan user, procress ja metodi. Aika kauanko voimassa
+const token = jwt.sign(
+  { userId: user.user_id, username: user.username, email: user.email },
+  process.env.JWT_SECRET,
+  { expiresIn: process.env.JWT_EXPIRES_IN }
+);
+ // tehdään muuttuja, jwt käyttöön. Haetaan user, procress ja metodi. Aika kauanko voimassa
       return res.json({message: 'login ok', user, token});
     }
     return res.status(403).json({error: 'invalid password'});

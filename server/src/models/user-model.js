@@ -62,6 +62,21 @@ const addUser = async (user) => {
     }
 };
 
+const addUserKubios = async (user) => {
+    const {username, password, email} = user;
+    const sql = `INSERT Users (username, password, email)
+                 VALUES (?, ?, ?)`;
+    const params = [username, password, email];
+    try {
+        const result = await promisePool.execute(sql, params);
+        return {user_id: result[0].insertId};
+    } catch (e) {
+        console.error('error', e.message);
+        return {error: e.message};
+    }
+};
+
+
 
 const putUser = async (user) => {
     const {user_id,username,password,email} = user;
@@ -85,4 +100,4 @@ const deleteUser = async (user_id) => {
 
 
 
-export {getUserById, addUser,putUser, deleteUser,findUserByUserName,selectUserByEmail};
+export {getUserById, addUser,putUser, deleteUser,findUserByUserName,selectUserByEmail,addUserKubios};

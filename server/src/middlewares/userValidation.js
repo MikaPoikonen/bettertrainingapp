@@ -7,7 +7,7 @@ const userValidation = [
     .trim()
     .isLength({ min: 3, max: 25 })
     .withMessage('Käyttäjänimi 3-25 merkkiä')
-    .matches(/^[a-zA-Z0-9_]+$/)
+    .matches(/^[a-zA-Z0-9_@]+$/)
     .withMessage('Vain kirjaimet, numerot ja _ sallittu'),
 
   // PASSWORD
@@ -65,7 +65,7 @@ const updateUserValidation = [
     .trim()
     .isLength({ min: 3, max: 25 })
     .withMessage('Username 3-25 merkkiä')
-    .matches(/^[a-zA-Z0-9_]+$/)
+    .matches(/^[a-zA-Z0-9_@]+$/)
     .withMessage('Vain kirjaimet, numerot ja _ sallittu'),
 
   body('password')

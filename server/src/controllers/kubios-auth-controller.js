@@ -18,9 +18,9 @@
 //  import {customError} from '../middlewares/error-handler.js'; 
 // Ei ole custom error käytössä
  import {
-    getUserById,
-   addUser,
-   selectUserByEmail,
+  getUserById,
+  addUserKubios,
+  selectUserByEmail,
  } from '../models/user-model.js';
 
  // Kubios API base URL should be set in .env
@@ -111,6 +111,7 @@
    const result = await selectUserByEmail(kubiosUser.email);
    // If user with the email not found, create new user, otherwise use existing
    if (result.error) {
+  
      // Create user
      const newUser = {
        username: kubiosUser.email,
@@ -118,7 +119,7 @@
        // Random password, quick workaround for the required field
        password: v4(),
      };
-     const newUserResult = await addUser(newUser);
+     const newUserResult = await addUserKubios(newUser);
      userId = newUserResult.user_id;
    } else {
      userId = result.user_id;
@@ -126,6 +127,39 @@
    console.log('syncWithLocalUser userId', userId);
    return userId;
  };
+
+// const syncWithLocalUser = async (kubiosUser) => {
+//   let userId;
+
+//   const result = await selectUserByEmail(kubiosUser.email);
+//   console.log("selectUserByEmail result:", result);
+
+//   if (result.error) {
+//     const newUser = {
+//       username: kubiosUser.email,
+//       email: kubiosUser.email,
+//       password: v4(),
+//     };
+
+//     const newUserResult = await addUser(newUser);
+//     console.log("addUser result:", newUserResult);
+
+//     // Poimitaan user_id riippumatta rakenteesta
+//     userId =
+//       newUserResult?.user?.user_id ??
+//       newUserResult?.user_id ??
+//       null;
+//   } else {
+//     userId =
+//       result?.user?.user_id ??
+//       result?.user_id ??
+//       null;
+//   }
+
+//   console.log("syncWithLocalUser userId:", userId);
+//   return userId;
+// };
+
 
  /**
  * User login

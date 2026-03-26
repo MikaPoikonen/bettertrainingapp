@@ -2,6 +2,7 @@ import express from 'express';
 import userRouter from './src/routes/user-router.js';
 import 'dotenv/config';
 import requestLogger from './src/middlewares/logger.js'
+import kubiosRouter from './src/routes/kubios-router.js';
 
 
 const hostname = '127.0.0.1';
@@ -30,15 +31,22 @@ app.get('/api', (req, res) => {
 
 app.use('/api/users', userRouter)
 
+// Kubios data router
+app.use('/api/kubios', kubiosRouter);
+
 app.listen(PORT,hostname, () => {
   console.log(`Server running on http://${hostname}:${PORT}/`);
 });
+
+
+
 
 
 app.use(requestLogger)
 
 app.use((err, req, res, next) => {
   console.error(err);
+
 
   const status = err.status || 500;
 
