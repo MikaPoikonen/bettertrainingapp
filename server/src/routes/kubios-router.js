@@ -9,8 +9,8 @@ kubiosRouter
   .get('/user-data', authenticateToken, getUserData)
   .get('/user-info', authenticateToken, getUserInfo);
 
-kubiosRouter
-  .get('/sql', authenticateToken, KubiosResultController)
-  .post('/sql', authenticateToken, KubiosResultController);
+//kubiosRouter.get('/sql', authenticateToken, getUserData);
+
+kubiosRouter.post('/sql', authenticateToken, KubiosResultController);
 
 export default kubiosRouter;

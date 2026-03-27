@@ -34,16 +34,16 @@ import fetch from 'node-fetch';
    // ennen responsen lähettämistä client-sovellukselle
 const formatted = results.results.map(item => ({
   kubios_id: item.measure_id,
-  entry_date: item.measured_timestamp,
+  entry_date: "2026-02-02",
   hrv_data: item.result.rmssd_ms,
   readiness_data: item.result.readiness,
   stress_data: item.result.stress_index,
   physiological_age: item.result.physiological_age,
   bpm: item.result.mean_hr_bpm,
-  mood: null // Kubios ei anna moodia tässä endpointissa
+  mood: "kissa" // Kubios ei anna moodia tässä endpointissa
 }));
 
-return res.json(formatted);
+return formatted
   };
 
  /**

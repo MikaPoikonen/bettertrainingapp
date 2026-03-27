@@ -7,6 +7,10 @@ const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization']; //haetaan authorization (token string test request BEARER)
   const token = authHeader && authHeader.split(' ')[1]; //katkastaan tyhjästä kohdasta bearerin jälkeen.Välilyönnin jälkeen eka indeksi eli token koodi
   console.log('token', token);
+  
+console.log("AUTH HEADER:", req.headers.authorization);
+console.log("TOKEN:", token);
+
   if (token == undefined) {
     return res.sendStatus(401);
   }
