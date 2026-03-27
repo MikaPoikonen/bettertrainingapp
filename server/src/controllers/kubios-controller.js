@@ -36,7 +36,7 @@ const formatted = results.results.map(item => ({
   kubios_id: item.measure_id,
   entry_date: "2026-02-02",
   hrv_data: item.result.rmssd_ms,
-  readiness_data: item.result.readiness,
+  readiness_data: item.result.readiness, 
   stress_data: item.result.stress_index,
   physiological_age: item.result.physiological_age,
   bpm: item.result.mean_hr_bpm,
