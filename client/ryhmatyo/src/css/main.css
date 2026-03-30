@@ -3,13 +3,13 @@ html, body {
   margin: 0;
 }
 
-/* 1️⃣ Pääflex: vasen + oikea */
+/* Pääflex  */
 .layout {
   display: flex;
   min-height: 100vh;
   font-size: 30px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  
+  overflow: visible;
 }
 
 /* Vasen navigaatio 
@@ -32,7 +32,7 @@ html, body {
 } */
 
 
-/* 2️⃣ Oikea puoli = pystysuuntainen flex */
+/* Oikea puoli = pystysuuntainen flex */
 .right {
   flex: 1;
   display: flex;
@@ -86,12 +86,14 @@ html, body {
 
 /* Logo vasemmalle*/
 #better_training_logo {
-  height: 45px;               
+  height: 127px;               
   width: auto;                
   object-fit: contain;
   display: block;
   margin: 0;
+  margin-top: 9px;
   padding: 0;
+  
 
 }
 
@@ -100,9 +102,10 @@ html, body {
 .content {
   flex: 1;
   padding: 15px;
+  overflow: visible;
 }
 
-/* Footer alas */
+/* Footer*/
 .footer {
   background:lightgray;
   width: 100%;
@@ -189,12 +192,85 @@ box-sizing: border-box;
   transform: scale(1.10);
 }
 
+/* Rekisteröitymis formi */
+
+.registerform {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 400px;
+}
+
+#register_form {  
+  padding: 40px 40px 20px 40px;
+  border-radius: 8px;
+  overflow: visible;
+}
+
+#close_register_dialog {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: white;
+  border: 2px solid black;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+#close_register_dialog:hover {
+  background: black;
+  color: white;
+  transform: scale(1.10);
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow: visible;
+}
+
+.form-row label {
+  width: 150px;  
+  font-size: 20px;
+}
+
+.form-row input {
+  flex: 1;
+  padding: 6px 10px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+
+.register_button {
+  background: white;
+  border: 2px solid black;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.register_button:hover {
+  background: black;
+  color: white;
+}
+
+.registerform select {
+  padding: 6px 10px;
+  font-size: 16px;
+  width: 100%;
+}
+
 .hero {
   width: 100%;
   height: 88vh;
   position: relative;
   display: inline-block;
-  overflow: hidden;
+  overflow: visible;
   
 }
 
@@ -218,6 +294,36 @@ box-sizing: border-box;
 
 .h2 {
   padding-top: 25px;
+}
+
+dialog {
+  position: fixed;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 75vw;
+  height: auto;
+  max-height: 75vh;
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  border: none;
+  overflow: visible;
+  z-index: 999999;
+}
+
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(9, 173, 243, 0.5);     
+  backdrop-filter: blur(10px);        
+  z-index: 99999;
+  display: none;                      
+}
+
+select {
+  position: relative;
+  z-index: 20000;
 }
 
 

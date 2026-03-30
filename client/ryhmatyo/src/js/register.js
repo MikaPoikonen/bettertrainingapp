@@ -1,27 +1,38 @@
+
 import '../css/main.css';
 
 const dialog = document.getElementById("register_form");
 const openBtn = document.getElementById("open_register_dialog");
 const closeBtn = document.getElementById("close_register_dialog");
+const overlay = document.getElementById("dialog_overlay");
+
+const birthYearSelect = document.getElementById("birth_year");
+
+for (let year = 2030; year >= 1910; year--) {
+    const option = document.createElement("option");
+    option.value = year;
+    option.textContent = year;
+
+    if (year === 2000) {
+        option.selected = true;
+    }
+
+    birthYearSelect.appendChild(option);
+}
 
 // Dialogin avaaminen
-if (openBtn) {
-  openBtn.addEventListener("click", () => {
-    if (typeof dialog.showModal === "function") {
-      dialog.showModal();
-    } else {
-      dialog.setAttribute("open", "");
-    }
-  });
-}
+openBtn?.addEventListener("click", () => {
+  dialog.showModal();
+  overlay.style.display = "block";
+});
 
-// Dialogin sulkeminen
-if (closeBtn) {
-  closeBtn.addEventListener("click", () => {
-    if (dialog.open) dialog.close();
-  });
-}
+// Dialogin sulkeminen X-napista
+closeBtn?.addEventListener("click", () => {
+  dialog.close();
+  overlay.style.display = "none";
+});
 
+// Sulje klikkaamalla dialogin ulkopuolelle
 dialog.addEventListener("click", (event) => {
   const rect = dialog.getBoundingClientRect();
   const inside =
@@ -30,17 +41,20 @@ dialog.addEventListener("click", (event) => {
     event.clientY >= rect.top &&
     event.clientY <= rect.bottom;
 
-  if (!inside) {
-    dialog.close();
-  }
+  if (!inside) dialog.close();
 });
 
+// Sulkeminen
+dialog.addEventListener("close", () => {
+  overlay.style.display = "none"; 
+});
+
+// Formin käsittely
 const form = dialog.querySelector("form");
 
 form.addEventListener("submit", (event) => {
-  event.preventDefault(); 
+  event.preventDefault();
 
-  // Haetaan kenttien arvot
   const payload = {
     email: document.getElementById("email").value.trim(),
     username: document.getElementById("reg_username").value.trim(),
@@ -51,15 +65,6 @@ form.addEventListener("submit", (event) => {
 
   console.log("Rekisteröintitiedot:", payload);
 
-  // TODO tähän johonki pitää lisätä backend-kutsun
-  // fetch("/api/register", {...})
-
-  // Sulje dialogi
   form.reset();
   dialog.close();
 });
-
-
-
-
-
