@@ -1,12 +1,59 @@
-const express = require("express");
+import express from 'express';
+import userRouter from './src/routes/user-router.js';
+import 'dotenv/config';
+import requestLogger from './src/middlewares/logger.js'
+import kubiosRouter from './src/routes/kubios-router.js';
 
+
+const hostname = '127.0.0.1';
 const app = express();
 const PORT = 3000;
 
-app.get("/", (req, res) => {
-  res.send("Backend toimii");
+// app.use((req, res, next) => {
+//   console.log("BODY RAW TEST:", req.headers["content-type"]);
+//   next();
+// });
+
+
+
+app.use(express.json());
+app.use('/', express.static('public'));
+
+//app.use(requestLogger);
+
+
+
+
+// Api root
+app.get('/api', (req, res) => {
+  res.send('This is dummy items API!');
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+app.use('/api/users', userRouter)
+
+// Kubios data router
+app.use('/api/kubios', kubiosRouter);
+
+app.listen(PORT,hostname, () => {
+  console.log(`Server running on http://${hostname}:${PORT}/`);
+});
+
+
+
+
+
+app.use(requestLogger)
+
+app.use((err, req, res, next) => {
+  console.error(err);
+
+
+  const status = err.status || 500;
+
+  res.status(status).json({
+    error: {
+      message: err.message || 'Internal Server Error',
+      details: err.errors || null
+    }
+  });
 });

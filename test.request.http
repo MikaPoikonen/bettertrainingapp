@@ -1,0 +1,66 @@
+
+
+
+## Test HTTp request
+
+
+@apiurl = http://localhost:3000/api
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE5LCJrdWJpb3NJZFRva2VuIjoiZXlKcmFXUWlPaUpRVkVSUlVHWkxialUyYlhCNVJVOXBjSFZ4T0dSRlVEQlBlWGxKTVdoMVdsUXdNVkpWZWtkWFVTdFJQU0lzSW1Gc1p5STZJbEpUTWpVMkluMC5leUpoZEY5b1lYTm9Jam9pTW5wTE9HUlFTMWhzY21VeFkxbDJWMGhCTTA1U1FTSXNJbk4xWWlJNklqUTRaV0ZrTWpJeUxUUmtNalV0TkRRM01DMDRaV1ZsTFRReFpUbGlZMlkyTkRZek1pSXNJbVZ0WVdsc1gzWmxjbWxtYVdWa0lqcDBjblZsTENKcGMzTWlPaUpvZEhSd2N6cGNMMXd2WTI5bmJtbDBieTFwWkhBdVpYVXRkMlZ6ZEMweExtRnRZWHB2Ym1GM2N5NWpiMjFjTDJWMUxYZGxjM1F0TVY5MVVXMUJaelExZUhraUxDSmpiMmR1YVhSdk9uVnpaWEp1WVcxbElqb2lORGhsWVdReU1qSXROR1F5TlMwME5EY3dMVGhsWldVdE5ERmxPV0pqWmpZME5qTXlJaXdpWjJsMlpXNWZibUZ0WlNJNklrMXBhMkVpTENKaGRXUWlPaUl5Y2pnek9HVnZhV1F4ZG1WaU1IRnVjV2R1T0RGeFlYVnRNQ0lzSW1WMlpXNTBYMmxrSWpvaU9EUmhNMk16WlRrdFpEZGlNeTAwWXpBeExXRmpNalF0TlRGaE16ZzJOakk0WlRJMUlpd2lkRzlyWlc1ZmRYTmxJam9pYVdRaUxDSmhkWFJvWDNScGJXVWlPakUzTnpRMk5EQTVOREFzSW1WNGNDSTZNVGMzTkRZME5EVTBNQ3dpYVdGMElqb3hOemMwTmpRd09UUXdMQ0ptWVcxcGJIbGZibUZ0WlNJNklsQnZhV3R2Ym1WdUlpd2lhblJwSWpvaVpEQmxNek00WXpFdE5EYzVOUzAwWW1Fd0xXRmpNMk10TVdJd01HSTVZVGN4TlRJeklpd2laVzFoYVd3aU9pSnRhV3RoY0c5cFFHMWxkSEp2Y0c5c2FXRXVabWtpZlEuUVhXMTNWcE9QS1h3QTlGMmNVSkt6QUg4UUwzX0dOZVk3MWhYek4yNWg5TklJczdMeTRvbWVER24wTy0wNTNiLTQ3dk9rMUw3SXJIeGR5Uk8wY0owVXFYUm1IRVdjQ0VyaUltQVFPMXNmcUZNQ05aemgzRFhjazdNT1l1ZGdfR0wzUU1Kdm9kYjVVb0FNcWRTZkh4c3NNYnR2UHNManpsczlWaFA1cXR0WWw3a3FqaVJjMmZERmlCYWR3N2p4U0JpQ1pkRlR4QnhUa2ZqV2VsN1F1dWJlS0thT3pxWTFDcEozQk9MYmJXTThrbk92S29Pb094blRjUGhMcjdlY0xFMVdIUEp5MmtvaUNqOUdlNzBuaWEzOWlreTBCNWFMdl9Xb0R4UzFrUGhORjA3ZmpJeU13YTJfOGVaS1FUcjkwM1R1aElYZm1RaklwZzlQQnBjcldIVHV3IiwiaWF0IjoxNzc0NjQwOTQwLCJleHAiOjE3NzQ2NDQ1NDB9.YDsyk6pVLLcJxjEVf-Ivv-W81ErElOAF45lbOWUN-y0
+
+
+
+################################
+###### users endpoints
+
+### GET user by id:
+
+GET {{apiurl}}/users/1
+
+### POST user
+POST {{apiurl}}/users
+Content-Type: application/json
+
+{
+    "username": "logintesti",
+    "password": "Salasana123",
+    "email": "login@testi.fi",
+    "start_weight": 90,
+    "birth_year": "2000-02-02"
+}
+
+
+########### User logIn
+######## MUISTA POISTAA OIKEAT TIEDOT!!!
+POST {{apiurl}}/users/login
+Content-Type: application/json
+
+{
+"username": "mikapoi@metropolia.fi",
+"password": "Aquamariinioy1!"
+}
+
+
+### PUT user
+PUT {{apiurl}}/users/17
+Content-Type: application/json
+
+{
+"username": "muutettu",
+"password": "Salasana123",
+"email": "muutettu@muutettu11.fi"
+}
+
+
+### Delete user by id
+DELETE {{apiurl}}/users/3
+
+### Get Kubios data
+GET {{apiurl}}/kubios/user-data
+Authorization: Bearer {{token}}
+
+### POST Kubios data to sql
+POST {{apiurl}}/kubios/sql
+Authorization: Bearer {{token}}
+
+
