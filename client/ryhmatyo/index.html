@@ -1,40 +1,112 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Better Training App</title>
 </head>
+
 <body>
-<div class="layout">
+    
+   <div id="dialog_overlay" class="dialog-overlay"></div>
+   
+   <dialog id="register_form">
 
-    <nav class="sidebar">
-      <ul>
-        <li>Kissa</li>
-        <li>Kala</li>
-        <li>Koiranpentu</li>
-        <li>Hamsteri</li>
-      </ul>
-    </nav>
+        <h2>Create a new user</h2>
 
-    <div class="right">
+        <button type="button" id="close_register_dialog">×</button>
 
-      <header class="header">
-        <button>Mitä tähän 
-        </button>
-      </header>
+        <form class="registerform">
 
-      <main class="content">
-        <h1>Sisältö</h1>
-        <p>Tähän tulee kontenttia</p>
-      </main>
+            <div class="form-row">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
 
-      <footer class="footer">
-        Footer
-      </footer>
+            <div class="form-row">
+                <label for="reg_username">Username</label>
+                <input type="text" id="reg_username" name="username" required>
+            </div>
+
+            <div class="form-row">
+                <label for="reg_password">Password</label>
+                <input type="password" id="reg_password" name="password" required>
+            </div>
+
+            <div class="form-row">
+                <label for="birth_year">Year of Birth</label>
+
+                
+                <select id="birth_year" name="birth_year" required></select>
+            </div>
+
+            <div class="form-row">
+                <label for="start_weight">Starting Weight (kg)</label>
+                <input type="number" id="start_weight" name="start_weight" required>
+            </div>
+
+            <div class="button-row">
+                <button class="register_button">Rekisteröidy</button>
+            </div>
+
+        </form>
+
+    </dialog>
+
+    <div class="layout">
+
+        <div class="right">
+
+            <header class="header">
+                <img id="better_training_logo" src="public/img/bettertrainngapplogo_nobackground.jpg" alt="Better Training Logo">
+                <span class="app-name">Better Training App</span>
+                <button>Asetukset</button>
+            </header>
+
+            <main class="content">
+
+                <div class="hero">
+                    <div class="inner_box">Welcome to Better Training App</div>
+                    <img id="olympiakuva" src="public/img/olympiakuva.jpg" alt="Olympic image">
+                </div>
+
+                <h2>Login</h2>
+
+                <form class="loginform">
+
+                    <div class="form-row">
+                        <label>Username</label>
+                        <input required>
+                    </div>
+
+                    <div class="form-row">
+                        <label>Password</label>
+                        <input required>
+                    </div>
+
+                    <div class="button-row">
+                        <button class="login_button">Kirjaudu sisään</button>
+                        <button type="button" class="register_button" id="open_register_dialog">
+                            Rekisteröidy
+                        </button>
+                    </div>
+
+                </form>
+
+            </main>
+
+            <footer class="footer">
+                Footer
+            </footer>
+
+        </div>
 
     </div>
-  </div>
+
+    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/js/register.js"></script>
+
 </body>
-<script type="module" src="/src/main.js"></script>
 </html>
+``
