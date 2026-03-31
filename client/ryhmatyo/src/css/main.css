@@ -3,16 +3,16 @@ html, body {
   margin: 0;
 }
 
-/* 1️⃣ Pääflex: vasen + oikea */
+/* Pääflex  */
 .layout {
   display: flex;
   min-height: 100vh;
   font-size: 30px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  
+  overflow: visible;
 }
 
-/* Vasen navigaatio */
+/* Vasen navigaatio 
 .sidebar {
   width: 220px;
   background: linear-gradient(to bottom, rgb(43, 43, 223), rgb(129, 129, 207));
@@ -29,10 +29,10 @@ html, body {
   flex-direction: column;
   gap: 40px;
   
-}
+} */
 
 
-/* 2️⃣ Oikea puoli = pystysuuntainen flex */
+/* Oikea puoli = pystysuuntainen flex */
 .right {
   flex: 1;
   display: flex;
@@ -40,20 +40,59 @@ html, body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
 }
 
+
 /* Header */
 .header {
-  background: linear-gradient(to right, rgb(43, 43, 223), rgb(129, 129, 207));
-    display: flex;
-  justify-content: end; /* työntää ääripäihin */
-  align-items: center;
-  height: 10%;
+  background: linear-gradient(to right, rgb(43, 43, 223), rgb(60, 163, 248));
+  display: flex;
+  align-items: center;          
+  justify-content: flex-start; 
+  height: 70px;                 
+  padding: 0 16px;              
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
+.branding {
+  display: flex;
+  align-items: center;
+  gap: 0; 
+}
+
+/* Tekstin tyyli */
+.app-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;  /* koska tausta on sininen */
+  margin: 0;
+  padding: 0;
+  margin-left: 3px;
+}
+
+/* Nappi asetuksille */
 .header button {
-    margin-right: 50px;
-    height: 40px;
-    width: 100px;
-    text-align: center;
+  height: 40px;
+  width: 55px;
+  padding: 20px 12px;
+  margin: 0;                    
+  text-align: center;
+  margin-left: auto;
+  font-size: 30%;
+}
+.header button:hover {
+  background: lightgrey;
+  cursor: pointer;
+  transform: scale(1.10);
+}
+
+/* Logo vasemmalle*/
+#better_training_logo {
+  height: 127px;               
+  width: auto;                
+  object-fit: contain;
+  display: block;
+  margin: 0;
+  margin-top: 9px;
+  padding: 0;
 }
 
 
@@ -61,11 +100,230 @@ html, body {
 .content {
   flex: 1;
   padding: 15px;
+  overflow: visible;
 }
 
-/* Footer alas */
+/* Footer*/
 .footer {
-  background: #eee;
-  padding: 15px;
+  background:lightgray;
+  width: 100%;
+  height: 28px;
+  font-size: 17px;
+  text-align: center;
+  padding-top: 25px;
+  position: fixed;
+  bottom: 0;
 }
+
+/*Login formi*/
+.loginform {
+  background: linear-gradient(to right, rgb(43, 43, 223), rgb(60, 163, 248));
+  color:white;
+  width: 375px;
+  height: auto;
+  padding: 45px;
+  margin: 0 auto;
+  border-radius: 15px;
+  margin-bottom: 150px;
+}
+.loginform form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form_group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Tekstikentät */
+.loginform input {
+  padding: 7px 25px;
+  width: 150px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;   
+  gap: 10px;
+  margin-bottom: 8px;             
+}
+
+.form-row label {
+  width: 120px;          
+  font-size: 28px;       
+}
+
+.button.row {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/*Kirjaudu sisään nappi*/
+.login_button {
+box-sizing: border-box;
+  background:white;
+  color: black;
+  width: 125px;
+  height: 35px;
+}
+.login_button:hover {
+  background: lightgrey;
+  cursor: pointer;
+  transform: scale(1.10);
+}
+
+/*Rekisteröidy nappi*/
+.register_button {
+  box-sizing: border-box;
+  background:white;
+  color: black;
+  width: 125px;
+  height: 35px;
+}
+.register_button:hover {
+  background: lightgrey;
+  cursor: pointer;
+  transform: scale(1.10);
+}
+
+/* Rekisteröitymis formi */
+
+.registerform {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 400px;
+}
+
+#register_form {  
+  padding: 40px 40px 20px 40px;
+  border-radius: 8px;
+  overflow: visible;
+}
+
+#close_register_dialog {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: white;
+  border: 2px solid black;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+/* Sulje nappi */
+#close_register_dialog:hover {
+  background: black;
+  color: white;
+  transform: scale(1.10);
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow: visible;
+}
+
+.form-row label {
+  width: 150px;  
+  font-size: 20px;
+}
+
+.form-row input {
+  flex: 1;
+  padding: 6px 10px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+
+.register_button {
+  background: white;
+  border: 2px solid black;
+  padding: 8px 15px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.register_button:hover {
+  background: black;
+  color: white;
+}
+
+.registerform select {
+  padding: 6px 10px;
+  font-size: 16px;
+  width: 100%;
+}
+
+/*Hero kuva*/
+.hero {
+  width: 100%;
+  height: 88vh;
+  position: relative;
+  display: inline-block;
+  overflow: visible;
+  
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.inner_box {
+  position: absolute;
+  top: 81%;
+  left: 26%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 50px;
+  text-shadow: 2px 2px 6px black;
+  margin-top: 20px;
+}
+
+.h2 {
+  padding-top: 25px;
+}
+
+dialog {
+  position: fixed;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 75vw;
+  height: auto;
+  max-height: 75vh;
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  border: none;
+  overflow: visible;
+  z-index: 999999;
+}
+
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(9, 173, 243, 0.5);     
+  backdrop-filter: blur(10px);        
+  z-index: 99999;
+  display: none;                      
+}
+
+select {
+  position: relative;
+  z-index: 20000;
+}
+
 

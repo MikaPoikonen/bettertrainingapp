@@ -1,0 +1,101 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* Pääflex  */
+.layout {
+  display: flex;
+  min-height: 100vh;
+  font-size: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  
+}
+
+/* Oikea puoli = pystysuuntainen flex */
+.right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+}
+
+/* Header */
+.header {
+  background: linear-gradient(to right, rgb(43, 43, 223), rgb(60, 163, 248));
+  display: flex;
+  align-items: center;          
+  justify-content: flex-start; 
+  height: 70px;                 
+  padding: 0 16px;              
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.branding {
+  display: flex;
+  align-items: center;
+  gap: 0; 
+}
+
+/* Tekstin tyyli */
+.app-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;  /* koska tausta on sininen */
+  margin: 0;
+  padding: 0;
+  margin-left: 3px;
+}
+
+/* Nappi oikealle */
+.header button {
+  height: 40px;
+  width: 55px;
+  padding: 20px 12px;
+  margin: 0;                    
+  text-align: center;
+  margin-left: auto;
+  font-size: 30%;
+}
+.header button:hover {
+  background: lightgrey;
+  cursor: pointer;
+  transform: scale(1.10);
+}
+
+/* Logo vasemmalle*/
+#better_training_logo {
+  height: 45px;               
+  width: auto;                
+  object-fit: contain;
+  display: block;
+  margin: 0;
+  padding: 0;
+
+}
+
+
+/* Content täyttää välin */
+.content {
+  flex: 1;
+  padding: 15px;
+}
+
+/* Footer*/
+.footer {
+  background:lightgray;
+  width: 100%;
+  height: 28px;
+  font-size: 17px;
+  text-align: center;
+  padding-top: 25px;
+  position: fixed;
+  bottom: 0;
+}
+
+
+.h2 {
+  padding-top: 25px;
+}
+
+
