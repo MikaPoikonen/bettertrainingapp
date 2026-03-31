@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+
+  <body>
+    <h3>REGISTER</h3>
+
+    <p>
+      Lisää käyttäjiä formin avulla. Formi lisää uuden käyttäjän nappulasta 'Add
+      User'.
+    </p>
+
+    <!-- https://www.w3schools.com/css/css_form.asp -->
+    <!-- https://www.w3schools.com/css/tryit.asp?filename=trycss_form_padding -->
+
+    <pre style="overflow: auto">
+    POST http://localhost:3000/api/users
+    content-type: application/json
+
+    {
+      "username": "daisy",
+      "password": "duck",
+      "email": "daisy@example.com"
+    }
+    </pre>
+
+    <form class="registerForm">
+      <label for="username">Username</label>
+      <input
+        id="username"
+        minlength="3"
+        maxlength="20"
+        type="text"
+        name="username"
+        placeholder="daisy"
+        required
+      />
+      <label for="password">Password (min 8, isoja ja pieniä kirjaimia)</label>
+      <input
+        id="password"
+        type="password"
+        name="password"
+        placeholder="duckDuck1"
+        pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$"
+        minlength="8"
+        required
+      />
+      <label for="email">Email (Metropolia.fi päätteinen)</label>
+      <input
+        id="email"
+        type="email"
+        name="email"
+        placeholder="daisy@metropolia.fi"
+        pattern="^[^\s@]+@metropolia\.fi$"
+        title="Sähköpostin pitää päättyä @metropolia.fi"
+        required
+      />
+      <!-- <input type="hidden" name="id" value="34" /> -->
+      <input name="submit" type="submit" value="Add User" class="postuser" />
+
+      <!-- <textarea name="tekstikenttä" id=""></textarea> -->
+    </form>
+
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
+      perferendis doloribus aspernatur quaerat amet itaque magnam ipsa nulla
+      quisquam repudiandae nemo, neque molestiae hic eaque, accusamus fuga
+      provident aut. Quas.
+    </p>
+
+    <h3>LOGIN</h3>
+    <pre><code>
+      # Login
+      POST http://localhost:3000/api/users/login
+      content-type: application/json
+
+      {
+        "username": "daisy",
+        "password": "duck"
+      }
+      </code></pre>
+    <div>
+      <form class="loginForm">
+        <label for="username">Username</label>
+        <input type="text" name="username" placeholder="name" value="daisy" />
+        <label for="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          placeholder="name123"
+          value="duck"
+        />
+        <input
+          name="submit"
+          type="submit"
+          value="Login and get new token"
+          class="loginform"
+        />
+      </form>
+      <br />
+      <div id="loginResponse"></div>
+    </div>
+    <hr />
+    <div>
+      <pre><code>
+        # Get user info by token (requires token)
+        GET http://localhost:3000/api/users/me
+        Authorization: Bearer (put-user-token-here)</code></pre>
+      <button id="meRequest">Make an "authenticated" request</button>
+      <br />
+      <div id="meResponse"></div>
+    </div>
+    <hr />
+    <div>
+      <button id="clearButton">Clear localStorage</button>
+      <br />
+      <code id="clearResponse"></code>
+    </div>
+  </body>
+
+  <script type="module" src="/src/js/login.js"></script>
+</html>
