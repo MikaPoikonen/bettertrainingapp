@@ -19,6 +19,7 @@ const KubiosResultController = async (req, res, next) => {
 //     .replace("T", " ");
 
     for (const item of kubiosData) {
+      
       const payload = {
         user_id: userId,
         kubios_id: item.kubios_id,
@@ -28,7 +29,7 @@ const KubiosResultController = async (req, res, next) => {
         stress_data: item.stress_data,
         physiological_age: item.physiological_age,
         bpm: item.bpm,
-        mood: item.mood
+        //mood: item.mood
       };
 
       console.log("testikuorma",payload)

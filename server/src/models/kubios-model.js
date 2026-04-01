@@ -7,11 +7,10 @@ const KubiosResult = async (payload) => {
     readiness_data, 
     stress_data, 
     physiological_age, 
-    bpm, 
-    mood, 
+    bpm,  
     kubios_id, 
     entry_date )
-    VALUES (?,?,?,?,?,?,?,?,?)`;
+    VALUES (?,?,?,?,?,?,?,?)`;
 
     const params = [
         payload.user_id,
@@ -19,8 +18,7 @@ const KubiosResult = async (payload) => {
         payload.readiness_data,
         payload.stress_data, 
         payload.physiological_age,
-        payload.bpm, 
-        payload.mood, 
+        payload.bpm,  
         payload.kubios_id, 
         payload.entry_date
     ];
