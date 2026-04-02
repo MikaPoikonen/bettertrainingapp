@@ -53,6 +53,25 @@ Content-Type: application/json
 ### Delete user by id
 DELETE {{apiurl}}/users/3
 
+
+#################################
+### Post entry
+POST {{apiurl}}/entries
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "entry_date": "2026-04-02",
+    "mood": "happy",
+    "weight_now": 75,
+    "sleep_hours": 8,
+    "notes": "Feeling great today!"
+}
+
+### GET entries by user id
+GET {{apiurl}}/entries/19
+Authorization: Bearer {{token}}
+
 ### Get Kubios data
 GET {{apiurl}}/kubios/user-data
 Authorization: Bearer {{token}}
