@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express from 'express';
 import userRouter from './src/routes/user-router.js';
 import 'dotenv/config';
@@ -18,7 +19,7 @@ const PORT = 3000;
 
 
 app.use(express.json());
-app.use('/', express.static('public'));
+app.use(cors('/', express.static('public')));
 
 //app.use(requestLogger);
 
