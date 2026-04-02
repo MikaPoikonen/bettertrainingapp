@@ -2,6 +2,7 @@ import express from 'express';
 import userRouter from './src/routes/user-router.js';
 import 'dotenv/config';
 import requestLogger from './src/middlewares/logger.js'
+import entryRouter from './src/routes/entry-router.js';
 import kubiosRouter from './src/routes/kubios-router.js';
 
 
@@ -30,6 +31,9 @@ app.get('/api', (req, res) => {
 });
 
 app.use('/api/users', userRouter)
+
+//Entry router
+app.use('/api/entries', entryRouter);
 
 // Kubios data router
 app.use('/api/kubios', kubiosRouter);
