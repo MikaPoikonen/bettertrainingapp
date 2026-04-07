@@ -29,21 +29,21 @@ import fetch from 'node-fetch';
      },
    );
    const results = await response.json();
-
+   //return res.json(results);
    // Kubiokselta saatua dataa voi käsitellä (palvelipuolella) tässä
    // ennen responsen lähettämistä client-sovellukselle
 const formatted = results.results.map(item => ({
   kubios_id: item.measure_id,
-  entry_date: "2026-02-02",
+  entry_date: item.create_timestamp.split("T")[0],
   hrv_data: item.result.rmssd_ms,
   readiness_data: item.result.readiness, 
   stress_data: item.result.stress_index,
   physiological_age: item.result.physiological_age,
   bpm: item.result.mean_hr_bpm,
-  mood: "kissa" // Kubios ei anna moodia tässä endpointissa
+  //mood: "kissa" // Kubios ei anna moodia tässä endpointissa
 }));
 
-return formatted
+return formatted //jos result kaikki tiedot. Formatted meidän muokkaamat
   };
 
  /**

@@ -1,5 +1,5 @@
 
-import { KubiosResult } from "../models/kubios-model.js";
+import { KubiosResult, getKubiosDataSql } from "../models/kubios-model.js";
 import { getUserData } from "../controllers/kubios-controller.js";
 
 const KubiosResultController = async (req, res, next) => {
@@ -19,6 +19,7 @@ const KubiosResultController = async (req, res, next) => {
 //     .replace("T", " ");
 
     for (const item of kubiosData) {
+      
       const payload = {
         user_id: userId,
         kubios_id: item.kubios_id,
@@ -28,7 +29,7 @@ const KubiosResultController = async (req, res, next) => {
         stress_data: item.stress_data,
         physiological_age: item.physiological_age,
         bpm: item.bpm,
-        mood: item.mood
+        //mood: item.mood
       };
 
       console.log("testikuorma",payload)
@@ -46,4 +47,17 @@ const KubiosResultController = async (req, res, next) => {
   }
 };
 
-export { KubiosResultController };
+
+// Get Kubios data from sql
+const kubiosDataSqlController= async (req,res) => {
+  const kubiosSqlData = await getKubiosDataSql(req.params.id);
+if (kubiosSqlData) {
+        res.json(kubiosSqlData);
+    } else {
+        res.sendstatus(404);
+    }
+};
+
+
+
+export { KubiosResultController,kubiosDataSqlController };
