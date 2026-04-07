@@ -60,12 +60,12 @@ html, body {
 
 /* Tekstin tyyli */
 .app-name {
-  font-size: 18px;
+  font-size: 27px;
   font-weight: 600;
-  color: white;  /* koska tausta on sininen */
+  color: white;
   margin: 0;
   padding: 0;
-  margin-left: 3px;
+  margin-left: -24px;
 }
 
 /* Nappi asetuksille */
@@ -91,6 +91,7 @@ html, body {
   object-fit: contain;
   display: block;
   margin: 0;
+  margin-left: -32px;
   margin-top: 9px;
   padding: 0;
 }
