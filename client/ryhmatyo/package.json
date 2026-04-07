@@ -12,6 +12,7 @@
     "vite": "^8.0.0"
   },
   "dependencies": {
+    "@amcharts/amcharts5": "^5.16.2",
     "bootstrap": "^5.3.8"
   }
 }

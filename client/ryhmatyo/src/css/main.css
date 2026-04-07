@@ -60,15 +60,15 @@ html, body {
 
 /* Tekstin tyyli */
 .app-name {
-  font-size: 18px;
+  font-size: 27px;
   font-weight: 600;
-  color: white;  /* koska tausta on sininen */
+  color: white;
   margin: 0;
   padding: 0;
-  margin-left: 3px;
+  margin-left: -24px;
 }
 
-/* Nappi oikealle */
+/* Nappi asetuksille */
 .header button {
   height: 40px;
   width: 55px;
@@ -91,10 +91,9 @@ html, body {
   object-fit: contain;
   display: block;
   margin: 0;
+  margin-left: -32px;
   margin-top: 9px;
   padding: 0;
-  
-
 }
 
 
@@ -117,7 +116,7 @@ html, body {
   bottom: 0;
 }
 
-/*login formi*/
+/*Login formi*/
 .loginform {
   background: linear-gradient(to right, rgb(43, 43, 223), rgb(60, 163, 248));
   color:white;
@@ -217,6 +216,7 @@ box-sizing: border-box;
   cursor: pointer;
 }
 
+/* Sulje nappi */
 #close_register_dialog:hover {
   background: black;
   color: white;
@@ -265,6 +265,7 @@ box-sizing: border-box;
   width: 100%;
 }
 
+/*Hero kuva*/
 .hero {
   width: 100%;
   height: 88vh;
