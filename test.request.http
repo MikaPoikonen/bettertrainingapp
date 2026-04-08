@@ -4,7 +4,7 @@
 
 @apiurl = http://localhost:3000/api
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE5LCJrdWJpb3NJZFRva2VuIjoiZXlKcmFXUWlPaUpRVkVSUlVHWkxialUyYlhCNVJVOXBjSFZ4T0dSRlVEQlBlWGxKTVdoMVdsUXdNVkpWZWtkWFVTdFJQU0lzSW1Gc1p5STZJbEpUTWpVMkluMC5leUpoZEY5b1lYTm9Jam9pZFRCU1dqQTFkWHBuWnpoT2JFZ3daSHA1U1RWSlFTSXNJbk4xWWlJNklqUTRaV0ZrTWpJeUxUUmtNalV0TkRRM01DMDRaV1ZsTFRReFpUbGlZMlkyTkRZek1pSXNJbVZ0WVdsc1gzWmxjbWxtYVdWa0lqcDBjblZsTENKcGMzTWlPaUpvZEhSd2N6cGNMMXd2WTI5bmJtbDBieTFwWkhBdVpYVXRkMlZ6ZEMweExtRnRZWHB2Ym1GM2N5NWpiMjFjTDJWMUxYZGxjM1F0TVY5MVVXMUJaelExZUhraUxDSmpiMmR1YVhSdk9uVnpaWEp1WVcxbElqb2lORGhsWVdReU1qSXROR1F5TlMwME5EY3dMVGhsWldVdE5ERmxPV0pqWmpZME5qTXlJaXdpWjJsMlpXNWZibUZ0WlNJNklrMXBhMkVpTENKaGRXUWlPaUl5Y2pnek9HVnZhV1F4ZG1WaU1IRnVjV2R1T0RGeFlYVnRNQ0lzSW1WMlpXNTBYMmxrSWpvaU56TTRZek5pTWpjdE5EazJNeTAwWkRNMExUaG1NbU10WWprd1pUUTVOV1l6TldWbUlpd2lkRzlyWlc1ZmRYTmxJam9pYVdRaUxDSmhkWFJvWDNScGJXVWlPakUzTnpVeE1USXlNemtzSW1WNGNDSTZNVGMzTlRFeE5UZ3pPU3dpYVdGMElqb3hOemMxTVRFeU1qTTVMQ0ptWVcxcGJIbGZibUZ0WlNJNklsQnZhV3R2Ym1WdUlpd2lhblJwSWpvaU9EUTVORGN4TjJZdE1HVm1OaTAwTlRReUxXSmxPVGN0WmpkbFpEUTRNVFF5TldGaklpd2laVzFoYVd3aU9pSnRhV3RoY0c5cFFHMWxkSEp2Y0c5c2FXRXVabWtpZlEuR0xUeFYwNkJUZF9TXzhncGFLZnJQenVZR3FIS1Bqa3o1c3dpc3pCVWR5UUc5SHZOcWdIT2FzRnF0eldid2lNYjNIc2M4ZmtnUWNZcFJBXzJtYkVDR3ZlOWl4eWtmRTZLMXVOU2k5OHZURUd0cEV3eFZ1TkhnRE1KeTJNVE1wYUxrR2tPMkVpMzBpY3dfSW1CczRUanl6WTFDTmJwNnJLR052SjVxbklXQjlucE93V1l2N1pNeDgxM3I5eGp1OHg1RzFZVHZYdGR4Q3Rnc3EySzRoS2hHQ0t1WFRybmk5eDNQaGZOUjBQWHVJcVRQRHFtSUY4YkZoSGx4YjlBSk52M2k2UUhVb1BUUk5HUFJ1MHZYNXEyOC0tTGRvN1JzLXhPVFEtODk1SXc3dkRIQmJMdUEzYUp3UGtVQTJKR3Ezbm5yc0xjU2ptZloyLUdHdFpDR0w4bW9nIiwiaWF0IjoxNzc1MTEyMjQwLCJleHAiOjE3NzUxMTU4NDB9.Oeg1pwijMkJomYozBU6olETOnpjftSZ9jeKmTagtxuM
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE5LCJrdWJpb3NJZFRva2VuIjoiZXlKcmFXUWlPaUpRVkVSUlVHWkxialUyYlhCNVJVOXBjSFZ4T0dSRlVEQlBlWGxKTVdoMVdsUXdNVkpWZWtkWFVTdFJQU0lzSW1Gc1p5STZJbEpUTWpVMkluMC5leUpoZEY5b1lYTm9Jam9pVkhORGFuTnJXblppUmxsUlNIaGlhMHBWWkZsRlp5SXNJbk4xWWlJNklqRmxOakEyT1RCaExUa3haall0TkdFelpTMWhOemRqTFdaaVpqWmlZekExTmpNeU5TSXNJbVZ0WVdsc1gzWmxjbWxtYVdWa0lqcDBjblZsTENKcGMzTWlPaUpvZEhSd2N6cGNMMXd2WTI5bmJtbDBieTFwWkhBdVpYVXRkMlZ6ZEMweExtRnRZWHB2Ym1GM2N5NWpiMjFjTDJWMUxYZGxjM1F0TVY5MVVXMUJaelExZUhraUxDSmpiMmR1YVhSdk9uVnpaWEp1WVcxbElqb2lNV1UyTURZNU1HRXRPVEZtTmkwMFlUTmxMV0UzTjJNdFptSm1ObUpqTURVMk16STFJaXdpWjJsMlpXNWZibUZ0WlNJNklrVnNhV0Z6SWl3aVlYVmtJam9pTW5JNE16aGxiMmxrTVhabFlqQnhibkZuYmpneGNXRjFiVEFpTENKbGRtVnVkRjlwWkNJNklqVTJNV1JsWWpJMkxURmxNMlV0TkRreE1DMDRZamcwTFdabFpqQXpZMk0wTkdNNE5pSXNJblJ2YTJWdVgzVnpaU0k2SW1sa0lpd2lZWFYwYUY5MGFXMWxJam94TnpjMU5qVTRNVGc0TENKbGVIQWlPakUzTnpVMk5qRTNPRGdzSW1saGRDSTZNVGMzTlRZMU9ERTRPQ3dpWm1GdGFXeDVYMjVoYldVaU9pSkxZV3hzYVc5cmIzTnJhU0lzSW1wMGFTSTZJakptWkRBNFpXVXlMV1F6TjJZdE5HUTBNaTA0WXpVeExUUmpZek16Tm1aallUQTRPQ0lzSW1WdFlXbHNJam9pWld4cFlYTXVhMkZzYkdsdmEyOXphMmxBYldWMGNtOXdiMnhwWVM1bWFTSjkucFJXMFowUHZHaUhsNFFkQnFyOVJkNjNVWDZMdFdXcGY4VGRVMnUxZFVocm9lNzZNMzdrWEllVWpBWmJuX2NNcUZHY2VQSTNPY3hXZDh1Ui0zNjNOaFRlSGgxS3hmUDV4MEVoeTdZTGZMajI5a0FyZVN4TDFpYXJ3Y21heGQ2SjJDc0ZGX2YzekdNRXRTV016ZFk3eFc4X0dsNm9MS0NPSG1YM2d4dmJ0dEMydDZHMkstc21SRUUzbjM3Y3RkNGdXZXpWUjV6Z3Nha3hGbENWQ0lpTllFZjlKQ1Q4ZUphNGZkWmRoNmtfczladm5hMThvRG1xQm1xOWw5VXZpc0o0aldUdFJjc0NtV0dHQWRqQXVFNWlja1JudUd6OUN4bXEtVUxvN3g3Yzd4eldJSnZUZ0ZQdjNBc1hTTmpBQ0lNaGRWaHRCQ1NwMUZQR05PLWlRVW9iZ3VBIiwiaWF0IjoxNzc1NjU4MTg5LCJleHAiOjE3NzU2NjE3ODl9.z_5FAtgPBeqqNerbv00RjoS8QDXuJZacWfUjGbz35f0
 asdasds
 
 
@@ -34,8 +34,8 @@ POST {{apiurl}}/users/login
 Content-Type: application/json
 
 {
-  "username": "",
-  "password": ""
+  "username": "elias.kalliokoski@metropolia.fi",
+  "password": "Kubios.elkku26"
 }
 
 
@@ -61,7 +61,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "entry_date": "2026-04-02",
+    "entry_date": "2026-04-08",
     "mood": "happy",
     "weight_now": 75,
     "sleep_hours": 8,
@@ -71,6 +71,25 @@ Authorization: Bearer {{token}}
 ### GET entries by user id
 GET {{apiurl}}/entries/19
 Authorization: Bearer {{token}}
+
+### GET latest entry from user
+GET {{apiurl}}/entries/latest/19
+Authorization: Bearer {{token}}
+
+
+
+### Delete entry by entry_id and user_id
+DELETE {{apiurl}}/entries
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "entry_id": 1,
+    "user_id": 19
+}
+
+
+
 
 ### Get Kubios data
 GET {{apiurl}}/kubios/user-data
@@ -83,5 +102,6 @@ Authorization: Bearer {{token}}
 #### Get Kubios data from sql
 GET {{apiurl}}/kubios/sql/19
 Authorization: Bearer {{token}}
+
 
 

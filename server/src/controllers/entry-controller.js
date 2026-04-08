@@ -1,4 +1,4 @@
-import { listAllEntriesById, addEntry } from '../models/entry-model.js';
+import { listAllEntriesById, addEntry,removeEntryById, getEntryById } from '../models/entry-model.js';
 
 const getEntriesById = async (req, res) => {
     const result = await listAllEntriesById(req.user.userId);
@@ -35,4 +35,30 @@ const addEntryController = async (req, res) => {
   }
 };
 
-export {getEntriesById, addEntryController};
+const getEntryByIdController = async (req, res) => {
+  const result = await getEntryById(req.user.userId);
+  if (!result.error) {
+    res.json(result);
+  } else {
+    res.status(500);
+    res.json(result);
+  }
+};
+
+
+
+
+
+// Delete entry
+const deleteEntryByIdController = async (req,res) => {
+  const result = await removeEntryById(req.body.entry_id,req.user.user_id);
+  if (!result.error){
+    res.json(result)
+  } else {
+    res.status(500);
+    res.json(result)
+  }
+}
+
+
+export {getEntriesById, addEntryController,deleteEntryByIdController, getEntryByIdController};
