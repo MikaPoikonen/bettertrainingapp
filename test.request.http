@@ -34,8 +34,8 @@ POST {{apiurl}}/users/login
 Content-Type: application/json
 
 {
-  "username": "elias.kalliokoski@metropolia.fi",
-  "password": "Kubios.elkku26"
+  "username": "",
+  "password": ""
 }
 
 
