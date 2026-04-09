@@ -257,3 +257,155 @@ bands.forEach(function(band) {
 readinessChart.appear(1000, 100);
 
 }); 
+
+
+
+/* STRESS GAUGE/PNS-index */
+
+var stressRoot = am5.Root.new("stressGauge");
+
+stressRoot.setThemes([
+  am5themes_Animated.new(stressRoot)
+]);
+
+var stressChart = stressRoot.container.children.push(
+  am5radar.RadarChart.new(stressRoot, {
+    panX: false,
+    panY: false,
+    startAngle: 160,
+    endAngle: 380
+  })
+);
+
+var axisRenderer = am5radar.AxisRendererCircular.new(stressRoot, {
+  innerRadius: -30
+});
+
+var xAxisGauge = stressChart.xAxes.push(
+  am5xy.ValueAxis.new(stressRoot, {
+    min: -3,
+    max: 3,
+    strictMinMax: true,
+    renderer: axisRenderer
+  })
+);
+
+var axisDataItem = xAxisGauge.makeDataItem({});
+
+var hand = am5radar.ClockHand.new(stressRoot, {
+  radius: am5.percent(95),
+  bottomWidth: 10
+});
+
+axisDataItem.set(
+  "bullet",
+  am5xy.AxisBullet.new(stressRoot, { sprite: hand })
+);
+
+xAxisGauge.createAxisRange(axisDataItem);
+
+var label = stressChart.radarContainer.children.push(
+  am5.Label.new(stressRoot, {
+    centerX: am5.percent(50),
+    centerY: am5.percent(50),
+    fontSize: "2.5em",
+    textAlign: "center",
+    fill: am5.color(0xffffff)
+  })
+);
+
+// Mock stresi
+var stressValue = 1.78;
+
+axisDataItem.set("value", stressValue);
+label.set("text", stressValue.toString());
+
+// Värit
+var bands = [
+  { from: -3, to: -1.5, color: 0x0f9747 }, // Todella huono
+  { from: -1.5, to: 0, color: 0xb0d136 }, // Huono
+  { from: 0, to: 1.5, color: 0xfdae19 }, // hyvä
+  { from: 1.5, to: 3, color: 0xee1f25 } //Erittäin hyvä
+];
+
+bands.forEach(function(band) {
+  var range = xAxisGauge.createAxisRange(
+    xAxisGauge.makeDataItem({
+      value: band.from,
+      endValue: band.to
+    })
+  );
+
+  range.get("axisFill").setAll({
+    visible: true,
+    fill: am5.color(band.color),
+    fillOpacity: 0.85
+  });
+});
+
+stressChart.appear(1000, 100);
+
+
+/* PÄIVÄKIRJA */
+
+const diaryDialog = document.getElementById("diaryDialog");
+const addDiaryBtn = document.getElementById("addDiaryBtn");
+const saveDiaryBtn = document.getElementById("saveDiary");
+const cancelDiaryBtn = document.getElementById("cancelDiary");
+const diaryText = document.getElementById("diaryText");
+const diaryEntries = document.getElementById("diaryEntries");
+
+// Avaa dialog
+addDiaryBtn.addEventListener("click", () => {
+  diaryText.value = "";
+  diaryDialog.showModal();
+});
+
+// Sulje dialog
+cancelDiaryBtn.addEventListener("click", () => {
+  diaryDialog.close();
+});
+
+// Tallenna merkintä
+saveDiaryBtn.addEventListener("click", () => {
+  const text = diaryText.value.trim();
+  if (!text) return;
+
+  const entry = {
+    text,
+    date: new Date().toLocaleDateString("fi-FI", {
+      weekday: "long",
+      day: "numeric",
+      month: "numeric",
+    }),
+    createdAt: Date.now(),
+  };
+
+  const entries = JSON.parse(localStorage.getItem("diaryEntries")) || [];
+  entries.unshift(entry);
+  localStorage.setItem("diaryEntries", JSON.stringify(entries));
+
+  diaryDialog.close();
+  renderDiary();
+});
+
+// Näyttää 2 viimeisintä merkintää
+function renderDiary() {
+  const entries = JSON.parse(localStorage.getItem("diaryEntries")) || [];
+  diaryEntries.innerHTML = "";
+
+  entries.slice(0, 2).forEach((entry) => {
+    const div = document.createElement("div");
+    div.className = "diary-entry";
+
+    div.innerHTML = `
+      <div class="diary-date">${entry.date}</div>
+      <div class="diary-text">${entry.text}</div>
+    `;
+
+    diaryEntries.appendChild(div);
+  });
+}
+
+// Näytä merkinnät sivun latautuessa
+renderDiary();

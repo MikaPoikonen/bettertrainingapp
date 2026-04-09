@@ -28,18 +28,46 @@
     <div id="hrvchart"></div>
   </div>
 
-  <!-- READINESS kortti -->
+  <!-- READINESS ja Stressi kortti -->
   <div class="card readiness_stress-card">
     <div class="Stress-title">Stress</div>
-    <div class="stress-value">78</div>
+    <div id="stressGauge"></div>
     <div class="readiness-status">
     <div class="readiness-title">Readiness</div>
-      <span class="dot"></span>
-      Hyvä
+    
     </div>
     <div id="readinessGauge"></div>
   </div>
 </div>
+
+
+ <!-- Diary kortti -->
+  
+<div class="card diary-card">
+  <div class="diary-header">
+    <h3>Päiväkirja</h3>
+    <button id="addDiaryBtn">+ Lisää uusi merkintä</button>
+  </div>
+
+  <div id="diaryEntries"></div>
+</div>
+
+
+<!-- Päiväkirja modal -->
+<dialog id="diaryDialog">
+  <h3>Uusi päiväkirjamerkintä</h3>
+
+  <textarea
+    id="diaryText"
+    placeholder="Miltä päivä tuntui?"
+    rows="5"
+  ></textarea>
+
+  <div class="dialog-buttons">
+    <button id="saveDiary">Tallenna</button>
+    <button id="cancelDiary">Peruuta</button>
+  </div>
+</dialog>
 
       <footer class="footer">
         Footer

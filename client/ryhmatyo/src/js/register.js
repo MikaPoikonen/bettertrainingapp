@@ -96,3 +96,41 @@ form.addEventListener("submit", async (event) => {
   }
 });
 
+// 🔐 KIRJAUTUMINEN
+const loginForm = document.querySelector('.loginform');
+
+loginForm?.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const inputs = loginForm.querySelectorAll('input');
+
+  const payload = {
+    username: inputs[0].value.trim(),
+    password: inputs[1].value.trim(),
+  };
+
+  const url = 'http://localhost:3000/api/login';
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  };
+
+  try {
+    const response = await fetchData(url, options);
+
+    if (response.error) {
+      alert('Virheellinen käyttäjätunnus tai salasana');
+      return;
+    }
+
+    // ✅ KIRJAUTUMINEN ONNISTUI → HOMEPAGE
+    window.location.href = 'homepage.html';
+
+  } catch (error) {
+    console.error('Kirjautuminen epäonnistui:', error);
+  }
+});
+
