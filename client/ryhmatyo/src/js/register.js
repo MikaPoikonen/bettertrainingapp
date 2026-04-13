@@ -1,15 +1,21 @@
 import '../css/main.css';
 import { fetchData } from './fetch.js';
 
-// Elementit
+function initRegister() {
 const dialog = document.getElementById("register_form");
+if(!dialog) {
+  console.warn("Rekisteröinti lomaketta ei ladattu.");
+  return;
+}
+
+// Elementit
 const openBtn = document.getElementById("open_register_dialog");
 const closeBtn = document.getElementById("close_register_dialog");
 const overlay = document.getElementById("dialog_overlay");
 const birthYearSelect = document.getElementById("birth_year");
 const form = dialog.querySelector("form");
 
-// 🔢 Täytetään syntymävuodet
+// Täytetään syntymävuodet
 for (let year = 2030; year >= 1910; year--) {
   const option = document.createElement("option");
   option.value = year;
@@ -122,7 +128,7 @@ loginForm?.addEventListener('submit', async (event) => {
     const response = await fetchData(url, options);
 
     if (response.error) {
-      alert('Virheellinen käyttäjätunnus tai salasana');
+      alert('Kirjautuminen onnistui');
       return;
     }
 
@@ -130,7 +136,12 @@ loginForm?.addEventListener('submit', async (event) => {
     window.location.href = 'homepage.html';
 
   } catch (error) {
+    alert('Kirjautuminen epäonnistui')
     console.error('Kirjautuminen epäonnistui:', error);
   }
 });
+
+}
+
+initRegister();
 
