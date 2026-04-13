@@ -27,8 +27,10 @@ const getUserInfo = async () => {
 const getUserDataSqlLatest = async () => {
   console.log('Käyttäjän DATA Kubioksesta');
 
-  const url = 'http://localhost:3000/api/kubios/sql/19';
+  const url = `http://localhost:3000/api/kubios/sql/${localStorage.getItem('userId')}`;
   const token = localStorage.getItem('token');
+  const user_id = localStorage.getItem('userId');
+  console.log('User ID:', user_id);
   const headers = { Authorization: `Bearer ${token}` };
   const options = {
     headers: headers,
