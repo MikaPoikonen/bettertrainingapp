@@ -1,5 +1,5 @@
 import express from 'express';
-// import { authenticateToken } from '../middlewares/authentication.js';
+import { authenticateToken } from '../middlewares/authentication.js';
 
 // Käytetään kubios controlleria
 import { 
@@ -32,7 +32,7 @@ userRouter.post('/login', postLogin)
 
 userRouter
   .route('/')
-  .get(getMe)
+  .get(authenticateToken, getMe)
   .post(
     userValidation,
     validationErrorHandler,

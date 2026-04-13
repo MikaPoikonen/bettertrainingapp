@@ -93,7 +93,7 @@ const putUser = async (user) => {
 
 const deleteUser = async (user_id) => {
     const sql = 'DELETE FROM users WHERE user_id = ?'
-    const [result] = await promisePool.execute(sql, [user_id]);
+    await promisePool.execute(sql, [entry_id, user_id]);
     return result.affectedRows;
 };
 

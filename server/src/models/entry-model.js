@@ -58,17 +58,16 @@ const getEntryById = async (id) => {
 
 
 const removeEntryById = async (entry_id, user_id) => {
-  const sql = 'DELETE FROM DiaryEntries WHERE entry_id=? AND user_id=?';
-  
-  try{
-  const [result] = await promisePool.execute(sql[entry_id,user_id])
-  return result.affectedRows;
+  const sql = 'DELETE FROM DiaryEntries WHERE entry_id = ? AND user_id = ?';
+
+  try {
+    const [result] = await promisePool.execute(sql, [entry_id, user_id]);
+    return result.affectedRows;
   } catch (e) {
     console.error('error', e.message);
-    return {error: e.message}
+    return { error: e.message };
   }
 };
-
 
 
 
