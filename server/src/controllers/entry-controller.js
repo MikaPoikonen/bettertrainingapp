@@ -50,15 +50,26 @@ const getEntryByIdController = async (req, res) => {
 
 
 // Delete entry
-const deleteEntryByIdController = async (req,res) => {
-  const result = await removeEntryById(req.body.entry_id,req.user.user_id);
-  if (!result.error){
-    res.json(result)
-  } else {
-    res.status(500);
-    res.json(result)
+const deleteEntryByIdController = async (req, res) => {
+  const entry_id = req.body.entry_id;
+  const user_id = req.body.user_id;
+
+  if (entry_id === undefined) {
+    return res.status(400).json({ error: 'entry_id missing' });
   }
-}
+
+  if (user_id === undefined) {
+    return res.status(400).json({ error: 'user_id missing' });
+  }
+
+  const result = await removeEntryById(entry_id, user_id);
+
+  if (result?.error) {
+    return res.status(500).json(result);
+  }
+
+  return res.json({ deleted: result });
+};
 
 
 export {getEntriesById, addEntryController,deleteEntryByIdController, getEntryByIdController};
