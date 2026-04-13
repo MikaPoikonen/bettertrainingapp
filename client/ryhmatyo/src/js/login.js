@@ -24,7 +24,26 @@ document.querySelector(".loginform").addEventListener("submit", async (e) => {
         }
 
         // Tallenna token
-        localStorage.setItem("token", data.token);
+        const token = data.token;
+        localStorage.setItem("token", token);
+
+
+        const kubiosResponse = await fetch ("http://localhost:3000/api/kubios/sql",{
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        const kubiosData = await kubiosResponse.json();
+
+        if (!kubiosResponse.ok) {
+            console.error("Kubios SQL error:", kubiosData);
+            alert("Kirjautuminen onnistui, mutta Kubios‑datan tallennus epäonnistui.");
+            return;
+        }
+
+        console.log("Kubios SQL OK:", kubiosData);
 
         // Ohjaa eteenpäin
         window.location.href = "/homepage/homepage.html";
