@@ -352,7 +352,6 @@ stressChart.appear(1000, 100);
 
 /* Uusi päiväkirjamekintä -dialogi */
 
-
 const diaryDialog = document.getElementById("diaryDialog");
 const addDiaryBtn = document.getElementById("addDiaryBtn");
 const saveDiaryBtn = document.getElementById("saveDiary");
@@ -360,6 +359,7 @@ const cancelDiaryBtn = document.getElementById("cancelDiary");
 const diaryText = document.getElementById("diaryText");
 const diaryEntries = document.getElementById("diaryEntries");
 const overlay = document.getElementById("dialogOverlay");
+const localDiaryEntries = [];
 
 addDiaryBtn.addEventListener("click", () => {
   diaryText.value = "";
@@ -385,6 +385,7 @@ saveDiaryBtn.addEventListener("click", async () => {
     notes
   };
 
+  /*
   try {
     await createDiaryEntry(entry);
     diaryDialog.close();
@@ -394,6 +395,14 @@ saveDiaryBtn.addEventListener("click", async () => {
     console.error(err);
     alert("Merkinnän tallennus epäonnistui");
   }
+    */
+   
+localDiaryEntries.unshift(entry);
+
+  diaryDialog.close();
+  overlay.style.display = "none";
+
+  renderDiary();
 });
 
 overlay.addEventListener("click", () => {
@@ -401,6 +410,7 @@ overlay.addEventListener("click", () => {
   overlay.style.display = "none";
 });
 
+/*
 async function renderDiary() {
   try {
     const entries = await fetchDiaryEntries();
@@ -428,6 +438,36 @@ async function renderDiary() {
     diaryEntries.innerHTML = "<p>Merkintöjä ei voitu ladata.</p>";
   }
 }
+*/
 
-renderDiary();
+/* Testi funktio mikä renderöi paikallisesti tallennetut merkinnät ilman backend-kutsua */
+
+function renderDiary() {
+  diaryEntries.innerHTML = "";
+
+  if (localDiaryEntries.length === 0) {
+    diaryEntries.innerHTML = "<p>Ei päiväkirjamerkintöjä vielä.</p>";
+    return;
+  }
+
+  localDiaryEntries.slice(0, 2).forEach((entry) => {
+    const div = document.createElement("div");
+    div.className = "diary-entry";
+
+    const dateLabel = new Date(entry.entry_date).toLocaleDateString("fi-FI", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric"
+    });
+
+    div.innerHTML = `
+      <div class="diary-date">${dateLabel}</div>
+      <div class="diary-text">${entry.notes}</div>
+    `;
+
+    diaryEntries.appendChild(div);
+  });
+}
+
+/* renderDiary(); */
 
