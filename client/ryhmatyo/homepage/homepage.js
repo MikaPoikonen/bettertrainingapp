@@ -1,12 +1,14 @@
 import "./homepage.css";
+import { getUserDataSqlLatest, getUserInfo } from "../src/js/kubios-data.js";
 
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import am5themes_Responsive from "@amcharts/amcharts5/themes/Responsive";
 import * as am5radar from "@amcharts/amcharts5/radar";
-
-
+const data = await getUserDataSqlLatest();
+const readinessData = data.readiness_data;
+const stressData = data.stress_data;
 am5.ready(function() {
 
 // Create root element
@@ -225,8 +227,11 @@ var label = readinessChart.radarContainer.children.push(
   })
 );
 
-// READINESS mock arvo
-var readinessValue = 78;
+// READINESS Kubios Arvo
+
+  
+
+  const readinessValue = readinessData;
 
 axisDataItem.set("value", readinessValue);
 label.set("text", readinessValue.toString());
@@ -255,8 +260,12 @@ bands.forEach(function(band) {
 });
 
 readinessChart.appear(1000, 100);
+});
 
-}); 
+
+
+
+
 
 
 
@@ -283,8 +292,8 @@ var axisRenderer = am5radar.AxisRendererCircular.new(stressRoot, {
 
 var xAxisGauge = stressChart.xAxes.push(
   am5xy.ValueAxis.new(stressRoot, {
-    min: -3,
-    max: 3,
+    min: 0,
+    max: 15,
     strictMinMax: true,
     renderer: axisRenderer
   })
@@ -315,17 +324,16 @@ var label = stressChart.radarContainer.children.push(
 );
 
 // Mock stresi
-var stressValue = 1.78;
+var stressValue = stressData;
 
 axisDataItem.set("value", stressValue);
 label.set("text", stressValue.toString());
 
 // Värit
 var bands = [
-  { from: -3, to: -1.5, color: 0x0f9747 }, // Todella huono
-  { from: -1.5, to: 0, color: 0xb0d136 }, // Huono
-  { from: 0, to: 1.5, color: 0xfdae19 }, // hyvä
-  { from: 1.5, to: 3, color: 0xee1f25 } //Erittäin hyvä
+  { from: 12, to: 30, color: 0xee1f25 }, // Huono 0xb0d136
+  { from: 10, to: 12, color: 0xfdae19 }, // hyvä
+  { from: 0, to: 10, color: 0xb0d136 } //Erittäin hyvä
 ];
 
 bands.forEach(function(band) {
