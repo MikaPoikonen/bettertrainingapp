@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.13.7 on win32)" generated="2026-04-07T11:25:19.089088" rpa="false" schemaversion="5">
+<suite id="s1" name="Registertest" source="C:\Users\mikap\OneDrive\Asiakirjat\Metropolia opiskelu\Terveysteknologia\Bettertrainingapp\bettertrainingapp\tests\registertest.robot">
+<test id="s1-t1" name="Test Web Form" line="6">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-04-07T11:25:19.612263" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Users\\mikap\\OneDrive\\Asiakirjat\\Metropolia opiskelu\\Terveysteknologia\\Bettertrainingapp\\bettertrainingapp\\tests\\browser\\traces\\temp\\d82faf29-c4ca-4912-9f00-ddcc252fcb25"}</msg>
+<msg time="2026-04-07T11:25:19.679001" level="INFO">Starting Browser process C:\Users\mikap\OneDrive\Asiakirjat\Metropolia opiskelu\Terveysteknologia\Bettertrainingapp\bettertrainingapp\.venv\Lib\site-packages\Browser\wrapper\index.js using at 127.0.0.1:50182</msg>
+<arg>chromium</arg>
+<arg>headless=No</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="FAIL" start="2026-04-07T11:25:19.611047" elapsed="10.078571">Execution terminated by signal</status>
+</kw>
+<kw name="New Page" owner="Browser">
+<arg>https://www.selenium.dev/selenium/web/web-form.html</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="NOT RUN" start="2026-04-07T11:25:29.690875" elapsed="0.000580"/>
+</kw>
+<kw name="Get Title" owner="Browser">
+<arg>==</arg>
+<arg>Web form</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the title of the current page.</doc>
+<status status="NOT RUN" start="2026-04-07T11:25:29.692488" elapsed="0.000395"/>
+</kw>
+<kw name="Type Text" owner="Browser">
+<arg>[name="my-text"]</arg>
+<arg>${Username}</arg>
+<arg>delay=0.1 s</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="NOT RUN" start="2026-04-07T11:25:29.694217" elapsed="0.000391"/>
+</kw>
+<kw name="Type Secret" owner="Browser">
+<arg>[name="my-password"]</arg>
+<arg>$Password</arg>
+<arg>delay=0.1 s</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given secret from ``variable_name`` into the text field
+found by ``selector``.</doc>
+<status status="NOT RUN" start="2026-04-07T11:25:29.695583" elapsed="0.000442"/>
+</kw>
+<kw name="Type Text" owner="Browser">
+<arg>[name="my-textarea"]</arg>
+<arg>${Message}</arg>
+<arg>delay=0.1 s</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="NOT RUN" start="2026-04-07T11:25:29.697090" elapsed="0.000400"/>
+</kw>
+<kw name="Select Options By" owner="Browser">
+<arg>[name="my-select"]</arg>
+<arg>label</arg>
+<arg>Two</arg>
+<arg>delay=0.1 s</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Selects options from select element found by ``selector``.</doc>
+<status status="NOT RUN" start="2026-04-07T11:25:29.698389" elapsed="0.000362"/>
+</kw>
+<kw name="Type Text" owner="Browser">
+<arg>[name="my-datalist"]</arg>
+<arg>Seattle</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="NOT RUN" start="2026-04-07T11:25:29.699660" elapsed="0.000354"/>
+</kw>
+<kw name="Check Checkbox" owner="Browser">
+<arg>id=my-check-2</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Checks the checkbox or selects radio button found by ``selector``.</doc>
+<status status="NOT RUN" start="2026-04-07T11:25:29.700915" elapsed="0.000374"/>
+</kw>
+<kw name="Check Checkbox" owner="Browser">
+<arg>id=my-radio-2</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Checks the checkbox or selects radio button found by ``selector``.</doc>
+<status status="NOT RUN" start="2026-04-07T11:25:29.702926" elapsed="0.001219"/>
+</kw>
+<kw name="Evaluate JavaScript" owner="Browser">
+<arg>css=input[name="my-colors"]</arg>
+<arg>(el) =&gt; { el.value = '#ff0000'; el.dispatchEvent(new Event('input', { bubbles: true })); el.dispatchEvent(new Event('change', { bubbles: true })); }</arg>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Executes given javascript on the selected element(s) or on page.</doc>
+<status status="NOT RUN" start="2026-04-07T11:25:29.706501" elapsed="0.000553"/>
+</kw>
+<kw name="Type Text" owner="Browser">
+<arg>[name="my-date"]</arg>
+<arg>30-03-2026</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="NOT RUN" start="2026-04-07T11:25:29.708067" elapsed="0.000386"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<arg>css=input[name="my-range"]</arg>
+<arg>8</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="NOT RUN" start="2026-04-07T11:25:29.709372" elapsed="0.000498"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<var>${options}</var>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2026-04-07T11:25:29.712709" elapsed="0.000858"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<var>${prefs}</var>
+<arg>download.default_directory=${DOWNLOAD DIR}</arg>
+<arg>download.prompt_for_download=${False}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="NOT RUN" start="2026-04-07T11:25:29.714777" elapsed="0.000801"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<arg>${options}</arg>
+<arg>add_experimental_option</arg>
+<arg>prefs</arg>
+<arg>${prefs}</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="NOT RUN" start="2026-04-07T11:25:29.716229" elapsed="0.000277"/>
+</kw>
+<kw name="Click" owner="Browser">
+<arg>text=submit</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="NOT RUN" start="2026-04-07T11:25:29.717227" elapsed="0.000692"/>
+</kw>
+<errors>
+<msg time="2026-04-07T11:25:36.300308" level="ERROR">Execution stopped by user.</msg>
+</errors>
+</robot>

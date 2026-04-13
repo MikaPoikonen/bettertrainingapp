@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.13.7 on win32)" generated="2026-04-07T12:03:11.710568" rpa="false" schemaversion="5">
+<suite id="s1" name="Registertest" source="C:\Users\mikap\OneDrive\Asiakirjat\Metropolia opiskelu\Terveysteknologia\Bettertrainingapp\bettertrainingapp\tests\registertest.robot">
+<test id="s1-t1" name="Avaa kissaselain" line="5">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-04-07T12:03:12.213678" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Users\\mikap\\OneDrive\\Asiakirjat\\Metropolia opiskelu\\Terveysteknologia\\Bettertrainingapp\\bettertrainingapp\\browser\\traces\\temp\\490a394b-1cb5-41ad-a983-c2f686f4a2f6"}</msg>
+<msg time="2026-04-07T12:03:12.293103" level="INFO">Starting Browser process C:\Users\mikap\OneDrive\Asiakirjat\Metropolia opiskelu\Terveysteknologia\Bettertrainingapp\bettertrainingapp\.venv\Lib\site-packages\Browser\wrapper\index.js using at 127.0.0.1:57315</msg>
+<msg time="2026-04-07T12:03:14.289944" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Users\\mikap\\OneDrive\\Asiakirjat\\Metropolia opiskelu\\Terveysteknologia\\Bettertrainingapp\\bettertrainingapp\\browser\\traces\\temp\\490a394b-1cb5-41ad-a983-c2f686f4a2f6"}</msg>
+<arg>chromium</arg>
+<arg>headless=False</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-04-07T12:03:12.211753" elapsed="2.078643"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-04-07T12:03:14.750543" level="INFO">Successfully initialized new page object and opened url: http://localhost:5173/</msg>
+<msg time="2026-04-07T12:03:14.750708" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<arg>http://localhost:5173/</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-04-07T12:03:14.291287" elapsed="0.459680"/>
+</kw>
+<kw name="Get Title" owner="Browser">
+<msg time="2026-04-07T12:03:14.826734" level="INFO">Title: 'Better Training App'</msg>
+<arg>==</arg>
+<arg>Better Training App</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2026-04-07T12:03:14.752016" elapsed="0.074887"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2026-04-07T12:03:14.828685" level="INFO">Clicks the element 'id=open_register_dialog'.</msg>
+<arg>id=open_register_dialog</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-04-07T12:03:14.827496" elapsed="0.311305"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-04-07T12:03:20.141096" level="INFO">Slept 5 seconds.</msg>
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-04-07T12:03:15.139386" elapsed="5.002236"/>
+</kw>
+<msg time="2026-04-07T12:03:20.178924" level="INFO">Switching context to context=b0e47ca8-af40-4cff-8a09-dd27e52e19e7 in CURRENT</msg>
+<msg time="2026-04-07T12:03:20.187368" level="INFO">Successfully changed active context: context=b0e47ca8-af40-4cff-8a09-dd27e52e19e7</msg>
+<msg time="2026-04-07T12:03:20.202946" level="INFO">Successfully closed Context</msg>
+<status status="PASS" start="2026-04-07T12:03:12.205476" elapsed="7.937214"/>
+</test>
+<status status="PASS" start="2026-04-07T12:03:11.714049" elapsed="8.490548"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Registertest" id="s1" pass="1" fail="0" skip="0">Registertest</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
