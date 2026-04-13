@@ -7,6 +7,38 @@ import am5themes_Responsive from "@amcharts/amcharts5/themes/Responsive";
 import * as am5radar from "@amcharts/amcharts5/radar";
 
 
+
+/* PÄIVÄKIRJA - API-kutsut */
+
+async function fetchDiaryEntries() {
+  const res = await fetch("/api/diary", {
+    credentials: "include"
+  });
+
+  if (!res.ok) {
+    throw new Error("Päiväkirjamerkintöjen haku epäonnistui");
+  }
+
+  return await res.json();
+}
+
+async function createDiaryEntry(entry) {
+  const res = await fetch("/api/diary", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    credentials: "include",
+    body: JSON.stringify(entry)
+  });
+
+  if (!res.ok) {
+    throw new Error("Merkinnän tallennus epäonnistui");
+  }
+
+  return await res.json();
+}
+
 am5.ready(function() {
 
 // Create root element
@@ -346,7 +378,9 @@ bands.forEach(function(band) {
 stressChart.appear(1000, 100);
 
 
-/* PÄIVÄKIRJA */
+
+/* Uusi päiväkirjamekintä -dialogi */
+
 
 const diaryDialog = document.getElementById("diaryDialog");
 const addDiaryBtn = document.getElementById("addDiaryBtn");
@@ -354,58 +388,75 @@ const saveDiaryBtn = document.getElementById("saveDiary");
 const cancelDiaryBtn = document.getElementById("cancelDiary");
 const diaryText = document.getElementById("diaryText");
 const diaryEntries = document.getElementById("diaryEntries");
+const overlay = document.getElementById("dialogOverlay");
 
-// Avaa dialog
 addDiaryBtn.addEventListener("click", () => {
   diaryText.value = "";
   diaryDialog.showModal();
+  overlay.style.display = "block";
+
 });
 
-// Sulje dialog
 cancelDiaryBtn.addEventListener("click", () => {
   diaryDialog.close();
+  overlay.style.display = "none";
 });
 
-// Tallenna merkintä
-saveDiaryBtn.addEventListener("click", () => {
-  const text = diaryText.value.trim();
-  if (!text) return;
+saveDiaryBtn.addEventListener("click", async () => {
+  const notes = diaryText.value.trim();
+  if (!notes) return;
 
   const entry = {
-    text,
-    date: new Date().toLocaleDateString("fi-FI", {
-      weekday: "long",
-      day: "numeric",
-      month: "numeric",
-    }),
-    createdAt: Date.now(),
+    entry_date: new Date().toISOString().split("T")[0],
+    mood: null,
+    weight_now: null,
+    sleep_hours: null,
+    notes
   };
 
-  const entries = JSON.parse(localStorage.getItem("diaryEntries")) || [];
-  entries.unshift(entry);
-  localStorage.setItem("diaryEntries", JSON.stringify(entries));
-
-  diaryDialog.close();
-  renderDiary();
+  try {
+    await createDiaryEntry(entry);
+    diaryDialog.close();
+    overlay.style.display = "none";
+    await renderDiary();
+  } catch (err) {
+    console.error(err);
+    alert("Merkinnän tallennus epäonnistui");
+  }
 });
 
-// Näyttää 2 viimeisintä merkintää
-function renderDiary() {
-  const entries = JSON.parse(localStorage.getItem("diaryEntries")) || [];
-  diaryEntries.innerHTML = "";
+overlay.addEventListener("click", () => {
+  diaryDialog.close();
+  overlay.style.display = "none";
+});
 
-  entries.slice(0, 2).forEach((entry) => {
-    const div = document.createElement("div");
-    div.className = "diary-entry";
+async function renderDiary() {
+  try {
+    const entries = await fetchDiaryEntries();
+    diaryEntries.innerHTML = "";
 
-    div.innerHTML = `
-      <div class="diary-date">${entry.date}</div>
-      <div class="diary-text">${entry.text}</div>
-    `;
+    entries.slice(0, 2).forEach((entry) => {
+      const div = document.createElement("div");
+      div.className = "diary-entry";
 
-    diaryEntries.appendChild(div);
-  });
+      const dateLabel = new Date(entry.entry_date).toLocaleDateString("fi-FI", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+      });
+
+      div.innerHTML = `
+        <div class="diary-date">${dateLabel}</div>
+        <div class="diary-text">${entry.notes}</div>
+      `;
+
+      diaryEntries.appendChild(div);
+    });
+  } catch (err) {
+    console.error(err);
+    diaryEntries.innerHTML = "<p>Merkintöjä ei voitu ladata.</p>";
+  }
 }
 
-// Näytä merkinnät sivun latautuessa
 renderDiary();
+

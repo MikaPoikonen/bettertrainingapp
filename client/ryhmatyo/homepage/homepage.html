@@ -52,20 +52,37 @@
   <div id="diaryEntries"></div>
 </div>
 
-
-<!-- Päiväkirja modal -->
-<dialog id="diaryDialog">
+<!-- Päiväkirja modaali ja uuden merkinnän lisäys -->
+<dialog id="diaryDialog" class="app-dialog diary-dialog">
   <h3>Uusi päiväkirjamerkintä</h3>
 
+  <label> Päivämäärä</label>
+  <input type="date" name ="entry_date" required/>
+  </label>
+
+  <label> Mieliala (1-5)
+  <input type="number" name="mood" min="1" max="5" required />
+  </label>
+
+  <label> Paino (kg)
+  <input type="number" name="weight" step="0.1" min="0" required />
+  </label>
+
+  <label>Uni (h)
+    <input type="number" name="sleep" step="0.1" min="0" required />
+  </label>
+
+  <label> Muistiinpanot
   <textarea
     id="diaryText"
     placeholder="Miltä päivä tuntui?"
     rows="5"
   ></textarea>
+  </label>
 
   <div class="dialog-buttons">
-    <button id="saveDiary">Tallenna</button>
-    <button id="cancelDiary">Peruuta</button>
+    <button class="register_button" id="saveDiary">Tallenna</button>
+    <button class="register_button" id="cancelDiary">Peruuta</button>
   </div>
 </dialog>
 
@@ -75,6 +92,7 @@
 
     </div>
   </div>
+  <div id="dialogOverlay" class="dialog-overlay"></div>
 </body>
 
 <script type="module" src="homepage.js"></script>
