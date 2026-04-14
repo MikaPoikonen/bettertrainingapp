@@ -69,7 +69,53 @@ const getUserDataSqlAll = async () => {
 
 
 
+const getUserData = async () => {
+  console.log("Käyttäjän DATA Kubioksesta");
+
+  const url = `http://localhost:3000/api/users/${localStorage.getItem('userId')}`;
+  const token = localStorage.getItem("token");
+  const user_id = localStorage.getItem("userId");
+  console.log("User ID:", user_id);
+
+  const headers = { Authorization: `Bearer ${token}` };
+  const options = {
+    headers: headers,
+  };
+
+  const usersData = await fetchData(url, options);
+
+  if (usersData.error) {
+    console.log("Käyttäjän tietojen haku Kubioksesta epäonnistui");
+    return;
+  }
+
+  console.log("Tässä tiedot käyttäjästä", usersData);
+
+  const birthDate = usersData.birth_year;
+  const today = new Date();
+  const birth = new Date(birthDate);
+
+  let age = today.getFullYear() - birth.getFullYear();
+
+  if (
+    today.getMonth() < birth.getMonth() ||
+    (today.getMonth() === birth.getMonth() &&
+      today.getDate() < birth.getDate())
+  ) {
+    age--;
+  }
+
+  console.log("Ikä:", age);
+
+  return {
+    ...usersData,
+    age: age,
+  };
+};
 
 
 
-export { getUserDataSqlLatest, getUserInfo, getUserDataSqlAll };
+
+
+
+export { getUserDataSqlLatest, getUserInfo, getUserDataSqlAll, getUserData };

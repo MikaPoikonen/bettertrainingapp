@@ -3,7 +3,7 @@ import { authenticateToken } from '../middlewares/authentication.js';
 
 // Käytetään kubios controlleria
 import { 
-  //getUserByIdController, 
+  getUserByIdController, 
   addUserController,
   updateUserController, 
   deleteUserController, 
@@ -21,7 +21,7 @@ const userRouter = express.Router();
 
 userRouter
   .route('/:id')
-  //.get(getUserByIdController)
+  .get(getUserByIdController)
   .put(
     updateUserValidation,
     validationErrorHandler,

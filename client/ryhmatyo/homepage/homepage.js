@@ -1,5 +1,5 @@
 import "./homepage.css";
-import { getUserDataSqlLatest, getUserInfo, getUserDataSqlAll } from "../src/js/kubios-data.js";
+import { getUserDataSqlLatest, getUserInfo, getUserDataSqlAll, getUserData } from "../src/js/kubios-data.js";
 
 import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
@@ -9,8 +9,11 @@ import * as am5radar from "@amcharts/amcharts5/radar";
 const data = await getUserDataSqlLatest();
 const readinessData = data.readiness_data;
 const stressData = data.stress_data;
+const physiologicalData = data.physiological_age;
 const allData = await getUserDataSqlAll();
-console.log(allData)
+const userInfo = await getUserData();
+console.log(userInfo);
+console.log(userInfo.age);
 
 
 
@@ -100,6 +103,7 @@ am5.ready(function () {
       yAxis: yAxis,
       valueYField: "value",
       valueXField: "date",
+      stroke: am5.color(0x000000),
       tooltip: am5.Tooltip.new(root, {
         labelText: "{valueY}",
       }),
@@ -111,8 +115,8 @@ am5.ready(function () {
       radius: 4,
       interactive: true,
       cursorOverStyle: "ns-resize",
-      stroke: series.get("stroke"),
-      fill: am5.color(0xffffff),
+      stroke: am5.color(0x000000),
+      fill: am5.color(0x000000),
     });
 
     return am5.Bullet.new(root, {
@@ -232,7 +236,7 @@ am5.ready(function () {
     am5.Label.new(readinessRoot, {
       centerX: am5.percent(50),
       centerY: am5.percent(50),
-      fontSize: "2.5em",
+      fontSize: "30px",
       textAlign: "center",
       fill: am5.color(0xffffff),
     }),
@@ -314,7 +318,7 @@ var label = stressChart.radarContainer.children.push(
   am5.Label.new(stressRoot, {
     centerX: am5.percent(50),
     centerY: am5.percent(50),
-    fontSize: "2.5em",
+    fontSize: "35px",
     textAlign: "center",
     fill: am5.color(0xffffff),
   }),
@@ -349,6 +353,98 @@ bands.forEach(function (band) {
 });
 
 stressChart.appear(1000, 100);
+
+
+/* STRESS GAUGE/PNS-index */
+
+var stressRoot = am5.Root.new("physiologicalGauge");
+
+stressRoot.setThemes([am5themes_Animated.new(stressRoot)]);
+
+var stressChart = stressRoot.container.children.push(
+  am5radar.RadarChart.new(stressRoot, {
+    panX: false,
+    panY: false,
+    startAngle: 160,
+    endAngle: 380,
+  }),
+);
+
+var axisRenderer = am5radar.AxisRendererCircular.new(stressRoot, {
+  innerRadius: -30,
+});
+
+var xAxisGauge = stressChart.xAxes.push(
+  am5xy.ValueAxis.new(stressRoot, {
+    min: 0,
+    max: userInfo.age + 20,
+    strictMinMax: true,
+    renderer: axisRenderer,
+  }),
+);
+
+var axisDataItem = xAxisGauge.makeDataItem({});
+
+var hand = am5radar.ClockHand.new(stressRoot, {
+  radius: am5.percent(95),
+  bottomWidth: 10,
+});
+
+axisDataItem.set("bullet", am5xy.AxisBullet.new(stressRoot, { sprite: hand }));
+
+xAxisGauge.createAxisRange(axisDataItem);
+
+var label = stressChart.radarContainer.children.push(
+  am5.Label.new(stressRoot, {
+    centerX: am5.percent(50),
+    centerY: am5.percent(50),
+    fontSize: "35px",
+    fill: am5.color(0xffffff),
+  })
+);
+
+// Mock stresi
+var stressValue = physiologicalData;
+
+
+axisDataItem.set("value", stressValue);
+label.set("text", stressValue.toString());
+
+// Värit
+
+
+
+var bands = [
+  { from: userInfo.age + 5, to: userInfo.age + 20, color: 0xee1f25 }, // Huono 0xb0d136
+  { from: userInfo.age, to: userInfo.age + 5, color: 0xfdae19 }, // hyvä
+  { from: 0, to: userInfo.age, color: 0xb0d136 }, //Erittäin hyvä
+];
+
+bands.forEach(function (band) {
+  var range = xAxisGauge.createAxisRange(
+    xAxisGauge.makeDataItem({
+      value: band.from,
+      endValue: band.to,
+    }),
+  );
+
+  range.get("axisFill").setAll({
+    visible: true,
+    fill: am5.color(band.color),
+    fillOpacity: 0.85,
+  });
+});
+
+stressChart.appear(1000, 100);
+
+
+
+
+
+
+
+
+
 
 /* Uusi päiväkirjamekintä -dialogi */
 

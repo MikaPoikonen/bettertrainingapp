@@ -13,8 +13,9 @@ asdasds
 
 ### GET user by id:
 
-GET {{apiurl}}/users/1
-Ö
+GET {{apiurl}}/users/19
+Authorization: Bearer {{token}}
+
 ### POST user
 POST {{apiurl}}/users
 Content-Type: application/json     
