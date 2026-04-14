@@ -45,4 +45,31 @@ const getUserDataSqlLatest = async () => {
   return userData[0];
 };
 
-export { getUserDataSqlLatest, getUserInfo };
+
+const getUserDataSqlAll = async () => {
+  console.log('Käyttäjän DATA Kubioksesta');
+
+  const url = `http://localhost:3000/api/kubios/sql/${localStorage.getItem('userId')}`;
+  const token = localStorage.getItem('token');
+  const user_id = localStorage.getItem('userId');
+  console.log('User ID:', user_id);
+  const headers = { Authorization: `Bearer ${token}` };
+  const options = {
+    headers: headers,
+  };
+  const userData = await fetchData(url, options);
+
+  if (userData.error) {
+    console.log('Käyttäjän tietojen haku Kubioksesta epäonnistui');
+    return;
+  }
+  console.log(userData);
+  return userData;
+};
+
+
+
+
+
+
+export { getUserDataSqlLatest, getUserInfo, getUserDataSqlAll };
