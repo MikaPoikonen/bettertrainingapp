@@ -375,7 +375,7 @@ cancelDiaryBtn.addEventListener("click", () => {
 
 saveDiaryBtn.addEventListener("click", async () => {
   const notes = diaryText.value.trim();
-  if (!notes) return;
+  // if (!notes) return;
 
   const entry = {
     entry_date: new Date().toISOString().split("T")[0],
@@ -393,7 +393,7 @@ saveDiaryBtn.addEventListener("click", async () => {
     await renderDiary();
   } catch (err) {
     console.error(err);
-    alert("Merkinnän tallennus epäonnistui");
+    //alert("Merkinnän tallennus epäonnistui");
   }
     */
    

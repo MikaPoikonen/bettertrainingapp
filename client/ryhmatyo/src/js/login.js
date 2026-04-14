@@ -24,8 +24,13 @@ document.querySelector(".loginform").addEventListener("submit", async (e) => {
         }
 
         // Tallenna token
+        console.log(data);
         const token = data.token;
+        const userId = data.user_id;
         localStorage.setItem("token", token);
+        localStorage.setItem("userId", userId);
+        console.log(userId);
+
 
 
         const kubiosResponse = await fetch ("http://localhost:3000/api/kubios/sql",{
