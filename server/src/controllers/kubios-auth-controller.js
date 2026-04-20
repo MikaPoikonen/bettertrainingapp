@@ -153,6 +153,7 @@
      const newUser = {
        username: kubiosUser.email,
        email: kubiosUser.email,
+       birth_year: kubiosUser.birthdate,
        // Random password, quick workaround for the required field
        password: v4(),
      };

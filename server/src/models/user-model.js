@@ -63,10 +63,10 @@ const addUser = async (user) => {
 };
 
 const addUserKubios = async (user) => {
-    const {username, password, email} = user;
-    const sql = `INSERT Users (username, password, email)
-                 VALUES (?, ?, ?)`;
-    const params = [username, password, email];
+    const {username, password, email, birth_year} = user;
+    const sql = `INSERT Users (username, password, email, birth_year)
+                 VALUES (?, ?, ?, ?)`;
+    const params = [username, password, email, birth_year];
     try {
         const result = await promisePool.execute(sql, params);
         return {user_id: result[0].insertId};
