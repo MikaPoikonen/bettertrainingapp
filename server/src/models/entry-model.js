@@ -53,6 +53,18 @@ const getEntryById = async (id) => {
 //     }
 // }
 
+const putEntry = async (entry) => {
+    const {entry_id,user_id,entry_date,mood,weight_now,sleep_hours,notes} = entry;
+    const sql = 'UPDATE DiaryEntries SET  entry_date = ?, mood = ?, weight_now = ?, sleep_hours = ?, notes = ? WHERE user_id = ? AND entry_id = ?'
+    const params = [entry_date,mood,weight_now,sleep_hours,notes,user_id,entry_id];
+    try {
+    const rows = await promisePool.execute(sql,params);
+        return {rows}; 
+  } catch (e) {
+    console.error('error', e.message);
+    return {error: e.message};
+  }
+};
 
 
 
@@ -75,4 +87,4 @@ const removeEntryById = async (entry_id, user_id) => {
 
 
 
-export {listAllEntriesById, addEntry, removeEntryById, getEntryById};
+export {listAllEntriesById, addEntry, removeEntryById, getEntryById, putEntry};

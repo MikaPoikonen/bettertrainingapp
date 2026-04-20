@@ -1,4 +1,4 @@
-import { listAllEntriesById, addEntry,removeEntryById, getEntryById } from '../models/entry-model.js';
+import { listAllEntriesById, addEntry,removeEntryById, getEntryById, putEntry } from '../models/entry-model.js';
 
 const getEntriesById = async (req, res) => {
     const result = await listAllEntriesById(req.user.userId);
@@ -45,6 +45,27 @@ const getEntryByIdController = async (req, res) => {
   }
 };
 
+const updateEntryController = async (req, res) => {
+const user_id = req.params.id;
+const { entry_date, mood, weight_now, sleep_hours, notes, entry_id } = req.body;
+
+
+  const result = await putEntry ({
+    user_id,
+    entry_id,
+    entry_date,
+    mood,
+    weight_now,
+    sleep_hours,
+    notes
+  });
+     if (!result.error) {
+      res.status(200).json({ message: 'Entry updated.', result });
+    } else {
+      res.status(500).json(result);
+    }
+};
+
 
 
 
@@ -72,4 +93,4 @@ const deleteEntryByIdController = async (req, res) => {
 };
 
 
-export {getEntriesById, addEntryController,deleteEntryByIdController, getEntryByIdController};
+export {getEntriesById, addEntryController,deleteEntryByIdController, getEntryByIdController, updateEntryController};

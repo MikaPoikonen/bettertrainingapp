@@ -77,6 +77,19 @@ Authorization: Bearer {{token}}
 GET {{apiurl}}/entries/latest/19
 Authorization: Bearer {{token}}
 
+### PUT Update entry
+PUT {{apiurl}}/entries/19
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "entry_date": "2026-04-20",
+  "mood": "Good",
+  "weight_now": 70,
+  "sleep_hours": 7,
+  "notes": "Päivitys testaus",
+  "entry_id": 3
+}
 
 
 ### Delete entry by entry_id and user_id
