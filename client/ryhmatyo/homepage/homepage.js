@@ -461,6 +461,36 @@ bands.forEach(function (band) {
 stressChart.appear(1000, 100);
 
 
+// Headerin dialogi
+const headerBtn = document.getElementById("SettingDialog");
+const headerDialog = document.getElementById("headerDialog");
+const closeHeaderDialog = document.getElementById("closeHeaderDialog");
+//const overlay = document.getElementById("dialogOverlay");
+
+// Avaa dialogi
+headerBtn.addEventListener("click", () => {
+    headerDialog.showModal();
+    overlay.style.display = "block";
+});
+
+// Sulje dialogi napista
+closeHeaderDialog.addEventListener("click", () => {
+    headerDialog.close();
+    overlay.style.display = "none";
+});
+
+
+
+// headerin username
+const usernameSpan = document.getElementById("headerUsername");
+
+if (userInfo && userInfo.username) {
+  usernameSpan.textContent = userInfo.username;
+} else {
+  usernameSpan.textContent = "User"; // fallback
+}
+
+
 
 
 

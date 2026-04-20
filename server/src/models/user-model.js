@@ -79,9 +79,9 @@ const addUserKubios = async (user) => {
 
 
 const putUser = async (user) => {
-    const {user_id,username,password,email} = user;
-    const sql = 'UPDATE users SET  username = ?, password = ?, email = ? WHERE user_id = ?'
-    const params = [username,password,email,user_id];
+    const {user_id,username,password,email, start_weight, birth_year} = user;
+    const sql = 'UPDATE users SET  username = ?, password = ?, email = ?, start_weight = ?, birth_year = ? WHERE user_id = ?'
+    const params = [username,password,email,start_weight,birth_year,user_id];
     try {
     const rows = await promisePool.execute(sql,params);
         return {rows}; 

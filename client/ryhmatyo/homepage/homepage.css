@@ -32,6 +32,14 @@ html, body {
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
+.header-username {
+  padding-right: 0;
+  margin-left: 650px;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+}
+
 .branding {
   display: flex;
   align-items: center;
@@ -107,8 +115,24 @@ html, body {
   display: grid;
   grid-template-columns: 2.2fr 1fr;
   gap: 24px;
+  align-items: flex-start;
+  flex: 1;
+  min-height: 0;
+  margin-top: 26px;
+  margin-left: 20px;
   align-items: stretch;
-  margin-top: 20px;
+}
+
+.left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  height: 100%;
+}
+
+.dashboard-row > .hrv-card {
+  display: flex;
+  flex-direction: column;
 }
 
 /* Yhteinen korttityyli */
@@ -116,18 +140,19 @@ html, body {
   background: white;
   border-radius: 16px;
   padding: 24px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  box-shadow: 
+    0 4px 10px rgba(0, 0, 0, 0.30),
+    0 12px 30px rgba(0, 0, 0, 0.45);
 }
 
 /* HRV kortti */
 .hrv-card {
-  height: 65%;
+  flex: 2;
   background: linear-gradient(180deg,#0cd116, #ee1212);
   border-radius: 16px;
   padding: 24px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
   outline: #7b3fff solid 1px;
-  margin: 20px;
   box-shadow: black 0px 1px 3px, rgba(0,0,0,0.2) 3px 3px 3px;
 }
 
@@ -145,7 +170,7 @@ html, body {
 
 #stressGauge {
   width: 100%;
-  height: 230px;
+  height: 180px;
   margin-top: 8px;
 }
 
@@ -156,8 +181,9 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   margin-right: 15px;
+  height: auto;
 }
 
 .readiness-title {
@@ -196,13 +222,13 @@ html, body {
 /* Readiness graafi */
 #readinessGauge {
   width: 100%;
-  height: 230px;
+  height: 180px;
   margin-top: 8px;
 }
 
 #physiologicalGauge {
   width: 100%;
-  height: 230px;
+  height: 180px;
   margin-top: 8px;
 }
 
@@ -210,8 +236,10 @@ html, body {
 /* Päiväkirja */
 
 .diary-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   padding: 30px;
-  margin: 15px;
   box-sizing: border-box;
   outline: #7b3fff solid 1px;
 }
@@ -228,6 +256,11 @@ html, body {
   color: #3b82f6;
   cursor: pointer;
   font-weight: 600;
+}
+
+.diary-header button:hover {
+  cursor: pointer;
+  transform: scale(1.15);
 }
 
 .diary-entry {
@@ -319,4 +352,49 @@ html, body {
   display: none;                      
 }
 
+/* Mittarien popupit */
+
+.tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 110%;               
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+
+  background: rgba(20, 20, 30, 0.95);
+  color: white;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 9999;
+}
+
+/* Pieni nuoli */
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: rgba(20, 20, 30, 0.95) transparent transparent transparent;
+}
+
+/* Hover */
+.tooltip-wrapper:hover .tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px);
+}
 

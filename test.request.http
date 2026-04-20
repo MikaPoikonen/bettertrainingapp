@@ -47,7 +47,9 @@ Content-Type: application/json
 {
 "username": "muutettu",
 "password": "Salasana123",
-"email": "muutettu@muutettu11.fi"
+"email": "muutettu@muutettu11.fi",
+"start_weight": 90,
+"birth_year": "2000-02-02"
 } 
 
 

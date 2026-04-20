@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,89 +7,154 @@
 </head>
 <body>
 <div class="layout">
-
     <div class="right">
+
+      <!-- Header -->
 
       <header class="header">
         <img id="better_training_logo" src="../img/bettertrainngapplogo_nobackground.jpg" alt="Better Training Logo">
         <span class="app-name">Better Training App</span>
-        <button>
+        <span id="headerUsername" class="header-username"></span>
+        <button id="SettingDialog">
             <img src="../img/transparent.png" alt="">
         </button>
       </header>
+      
+
+      <!-- Headerin dialogi -->
+ <dialog id="headerDialog" class="app-dialog">
+  <h3>Asetukset</h3>
+  <p>vaihda sähköposti</p>
+
+  <div class="dialog-field">
+    <label for="settingsEmail">Uusi sähköposti</label>
+    <input 
+      type="email" 
+      id="settingsEmail" 
+      placeholder="name@example.com" 
+      required
+    />
+  </div>
+
+  <div class="dialog-field">
+    <label for="settingsPassword">Salasana</label>
+    <input 
+      type="password" 
+      id="settingsPassword" 
+      placeholder="********" 
+      required
+    />
+  </div>
+
+  <label> Aloitus Paino (kg)
+  <input type="number" name="start_weight" step="0.1" min="0" required />
+  </label>
+
+  <label> Syntymävuosi 
+  <input type="date" name="birth_year" required />
+  </label>
+
+  <div class="dialog-buttons">
+    <button id="saveSettings">Tallenna</button>
+    <button id="closeHeaderDialog">Sulje</button>
+  </div>
+</dialog>
 
 <!-- Homepage sisältö -->
     
 <div class="dashboard-row">
 
-  <!-- HRV kortti -->
-  <div class="card hrv-card">
-    <h3>HRV – Viimeiset 7 päivää</h3>
-    <div id="hrvchart"></div>
-  </div>
+        <!-- ========= VASEN PUOLI ========= -->
+        <div class="left-column">
 
-  <!-- READINESS ja Stressi kortti -->
-  <div class="card readiness_stress-card">
-    <div class="Stress-title">Stress</div>
-    <div id="stressGauge"></div>
-    <div class="readiness-status">
-    <div class="readiness-title">Readiness</div>
-    
-    </div>
-    <div id="readinessGauge"></div>
-    <div class="physiological-title">Physiological</div>
-    <div id="physiologicalGauge"></div>
-  </div>
-</div>
+          <!-- HRV -->
+          <div class="card hrv-card">
+            <h3>HRV – Viimeiset 7 päivää</h3>
+            <div id="hrvchart"></div>
+          </div>
 
+          <!-- PÄIVÄKIRJA -->
+          <div class="card diary-card">
+            <div class="diary-header">
+              <h3>Päiväkirja</h3>
+              <button id="addDiaryBtn">+ Lisää uusi merkintä</button>
+            </div>
 
- <!-- Diary kortti -->
-  
-<div class="card diary-card">
-  <div class="diary-header">
-    <h3>Päiväkirja</h3>
-    <button id="addDiaryBtn">+ Lisää uusi merkintä</button>
-  </div>
+            <div id="diaryEntries"></div>
+          </div>
 
-  <div id="diaryEntries"></div>
-</div>
+          <!-- Päiväkirja modaali ja uuden merkinnän lisäys -->
+           <dialog id="diaryDialog" class="app-dialog diary-dialog">
+           <h3>Uusi päiväkirjamerkintä</h3>
+          
+          <form id= "add-entry-form">
+          <label> Päivämäärä
+          <input type="date" name ="entry_date" required/>
+          </label>
 
-<!-- Päiväkirja modaali ja uuden merkinnän lisäys -->
-<dialog id="diaryDialog" class="app-dialog diary-dialog">
-  <h3>Uusi päiväkirjamerkintä</h3>
+          <label> Mieliala (1-5)
+          <input type="number" name="mood" min="1" max="5" required />
+          </label>
 
-  <form id="add-entry-form">
-  <label> Päivämäärä
-  <input type="date" name ="entry_date" required/>
-  </label>
+          <label> Paino (kg)
+          <input type="number" name="weight" step="0.1" min="0" required />
+          </label>
 
-  <label> Mieliala (1-5)
-  <input type="number" name="mood" min="1" max="5" required />
-  </label>
+          <label> Uni (h)
+          <input type="number" name="sleep" step="0.1" min="0" required />
+          </label>
 
-  <label> Paino (kg)
-  <input type="number" name="weight_now" step="0.1" min="0" required />
-  </label>
-
-  <label>Uni (h)
-    <input type="number" name="sleep_hours" step="0.1" min="0" required />
-  </label>
-
-  <label> Muistiinpanot
-  <textarea
-    id="diaryText"
-    placeholder="Miltä päivä tuntui?"
-    rows="5"
-    name="notes"
-  ></textarea>
-  </label>
-  
+         <label> Muistiinpanot
+          <textarea
+            id="diaryText"
+            placeholder="Miltä päivä tuntui?"
+            rows="5"
+          ></textarea>
+         </label>
 
   <div class="dialog-buttons">
     <button class="register_button" id="saveDiary">Tallenna</button>
     <button class="register_button" id="cancelDiary">Peruuta</button>
   </div>
 </dialog>
+          </div>
+        </div>
+
+        <!-- ========= OIKEA PUOLI / MITTARIT ========= -->
+        <div class="card readiness_stress-card">
+
+          <!-- STRESS -->
+          <div class="tooltip-wrapper">
+            <div class="tooltip">
+              Stress kuvaa kehon kuormitustasoa. Mitä suurempi arvo, sitä
+              korkeampi fysiologinen stressi.
+            </div>
+            <div class="Stress-title">Stress</div>
+            <div id="stressGauge"></div>
+          </div>
+
+          <!-- READINESS -->
+          <div class="tooltip-wrapper">
+            <div class="tooltip">
+              Readiness kertoo, kuinka valmis kehosi on fyysiseen rasitukseen
+              ja harjoitteluun tänään.
+            </div>
+            <div class="readiness-title">Readiness</div>
+            <div id="readinessGauge"></div>
+          </div>
+
+          <!-- PHYSIOLOGICAL AGE -->
+          <div class="tooltip-wrapper">
+            <div class="tooltip">
+              Physiological Age (fysiologinen ikä) on arvio siitä, kuinka vanhalta kehosi tuntuu ja toimii verrattuna todelliseen ikääsi. 
+              Mitä pienempi fysiologinen ikä, sitä parempi fyysinen kunto ja terveys yleensä on.
+            </div>
+            <div class="physiological-title">Physiological Age</div>
+            <div id="physiologicalGauge"></div>
+          </div>
+
+        </div>
+      </div>
 
       <footer class="footer">
         Footer
@@ -105,4 +169,4 @@
 <script type="module" src="/src/js/entrydialog.js"></script>
 <script type="module" src="/src/js/register.js"></script>
 </html>
-``
+

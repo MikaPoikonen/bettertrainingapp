@@ -32,14 +32,16 @@ const addUserController = async (req, res) => {
 // PUT USER
 const updateUserController = async (req, res) => {
 const user_id = req.params.id;
-const { username, password, email } = req.body;
+const { username, password, email, start_weight, birth_year } = req.body;
 
 
   const result = await putUser ({
     user_id,
     username,
     password,
-    email
+    email,
+    start_weight,
+    birth_year
   });
      if (!result.error) {
       res.status(200).json({ message: 'Entry updated.', result });
