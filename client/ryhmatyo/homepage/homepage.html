@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,155 +7,155 @@
 </head>
 <body>
 
-<div class="layout">
-  <div class="right">
+  <div class="layout">
+    <div class="right">
 
-    <!-- Header -->
-    <header class="header">
-      <img id="better_training_logo" src="../img/bettertrainngapplogo_nobackground.jpg" alt="Better Training Logo">
-      <span class="app-name">Better Training App</span>
-      <span id="headerUsername" class="header-username"></span>
-      <button id="SettingDialog">
-        <img src="../img/transparent.png" alt="">
-      </button>
-    </header>
+      <!-- Header -->
+      <header class="header">
+        <img id="better_training_logo" src="../img/bettertrainngapplogo_nobackground.jpg" alt="Better Training Logo">
+        <span class="app-name">Better Training App</span>
+        <span id="headerUsername" class="header-username"></span>
+        <button id="SettingDialog" type="button">
+          <img src="../img/transparent.png" alt="">
+        </button>
+      </header>
 
-    <!-- Header dialog -->
-    <dialog id="headerDialog" class="app-dialog">
-      <h3>Asetukset</h3>
-      <p>vaihda sähköposti</p>
+      <!-- Header dialog -->
+      <dialog id="headerDialog" class="app-dialog">
+        <h3>Asetukset</h3>
+        <p>Vaihda sähköposti</p>
 
-      <div class="dialog-field">
-        <label for="settingsEmail">Uusi sähköposti</label>
-        <input type="email" id="settingsEmail" placeholder="name@example.com" required />
-      </div>
-
-      <div class="dialog-field">
-        <label for="settingsPassword">Salasana</label>
-        <input type="password" id="settingsPassword" placeholder="********" required />
-      </div>
-
-      <label>Aloitus Paino (kg)
-        <input type="number" name="start_weight" step="0.1" min="0" required />
-      </label>
-
-      <label>Syntymävuosi 
-        <input type="date" name="birth_year" required />
-      </label>
-
-      <div class="dialog-buttons">
-        <button id="saveSettings">Tallenna</button>
-        <button id="closeHeaderDialog">Sulje</button>
-      </div>
-    </dialog>
-
-    <!-- DASHBOARD -->
-    <div class="dashboard-row">
-
-      <!-- ========= VASEN PUOLI ========= -->
-      <div class="left-column">
-
-        <!-- HRV -->
-        <div class="card hrv-card">
-          <h3>HRV – Viimeiset 7 päivää</h3>
-          <div id="hrvchart"></div>
+        <div class="dialog-field">
+          <label for="settingsEmail">Uusi sähköposti</label>
+          <input type="email" id="settingsEmail" placeholder="name@example.com" required />
         </div>
 
-        <!-- PÄIVÄKIRJA -->
-        <div class="card diary-card">
-          <div class="diary-header">
-            <h3>Päiväkirja</h3>
-            <button id="addDiaryBtn">+ Lisää uusi merkintä</button>
+        <div class="dialog-field">
+          <label for="settingsPassword">Salasana</label>
+          <input type="password" id="settingsPassword" placeholder="********" required />
+        </div>
+
+        <label>
+          Aloitus Paino (kg)
+          <input type="number" name="start_weight" step="0.1" min="0" required />
+        </label>
+
+        <label>
+          Syntymävuosi
+          <input type="date" name="birth_year" required />
+        </label>
+
+        <div class="dialog-buttons">
+          <button id="saveSettings" type="button">Tallenna</button>
+          <button id="closeHeaderDialog" type="button">Sulje</button>
+        </div>
+      </dialog>
+
+      <!-- DASHBOARD -->
+      <main class="dashboard-row">
+
+        <!-- ========= VASEN PUOLI ========= -->
+        <section class="left-column">
+
+          <!-- HRV -->
+          <div class="card hrv-card">
+            <h3>HRV – Viimeiset 7 päivää</h3>
+            <div id="hrvchart"></div>
           </div>
 
-          <div id="diaryEntries"></div>
-        </div>
-
-        <!-- Diary dialog -->
-        <dialog id="diaryDialog" class="app-dialog diary-dialog">
-          <h3>Uusi päiväkirjamerkintä</h3>
-
-          <form id="add-entry-form">
-            <label>Päivämäärä
-              <input type="date" name="entry_date" required />
-            </label>
-
-            <label>Mieliala (1-5)
-              <input type="number" name="mood" min="1" max="5" required />
-            </label>
-
-            <label>Paino (kg)
-              <input type="number" name="weight_now" step="0.1" min="0" required />
-            </label>
-
-            <label>Uni (h)
-              <input type="number" name="sleep_hours" step="0.1" min="0" required />
-            </label>
-
-            <label>Muistiinpanot
-              <textarea id="diaryText" name="notes" placeholder="Miltä päivä tuntui?" rows="5"></textarea>
-            </label>
-
-            <div class="dialog-buttons">
-              <button class="register_button" id="saveDiary">Tallenna</button>
-              <button class="register_button" id="cancelDiary">Peruuta</button>
+          <!-- PÄIVÄKIRJA -->
+          <div class="card diary-card">
+            <div class="diary-header">
+              <h3>Päiväkirja</h3>
+              <button id="addDiaryBtn" type="button">+ Lisää uusi merkintä</button>
             </div>
-          </form>
-        </dialog>
 
-      </div>
-
-      <!-- ========= OIKEA PUOLI ========= -->
-      <div class="card readiness_stress-card">
-
-        <!-- STRESS -->
-        <div class="tooltip-wrapper">
-          <div class="tooltip">
-            Stress kuvaa kehon kuormitustasoa.
+            <div id="diaryEntries"></div>
           </div>
-          <div class="Stress-title">Stress</div>
-          <div id="stressGauge"></div>
-        </div>
 
-        <!-- READINESS -->
-        <div class="tooltip-wrapper">
-          <div class="tooltip">
-            Readiness kertoo kuinka valmis olet harjoitteluun.
+          <!-- Diary dialog -->
+          <dialog id="diaryDialog" class="app-dialog diary-dialog">
+            <h3>Uusi päiväkirjamerkintä</h3>
+
+            <form id="add-entry-form">
+              <label>
+                Päivämäärä
+                <input type="date" name="entry_date" required />
+              </label>
+
+              <label>
+                Mieliala (1-5)
+                <input type="number" name="mood" min="1" max="5" required />
+              </label>
+
+              <label>
+                Paino (kg)
+                <input type="number" name="weight_now" step="0.1" min="0" required />
+              </label>
+
+              <label>
+                Uni (h)
+                <input type="number" name="sleep_hours" step="0.1" min="0" required />
+              </label>
+
+              <label>
+                Muistiinpanot
+                <textarea id="diaryText" name="notes" placeholder="Miltä päivä tuntui?" rows="5"></textarea>
+              </label>
+
+              <div class="dialog-buttons">
+                <button class="register_button" id="saveDiary" type="submit">Tallenna</button>
+                <button class="register_button" id="cancelDiary" type="button">Peruuta</button>
+              </div>
+            </form>
+          </dialog>
+
+        </section>
+
+        <!-- ========= OIKEA PUOLI ========= -->
+        <aside class="card readiness_stress-card">
+
+          <div class="gauge-section tooltip-wrapper">
+            <div class="tooltip">
+              Stress kuvaa kehon kuormitustasoa.
+            </div>
+            <div class="gauge-title">Stress</div>
+            <div id="stressGauge" class="gauge-box"></div>
           </div>
-          <div class="readiness-title">Readiness</div>
-          <div id="readinessGauge"></div>
-        </div>
 
-        <!-- PHYSIOLOGICAL AGE -->
-        <div class="tooltip-wrapper">
-          <div class="tooltip">
-            Fysiologinen ikä kuvaa kehon kuntoa.
+          <div class="gauge-section tooltip-wrapper">
+            <div class="tooltip">
+              Readiness kertoo kuinka valmis olet harjoitteluun.
+            </div>
+            <div class="gauge-title">Readiness</div>
+            <div id="readinessGauge" class="gauge-box"></div>
           </div>
-          <div class="physiological-title">Physiological Age</div>
-          <div id="physiologicalGauge"></div>
-        </div>
 
-      </div>
+          <div class="gauge-section tooltip-wrapper">
+            <div class="tooltip">
+              Fysiologinen ikä kuvaa kehon kuntoa.
+            </div>
+            <div class="gauge-title">Physiological Age</div>
+            <div id="physiologicalGauge" class="gauge-box"></div>
+          </div>
+
+        </aside>
+
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer">
+        Footer
+      </footer>
 
     </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-      Footer
-    </footer>
-
   </div>
-</div>
 
-<div id="dialogOverlay" class="dialog-overlay"></div>
+  <div id="dialogOverlay" class="dialog-overlay"></div>
 
-<script type="module" src="homepage.js"></script>
-<script type="module" src="/src/js/entrydialog.js"></script>
-<script type="module" src="/src/js/register.js"></script>
+  <script type="module" src="homepage.js"></script>
+  <script type="module" src="/src/js/entrydialog.js"></script>
+  <script type="module" src="/src/js/register.js"></script>
 
 </body>
 </html>
-
-
-
-

@@ -438,7 +438,7 @@ label.set("text", stressValue.toString());
 
 
 var bands = [
-  { from: userInfo.age + 5, to: userInfo.age + 20, color: 0xee1f25 }, // Huono 0xb0d136
+  { from: userInfo.age + 5, to: userInfo.age + 15, color: 0xee1f25 }, // Huono 0xb0d136
   { from: userInfo.age, to: userInfo.age + 5, color: 0xfdae19 }, // hyvä
   { from: 0, to: userInfo.age, color: 0xb0d136 }, //Erittäin hyvä
 ];

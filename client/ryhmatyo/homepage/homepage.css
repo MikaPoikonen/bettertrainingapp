@@ -1,241 +1,232 @@
 html, body {
   height: 100%;
   margin: 0;
+  padding: 0;
 }
 
-/* Pääflex  */
+body {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+/* Päälayout */
 .layout {
   display: flex;
   min-height: 100vh;
   font-size: 30px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  padding-bottom: 50px; /* Tilaa footerille */
-  
+  padding-bottom: 110px;
+  box-sizing: border-box;
 }
 
-/* Oikea puoli = pystysuuntainen flex */
 .right {
   flex: 1;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
-  min-height: 100vh; 
+  min-height: 100vh;
+  min-width: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Header */
 .header {
   background: linear-gradient(to right, rgb(43, 43, 223), rgb(60, 163, 248));
   display: flex;
-  align-items: center;          
-  justify-content: flex-start; 
-  height: 70px;                 
-  padding: 0 16px;              
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  align-items: center;
+  height: 70px;
+  padding: 0 16px;
+  gap: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .header-username {
-  padding-right: 0;
-  margin-left: 650px;
+  margin-left: auto;
+  margin-right: 16px;
   color: white;
   font-size: 20px;
   font-weight: 500;
 }
 
-.branding {
-  display: flex;
-  align-items: center;
-  gap: 0; 
-}
-
-/* Tekstin tyyli */
 .app-name {
   font-size: 27px;
   font-weight: 600;
   color: white;
   margin: 0;
-  padding: 0;
-  margin-left: 3px;
 }
 
-/* Nappi asetuksille */
 .header button {
   height: 40px;
   width: 55px;
-  padding: 20px 12px;
-  margin: 0;                    
+  padding: 0;
+  margin: 0;
   text-align: center;
-  margin-left: auto;
-  font-size: 30%;
+  background: transparent;
+  border: none;
 }
+
 .header button:hover {
   background: lightgrey;
   cursor: pointer;
   transform: scale(1.10);
 }
 
-/* Logo vasemmalle*/
 #better_training_logo {
-  height: 45px;               
-  width: auto;                
+  height: 45px;
+  width: auto;
   object-fit: contain;
   display: block;
   margin: 0;
-  margin-left: -32px;
   padding: 0;
-
 }
 
-
-/* Content täyttää välin */
-.content {
-  flex: 1;
-  padding: 15px;
-}
-
-/* Footer*/
-.footer {
-  background: red;
-  width: 100%;
-  height: 28px;
-  font-size: 17px;
-  text-align: center;
-  padding-top: 25px;
-  position: fixed;
-  bottom: 0;
-  margin-top: 20px;
-}
-
-.h2 {
-  padding-top: 25px;
-}
-
-
-
-/* HRV + Readiness rivi */
-
+/* Dashboard */
 .dashboard-row {
   flex: 1;
   display: grid;
-  grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 2.2fr) minmax(320px, 1fr);
   gap: 24px;
   margin-top: 26px;
-  padding: 0 20px;
-  align-items: stretch;
+  padding: 0 20px 80px 20px;
+  align-items: start;
+  box-sizing: border-box;
 }
 
-
+.dashboard-row > * {
+  min-width: 0;
+}
 
 .left-column {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  min-width: 0;
   height: 100%;
 }
 
-
-.dashboard-row > .hrv-card {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Yhteinen korttityyli */
+/* Kortit */
 .card {
   background: white;
   border-radius: 16px;
   padding: 24px;
-  box-shadow: 
+  box-shadow:
     0 4px 10px rgba(0, 0, 0, 0.30),
-    0 12px 30px rgba(0, 0, 0, 0.45);
+    0 12px 30px rgba(0, 0, 0, 0.20);
+  box-sizing: border-box;
+  min-width: 0;
 }
 
 /* HRV kortti */
 .hrv-card {
   flex: 3;
-  background: linear-gradient(180deg,#0cd116, #ee1212);
+  background: linear-gradient(180deg, #0cd116, #ee1212);
   border-radius: 16px;
   padding: 24px;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
   outline: #7b3fff solid 1px;
   box-shadow: black 0px 1px 3px, rgba(0,0,0,0.2) 3px 3px 3px;
 }
 
-/* HRV */
 .hrv-card h3 {
-  margin-bottom: 5px;
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
-/* HRV chart */
 #hrvchart {
   width: 100%;
-  height: 80%;
-  align-items: center;
+  height: 320px;
 }
 
-#stressGauge {
-  width: 100%;
-  height: 180px;
-  margin-top: 8px;
-}
-
-/* READINESS KORTTI */
+/* Oikea mittarikortti */
 .readiness_stress-card {
   background: linear-gradient(135deg, #2f6bff, #7b3fff);
   color: white;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 24px;
+  min-width: 0;
+  overflow: visible;
+  padding-bottom: 32px;
 }
 
-.readiness-title {
-  font-size: 32px;
-  opacity: 0.9;
-  margin-bottom: 8px;
-}
-
-.stress-value {
-  font-size: 75px;
-  font-weight: 700;
-  margin: 10px 0;
-}
-
-.readiness-status {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 14px;
-}
-
-.readiness-status .dot {
-  width: 10px;
-  height: 10px;
-  background: gold;
-  border-radius: 50%;
-}
-
-.readiness-text {
-  font-size: 14px;
-  text-align: center;
-  margin-top: 20px;
-  opacity: 0.9;
-}
-
-/* Readiness graafi */
-#readinessGauge {
+/* Yksi mittariblokki */
+.gauge-section {
   width: 100%;
-  height: 180px;
-  margin-top: 8px;
+  max-width: 100%;
+  box-sizing: border-box;
+  flex: 0 0 auto;
 }
 
+.gauge-title {
+  font-size: 32px;
+  opacity: 0.95;
+  margin-bottom: 8px;
+  text-align: center;
+  color: white;
+}
+
+/* Tooltip wrapper */
+.tooltip-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  overflow: visible;
+}
+
+.tooltip {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  background: rgba(20, 20, 30, 0.95);
+  color: white;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 9999;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent rgba(20, 20, 30, 0.95) transparent;
+}
+
+.tooltip-wrapper:hover .tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(4px);
+}
+
+/* Gauge-kontit */
+.gauge-box {
+  width: 100%;
+  max-width: 320px;
+  height: 180px;
+  margin: 0 auto;
+}
+
+#stressGauge,
+#readinessGauge,
 #physiologicalGauge {
   width: 100%;
+  max-width: 320px;
   height: 180px;
-  margin-top: 8px;
+  margin: 0 auto;
 }
 
-
 /* Päiväkirja */
-
 .diary-card {
   flex: 1;
   display: flex;
@@ -249,6 +240,11 @@ html, body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
+}
+
+.diary-header h3 {
+  margin: 0;
 }
 
 .diary-header button {
@@ -261,7 +257,11 @@ html, body {
 
 .diary-header button:hover {
   cursor: pointer;
-  transform: scale(1.15);
+  transform: scale(1.05);
+}
+
+#diaryEntries {
+  margin-top: 16px;
 }
 
 .diary-entry {
@@ -278,22 +278,11 @@ html, body {
   color: #555;
 }
 
-/* Diary dialog */
-
+/* Dialogit */
 #diaryDialog textarea {
   width: 100%;
   margin-top: 10px;
 }
-
-.dialog-buttons {
-  margin-top: 12px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
-
-/* YHTEINEN APP-DIALOG */
 
 .app-dialog {
   position: fixed;
@@ -308,6 +297,7 @@ html, body {
   border: none;
   box-shadow: 0 20px 40px rgba(0,0,0,0.25);
   z-index: 999999;
+  box-sizing: border-box;
 }
 
 .diary-dialog h3 {
@@ -323,6 +313,7 @@ html, body {
 }
 
 .diary-dialog input[type="date"],
+.diary-dialog input[type="number"],
 .diary-dialog textarea {
   width: 100%;
   padding: 8px 10px;
@@ -330,6 +321,7 @@ html, body {
   margin-bottom: 15px;
   border-radius: 6px;
   border: 1px solid #ccc;
+  box-sizing: border-box;
 }
 
 .diary-dialog textarea {
@@ -342,64 +334,80 @@ html, body {
 }
 
 .dialog-buttons {
+  margin-top: 12px;
   display: flex;
   justify-content: flex-end;
-  gap: 12px;
-  margin-top: 20px;
+  gap: 10px;
 }
 
 .dialog-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(9, 173, 243, 0.5);     
-  backdrop-filter: blur(10px);        
+  background: rgba(9, 173, 243, 0.5);
+  backdrop-filter: blur(10px);
   z-index: 99999;
-  display: none;                      
+  display: none;
 }
 
-/* Mittarien popupit */
-
-.tooltip-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.tooltip {
-  position: absolute;
-  bottom: 110%;               
-  left: 50%;
-  transform: translateX(-50%);
-  width: 220px;
-
-  background: rgba(20, 20, 30, 0.95);
-  color: white;
-  padding: 10px 12px;
-  border-radius: 8px;
-  font-size: 14px;
-  line-height: 1.4;
+/* Footer */
+.footer {
+  background: red;
+  width: 100%;
+  height: 28px;
+  font-size: 17px;
   text-align: center;
-
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  z-index: 9999;
+  padding-top: 25px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
 }
 
-/* Pieni nuoli */
-.tooltip::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 6px;
-  border-style: solid;
-  border-color: rgba(20, 20, 30, 0.95) transparent transparent transparent;
+/* Responsiivisuus */
+@media (max-width: 1100px) {
+  .dashboard-row {
+    grid-template-columns: 1fr;
+  }
+
+  .readiness_stress-card {
+    width: 100%;
+  }
+
+  .gauge-box,
+  #stressGauge,
+  #readinessGauge,
+  #physiologicalGauge {
+    max-width: 380px;
+  }
 }
 
-/* Hover */
-.tooltip-wrapper:hover .tooltip {
-  opacity: 1;
-  transform: translateX(-50%) translateY(-4px);
-}
+@media (max-width: 700px) {
+  .header {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 12px 16px;
+  }
 
+  .header-username {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    order: 3;
+  }
+
+  .app-name {
+    font-size: 22px;
+  }
+
+  .gauge-title {
+    font-size: 26px;
+  }
+
+  .dashboard-row {
+    padding: 0 12px 16px 12px;
+    gap: 16px;
+  }
+
+  .card {
+    padding: 18px;
+  }
+}
