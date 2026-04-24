@@ -40,6 +40,11 @@ const diaryEntries = document.getElementById("diaryEntries");
 const overlay = document.getElementById("dialogOverlay");
 
 
+
+
+///////////////////////////////////////////////////
+
+
 addDiaryBtn.addEventListener("click", () => {
   diaryText.value = "";
   diaryDialog.showModal();
@@ -77,12 +82,25 @@ overlay.addEventListener("click", () => {
 
 
 
-// Viimeisimmän päiväkirjamerkinnän haku ja renderöinti
+// 🔹 Täyttää formiin arvot
+function fillDiaryForm(row) {
+  diaryDate.value = row.entry_date?.split("T")[0] || "";
+  diaryMood.value = row.mood || "";
+  diaryWeight.value = row.weight_now || "";
+  diarySleep.value = row.sleep_hours || "";
+  diaryText.value = row.notes || "";
+
+  diaryDialogUpdate.dataset.id = row.id;
+
+  diaryDialogUpdate.showModal();
+  overlay.style.display = "block";
+}
+
+// 🔹 Renderöinti
 async function renderDiary() {
   try {
     const result = await fetchDiaryEntries();
 
-    // Ensure it's always an array
     const data = Array.isArray(result) ? result : [result];
 
     diaryEntries.innerHTML = "";
@@ -101,8 +119,15 @@ async function renderDiary() {
         Paino nyt: ${row.weight_now || "-"} kg<br>
         Uni: ${row.sleep_hours || "-"} tuntia<br>
         Olotila: ${row.mood || "-"}<br>
-        Muistiinpanot: ${row.notes || ""}
+        Muistiinpanot: ${row.notes || ""}<br><br>
       `;
+      
+      // 🔹 nappi tästä rivistä
+      const editBtn = document.getElementById("putDiaryBtn");
+
+      editBtn.addEventListener("click", () => {
+        fillDiaryForm(row);
+      });
 
       diaryEntries.appendChild(li);
     });
@@ -114,6 +139,15 @@ async function renderDiary() {
 }
 
 renderDiary();
+
+
+
+
+
+
+
+
+
 
 
 // Uuden päiväkirjamerkinnän renderöinti
