@@ -71,6 +71,7 @@
             <div class="diary-header">
               <h3>Päiväkirja</h3>
               <button id="addDiaryBtn" type="button">+ Lisää uusi merkintä</button>
+              <button id="putDiaryBtn" type="button">+ Muokkaa merkintää</button>
             </div>
 
             <div id="diaryEntries"></div>
@@ -118,17 +119,58 @@
 
               <label>
                 Muistiinpanot
-                <textarea id="diaryTextUpdate" name="notes" placeholder="Miltä päivä tuntui?" rows="5"></textarea>
+                <textarea id="diaryText" name="notes" placeholder="Miltä päivä tuntui?" rows="5"></textarea>
               </label>
 
               <div class="dialog-buttons">
                 <button class="register_button" id="saveDiary" type="submit">Tallenna</button>
+                <button class="register_button" id="cancelDiaryUpdate" type="button">Peruuta</button>
+              </div>
+            </form>
+          </dialog>
+
+        </section>
+
+        <!-- Diary dialog update -->
+          <dialog id="diaryDialogUpdate" class="app-dialog diary-dialog">
+            <h3>Muokkaa päiväkirjamerkintää</h3>
+
+            <form id="put-entry-form">
+              <label>
+                Päivämäärä
+                <input id="diaryDate" type="date" name="entry_date" required />
+              </label>
+
+              <label>
+                Mieliala (1-5)
+                <input id="diaryMood" type="number" name="mood" min="1" max="5" required />
+              </label>
+
+               <label>
+                Paino (kg)
+                <input id="diaryWeight" type="number" name="weight_now" step="0.1" min="0" required />
+              </label>
+
+              <label>
+                Uni (h)
+                <input id="diarySleep" type="number" name="sleep_hours" step="0.1" min="0" required />
+              </label>
+
+              <label>
+                Muistiinpanot
+                <textarea id="diaryTextUpdate" name="notes" placeholder="Miltä päivä tuntui?" rows="5"></textarea>
+              </label>
+
+              <div class="dialog-buttons">
+                <button class="register_button" id="saveDiaryUpdate" type="submit">Päivitä</button>
                 <button class="register_button" id="cancelDiary" type="button">Peruuta</button>
               </div>
             </form>
           </dialog>
 
         </section>
+
+
 
         <!-- ========= OIKEA PUOLI ========= -->
         <aside class="card readiness_stress-card">
@@ -172,7 +214,7 @@
   <div id="dialogOverlay" class="dialog-overlay"></div>
 
   <script type="module" src="homepage.js"></script>
-  <script type="module" src="/src/js/entrydialog.js"></script>
+  <script type="module" src="/src/js/entrydialog.js" defer></script>
   <script type="module" src="/src/js/register.js"></script>
 
 </body>
