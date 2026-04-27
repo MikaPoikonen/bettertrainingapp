@@ -46,4 +46,31 @@ const postEntry = async (payload) => {
   return entryPost;
 };
 
-export { fetchDiaryEntries,postEntry };
+const updateEntry = async (userId, updatedEntry) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`http://localhost:3000/api/entries/${userId}`, {
+      method: "PUT",
+      headers: { 
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify(updatedEntry),
+    });
+
+    if (!response.ok) {
+      throw new Error("Päivitys epäonnistui");
+    }
+
+    return await response.json();
+  } catch (err) {
+    console.error("Virhe PUT-kutsussa:", err);
+    throw err;
+  }
+};
+
+
+
+
+export { fetchDiaryEntries,postEntry, updateEntry };

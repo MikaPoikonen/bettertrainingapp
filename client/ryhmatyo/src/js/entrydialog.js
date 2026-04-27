@@ -1,6 +1,6 @@
 import {fetchDiaryEntries} from "./entry.js";
 import "../../homepage/homepage.css";
-import { postEntry } from "./entry.js";
+import { postEntry, updateEntry } from "./entry.js";
 
 const myUserId = localStorage.getItem("userId");
 
@@ -38,6 +38,16 @@ const cancelDiaryBtn = document.getElementById("cancelDiary");
 const diaryText = document.getElementById("diaryText");
 const diaryEntries = document.getElementById("diaryEntries");
 const overlay = document.getElementById("dialogOverlay");
+const diaryDialogUpdate = document.getElementById("diaryDialogUpdate");
+const cancelDiaryUpdateBtn = diaryDialogUpdate.querySelector("#cancelDiary");
+const saveDiaryUpdateBtn = document.getElementById("saveDiaryUpdate");
+const putDiaryBtn = document.getElementById("putDiaryBtn");
+const diaryTextUpdate = document.getElementById("diaryTextUpdate");
+
+
+
+
+
 
 
 
@@ -55,6 +65,68 @@ cancelDiaryBtn.addEventListener("click", () => {
   diaryDialog.close();
   overlay.style.display = "none";
 });
+
+cancelDiaryUpdateBtn.addEventListener("click", () => {
+  diaryDialogUpdate.close();
+  overlay.style.display = "none";
+});
+
+putDiaryBtn.addEventListener("click", async () => {
+  try {
+    let entry = await fetchDiaryEntries();
+
+    if (!entry) {
+      alert("Ei merkintöjä muokattavaksi.");
+      return;
+    }
+
+    // Jos backend joskus palauttaa listan, tee siitä lista
+    if (Array.isArray(entry)) {
+      entry = entry[0];
+    }
+
+    console.log("Muokataan merkintää:", entry);
+
+    fillDiaryForm(entry);
+
+  } catch (err) {
+    console.error("Virhe merkintöjä haettaessa:", err);
+  }
+});
+
+
+
+saveDiaryUpdateBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
+
+  const entryId = diaryDialogUpdate.dataset.entryId;
+  const userId = localStorage.getItem("userId");
+
+
+  const updatedEntry = {
+  entry_date: diaryDate.value,
+  mood: diaryMood.value,
+  weight_now: diaryWeight.value,
+  sleep_hours: diarySleep.value,
+  notes: diaryTextUpdate.value,
+  entry_id: entryId
+};
+
+
+  try {
+    await updateEntry(userId, updatedEntry);
+
+    diaryDialogUpdate.close();
+    overlay.style.display = "none";
+
+    renderDiary(); // Päivitä lista
+
+  } catch (err) {
+    console.error("Päivitys epäonnistui", err);
+  }
+});
+
+
 
 saveDiaryBtn.addEventListener("click", async () => {
   const notes = diaryText.value.trim();
@@ -88,9 +160,9 @@ function fillDiaryForm(row) {
   diaryMood.value = row.mood || "";
   diaryWeight.value = row.weight_now || "";
   diarySleep.value = row.sleep_hours || "";
-  diaryText.value = row.notes || "";
+  diaryTextUpdate.value = row.notes || "";
 
-  diaryDialogUpdate.dataset.id = row.id;
+  diaryDialogUpdate.dataset.entryId = row.entry_id;
 
   diaryDialogUpdate.showModal();
   overlay.style.display = "block";
@@ -100,7 +172,6 @@ function fillDiaryForm(row) {
 async function renderDiary() {
   try {
     const result = await fetchDiaryEntries();
-
     const data = Array.isArray(result) ? result : [result];
 
     diaryEntries.innerHTML = "";
@@ -121,13 +192,6 @@ async function renderDiary() {
         Olotila: ${row.mood || "-"}<br>
         Muistiinpanot: ${row.notes || ""}<br><br>
       `;
-      
-      // 🔹 nappi tästä rivistä
-      const editBtn = document.getElementById("putDiaryBtn");
-
-      editBtn.addEventListener("click", () => {
-        fillDiaryForm(row);
-      });
 
       diaryEntries.appendChild(li);
     });
@@ -137,6 +201,9 @@ async function renderDiary() {
     diaryEntries.innerHTML = "<p>Merkintöjä ei voitu ladata.</p>";
   }
 }
+
+
+
 
 renderDiary();
 
