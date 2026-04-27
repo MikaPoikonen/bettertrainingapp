@@ -84,11 +84,6 @@ am5.ready(function () {
   cursor.lineY.set("visible", false);
 
 
-
-
-
-  
-
   // Create axes
   var xAxis = chart.xAxes.push(
     am5xy.DateAxis.new(root, {
@@ -119,12 +114,14 @@ am5.ready(function () {
   );
 
   // Add series
-  var series = chart.series.push(
+
+  //HRV
+  var hrvseries = chart.series.push(
     am5xy.LineSeries.new(root, {
       name: "Series",
       xAxis: xAxis,
       yAxis: yAxis,
-      valueYField: "value",
+      valueYField: "hrv",
       valueXField: "date",
       stroke: am5.color(0x000000),
       tooltip: am5.Tooltip.new(root, {
@@ -133,7 +130,8 @@ am5.ready(function () {
     }),
   );
 
-  series.bullets.push(function () {
+
+  hrvseries.bullets.push(function () {
     var graphics = am5.Circle.new(root, {
       radius: 4,
       interactive: true,
@@ -171,7 +169,7 @@ am5.ready(function () {
     // if pointer is down
     if (isDown) {
       // get tooltip data item
-      var tooltipDataItem = series.get("tooltipDataItem");
+      var tooltipDataItem = hrvseries.get("tooltipDataItem");
       if (tooltipDataItem) {
         if (e.originalEvent) {
           var position = yAxis.coordinateToPosition(
@@ -202,14 +200,18 @@ am5.ready(function () {
 
     const data = latest7.map(item => ({
       date: new Date(item.entry_date).getTime(),
-      value: parseFloat(item.hrv_data)
+      hrv: parseFloat(item.hrv_data),
+      stress: parseFloat(item.stress_data),
+      readiness: parseFloat(item.readiness_data),
+
     }));
 
-    series.data.setAll(data);
+    hrvseries.data.setAll(data);
+    window.hrvDataForDialog = data;
     console.log(data);
 
   
-  series.appear(1000);
+  hrvseries.appear(1000);
   chart.appear(1000, 100);
 
 
@@ -295,8 +297,7 @@ am5.ready(function () {
     });
   });
 
-  readinessChart.appear(1000, 100);
-});
+readinessChart.appear(1000, 100);
 
 /* STRESS GAUGE/PNS-index */
 
@@ -435,8 +436,6 @@ label.set("text", stressValue.toString());
 
 // Värit
 
-
-
 var bands = [
   { from: userInfo.age + 5, to: userInfo.age + 15, color: 0xee1f25 }, // Huono 0xb0d136
   { from: userInfo.age, to: userInfo.age + 5, color: 0xfdae19 }, // hyvä
@@ -465,11 +464,11 @@ stressChart.appear(1000, 100);
 const headerBtn = document.getElementById("SettingDialog");
 const headerDialog = document.getElementById("headerDialog");
 const closeHeaderDialog = document.getElementById("closeHeaderDialog");
-//const overlay = document.getElementById("dialogOverlay");
+const overlay = document.getElementById("dialogOverlay");
 
 // Avaa dialogi
 headerBtn.addEventListener("click", () => {
-    headerDialog.showModal();
+    headerDialog.show();
     overlay.style.display = "block";
 });
 
@@ -491,6 +490,169 @@ if (userInfo && userInfo.username) {
 }
 
 
+
+/* HRV graafin analyysi dialogi */
+
+const hrvCard = document.getElementById("hrvchart");
+const hrvDialog = document.getElementById("hrvDialog");
+const closeHrvDialog = document.getElementById("closeHrvDialog");
+const printHRV = document.getElementById("printHRV");
+
+let hrvLargeRoot = null;
+
+hrvCard.addEventListener("click", () => {
+  hrvDialog.show();
+  overlay.style.display = "block";
+
+  if (hrvLargeRoot) {
+    hrvLargeRoot.dispose();
+  }
+
+  hrvLargeRoot = am5.Root.new("hrvchartLarge");
+
+  hrvLargeRoot.setThemes([
+    am5themes_Animated.new(hrvLargeRoot),
+    am5themes_Responsive.new(hrvLargeRoot)
+  ]);
+
+  const chart = hrvLargeRoot.container.children.push(
+    am5xy.XYChart.new(hrvLargeRoot, {
+      wheelX: "panX",
+      wheelY: "zoomX",
+      pinchZoomX: true
+    })
+  );
+
+  const xAxis = chart.xAxes.push(
+    am5xy.DateAxis.new(hrvLargeRoot, {
+      baseInterval: { timeUnit: "day", count: 1 },
+      renderer: am5xy.AxisRendererX.new(hrvLargeRoot, {})
+    })
+  );
+
+  const yAxis = chart.yAxes.push(
+    am5xy.ValueAxis.new(hrvLargeRoot, {
+      renderer: am5xy.AxisRendererY.new(hrvLargeRoot, {})
+    })
+  );
+
+
+// HRV
+const hrvSeries = chart.series.push(
+ am5xy.LineSeries.new(hrvLargeRoot, {
+ name: "HRV",
+ xAxis,
+ yAxis,
+ valueXField: "date",
+ valueYField: "hrv",
+ stroke: am5.color(0x000000),
+ })
+);
+
+hrvSeries.strokes.template.setAll({
+  stroke: am5.color(0x000000),
+  strokeWidth: 3,
+  strokeLinecap: "round",
+  strokeLinejoin: "round",
+});
+
+hrvSeries.states.create("hover", {
+  strokeWidth: 6,
+});
+
+hrvSeries.data.setAll(window.hrvDataForDialog);
+
+
+// Stress
+const stressSeries = chart.series.push(
+  am5xy.LineSeries.new(hrvLargeRoot, {
+    name: "Stress",
+    xAxis,
+    yAxis,
+    valueXField: "date",
+    valueYField: "stress"
+  })
+);
+
+stressSeries.strokes.template.setAll({
+  stroke: am5.color(0xdc2626),
+  strokeWidth: 3,
+  strokeDasharray: [6, 4],   // näkyy katkoviivana
+  strokeLinecap: "round"
+});
+
+stressSeries.states.create("hover", {
+  strokeWidth: 5
+});
+
+stressSeries.data.setAll(window.hrvDataForDialog);
+
+
+// Readiness
+const readinessSeries = chart.series.push(
+  am5xy.LineSeries.new(hrvLargeRoot, {
+    name: "Readiness",
+    xAxis,
+    yAxis,
+    valueXField: "date",
+    valueYField: "readiness"
+  })
+);
+
+readinessSeries.strokes.template.setAll({
+  stroke: am5.color(0x2563eb), 
+  strokeWidth: 3,
+  strokeLinecap: "round"
+});
+
+readinessSeries.states.create("hover", {
+  strokeWidth: 5
+});
+
+readinessSeries.data.setAll(window.hrvDataForDialog);
+
+
+// Legendat
+const legend = chart.children.push(
+  am5.Legend.new(hrvLargeRoot, {
+    centerX: am5.percent(50),
+    x: am5.percent(50)
+  })
+);
+legend.data.setAll(chart.series.values);
+
+
+xAxis.get("renderer").labels.template.setAll({
+  fontSize: 15
+});
+
+yAxis.get("renderer").labels.template.setAll({
+  fontSize: 15
+});
+
+hrvSeries.data.setAll(window.hrvDataForDialog);
+stressSeries.data.setAll(window.hrvDataForDialog);
+readinessSeries.data.setAll(window.hrvDataForDialog);
+
+
+chart.appear(1000, 100);
+});
+
+closeHrvDialog.addEventListener("click", () =>{
+  hrvDialog.close();
+  overlay.style.display = "none";
+
+  if (hrvLargeRoot) {
+    hrvLargeRoot.dispose();
+    hrvLargeRoot = null;
+  }
+});
+
+printHRV.addEventListener("click", () => {
+  window.print();
+});
+
+});
 
 
 

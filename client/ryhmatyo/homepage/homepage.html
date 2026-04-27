@@ -10,18 +10,21 @@
   <div class="layout">
     <div class="right">
 
-      <!-- Header -->
+   <!-- Header -->
       <header class="header">
-        <img id="better_training_logo" src="../img/bettertrainngapplogo_nobackground.jpg" alt="Better Training Logo">
-        <span class="app-name">Better Training App</span>
-        <span id="headerUsername" class="header-username"></span>
-        <button id="SettingDialog" type="button">
-          <img src="../img/transparent.png" alt="">
-        </button>
-      </header>
+  <img id="better_training_logo" src="../img/bettertrainngapplogo_nobackground.jpg" alt="Better Training Logo">
+  <span class="app-name">Better Training App</span>
+
+  <div class="header-right">
+    <span id="headerUsername" class="header-username"></span>
+    <button id="SettingDialog" type="button">
+      <img src="../img/transparent.png" alt="">
+    </button>
+  </div>
+</header>
 
       <!-- Header dialog -->
-      <dialog id="headerDialog" class="app-dialog">
+      <dialog id="headerDialog" class="app-dialog diary-dialog">
         <h3>Asetukset</h3>
         <p>Vaihda sähköposti</p>
 
@@ -68,11 +71,25 @@
             <div class="diary-header">
               <h3>Päiväkirja</h3>
               <button id="addDiaryBtn" type="button">+ Lisää uusi merkintä</button>
-              <button id="putDiaryBtn" type="button">+ Muokkaa merkintää</button>
             </div>
 
             <div id="diaryEntries"></div>
           </div>
+
+         <!-- HRV graafin analyysi dialog -->
+          
+      <dialog id="hrvDialog" class="app-dialog">
+        <div class="hrv-dialog-content">
+          <h3>HRV Analyysi</h3>
+
+        <div id="hrvchartLarge"></div>
+
+        <div class="dialog-buttons">
+        <button id="printHRV">Tulosta</button>
+        <button id="closeHrvDialog">Sulje</button>
+        </div>
+      </dialog>
+
 
           <!-- Diary dialog -->
           <dialog id="diaryDialog" class="app-dialog diary-dialog">
@@ -101,7 +118,7 @@
 
               <label>
                 Muistiinpanot
-                <textarea id="diaryText" name="notes" placeholder="Miltä päivä tuntui?" rows="5"></textarea>
+                <textarea id="diaryTextUpdate" name="notes" placeholder="Miltä päivä tuntui?" rows="5"></textarea>
               </label>
 
               <div class="dialog-buttons">
@@ -112,49 +129,6 @@
           </dialog>
 
         </section>
-
-        <!-- Diary dialog update -->
-          <dialog id="diaryDialogUpdate" class="app-dialog diary-dialog">
-            <h3>Muokkaa päiväkirjamerkintää</h3>
-
-            <form id="put-entry-form">
-              <label>
-                Päivämäärä
-                <input id="diaryDate" type="date" name="entry_date" required />
-              </label>
-
-              <label>
-                Mieliala (1-5)
-                <input id="diaryMood" type="number" name="mood" min="1" max="5" required />
-              </label>
-
-              <label>
-                Paino (kg)
-                <input id="diaryWeight" type="number" name="weight_now" step="0.1" min="0" required />
-              </label>
-
-              <label>
-                Uni (h)
-                <input id="diarySleep" type="number" name="sleep_hours" step="0.1" min="0" required />
-              </label>
-
-              <label>
-                Muistiinpanot
-                <textarea id="diaryTextUpdate" name="notes" placeholder="Miltä päivä tuntui?" rows="5"></textarea>
-              </label>
-
-              <div class="dialog-buttons">
-                <button class="register_button" id="saveDiaryUpdate" type="submit">Päivitä</button>
-                <button class="register_button" id="cancelDiary" type="button">Peruuta</button>
-              </div>
-            </form>
-          </dialog>
-
-        </section>
-
-
-
-
 
         <!-- ========= OIKEA PUOLI ========= -->
         <aside class="card readiness_stress-card">
