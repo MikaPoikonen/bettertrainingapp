@@ -214,6 +214,37 @@ am5.ready(function () {
   hrvseries.appear(1000);
   chart.appear(1000, 100);
 
+  
+// HRV treenisuositus
+function updateHrvRecommendation() {
+  const recommendationEl = document.getElementById("hrvRecommendation");
+
+  if (!window.hrvDataForDialog || window.hrvDataForDialog.length === 0) {
+    recommendationEl.textContent = "HRV‑dataa ei ole saatavilla.";
+    return;
+  }
+
+  // Käyttää uusinta HRV-arvoa
+  const latestHrv =
+    window.hrvDataForDialog[window.hrvDataForDialog.length - 1].hrv;
+
+  let text = "";
+
+  if (latestHrv >= 65) {
+    text =
+      "Palautumisesi on hyvä. Voit nostaa treenin rasitusta tai tehdä tehoharjoituksen.";
+  } else if (latestHrv >= 50) {
+    text =
+      "Palautuminen on kohtalainen. Suositellaan maltillista harjoittelua.";
+  } else {
+    text =
+      "Palautuminen on heikko. Kevyt harjoitus tai lepo tukee kehon palautumista.";
+  }
+
+  recommendationEl.textContent = text;
+}
+
+
 
   /* READINESS GAUGE */
 
@@ -469,15 +500,14 @@ const overlay = document.getElementById("dialogOverlay");
 // Avaa dialogi
 headerBtn.addEventListener("click", () => {
     headerDialog.show();
-    overlay.style.display = "block";
+    overlay.style.display ="block";
 });
 
 // Sulje dialogi napista
 closeHeaderDialog.addEventListener("click", () => {
     headerDialog.close();
-    overlay.style.display = "none";
+    overlay.style.display ="none";
 });
-
 
 
 // headerin username
@@ -500,7 +530,27 @@ const printHRV = document.getElementById("printHRV");
 
 let hrvLargeRoot = null;
 
+
+// Dialogien sulku klikkaamalla dialogien ulkopuolelta
+overlay.addEventListener("click", () => {
+  if (headerDialog.open) {
+    headerDialog.close();
+  }
+
+  if (hrvDialog.open) {
+    hrvDialog.close();
+
+    if (hrvLargeRoot) {
+      hrvLargeRoot.dispose();
+      hrvLargeRoot = null;
+    }
+  }
+
+  overlay.style.display = "none";
+});
+
 hrvCard.addEventListener("click", () => {
+  updateHrvRecommendation();
   hrvDialog.show();
   overlay.style.display = "block";
 
@@ -545,7 +595,7 @@ const hrvSeries = chart.series.push(
  yAxis,
  valueXField: "date",
  valueYField: "hrv",
- stroke: am5.color(0x000000),
+ stroke: am5.color(0x2563eb),
  })
 );
 
@@ -570,12 +620,12 @@ const stressSeries = chart.series.push(
     xAxis,
     yAxis,
     valueXField: "date",
-    valueYField: "stress"
+    valueYField: "stress",
+    stroke: am5.color(0xdc2626),
   })
 );
 
 stressSeries.strokes.template.setAll({
-  stroke: am5.color(0xdc2626),
   strokeWidth: 3,
   strokeDasharray: [6, 4],   // näkyy katkoviivana
   strokeLinecap: "round"
@@ -595,12 +645,12 @@ const readinessSeries = chart.series.push(
     xAxis,
     yAxis,
     valueXField: "date",
-    valueYField: "readiness"
+    valueYField: "readiness",
+    stroke: am5.color(0x16a34a),
   })
 );
 
 readinessSeries.strokes.template.setAll({
-  stroke: am5.color(0x2563eb), 
   strokeWidth: 3,
   strokeLinecap: "round"
 });
@@ -619,6 +669,13 @@ const legend = chart.children.push(
     x: am5.percent(50)
   })
 );
+
+legend.labels.template.setAll({
+  fontSize: 14,
+  fontWeight: "500",
+  fill: am5.color(0x000000)
+});
+
 legend.data.setAll(chart.series.values);
 
 
