@@ -52,7 +52,7 @@ am5.ready(function () {
   });
 
   myTheme.rule("AxisLabel").setAll({
-    fontSize: "0.9em",
+    fontSize: "0.65em",
   });
 
   // Set themes
