@@ -145,13 +145,6 @@ am5.ready(function () {
     });
   });
 
-  // Add scrollbar
-  chart.set(
-    "scrollbarX",
-    am5.Scrollbar.new(root, {
-      orientation: "horizontal",
-    }),
-  );
 
   // manipulating with mouse code
   var isDown = false;
