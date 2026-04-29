@@ -492,3 +492,35 @@ body {
     padding: 18px;
   }
 }
+
+#diaryHistoryList li {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  font-size: 18px;
+}
+
+#diaryHistoryList button {
+  margin-right: 10px;
+  background: none;
+  border: none;
+  color: #3b82f6;
+  cursor: pointer;
+}
+
+#diaryHistoryList button:hover {
+  text-decoration: underline;
+  transform: scale(1.04);
+
+}
+
+/* Päiväkirja kortin hover */
+
+.diary-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.diary-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}

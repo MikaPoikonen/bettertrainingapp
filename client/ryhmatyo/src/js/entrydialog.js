@@ -1,6 +1,5 @@
-import {fetchDiaryEntries} from "./entry.js";
+import { fetchDiaryEntries, fetchLatestDiaryEntry, postEntry, updateEntry } from "./entry.js";
 import "../../homepage/homepage.css";
-import { postEntry, updateEntry } from "./entry.js";
 
 const myUserId = localStorage.getItem("userId");
 
@@ -43,16 +42,31 @@ const cancelDiaryUpdateBtn = diaryDialogUpdate.querySelector("#cancelDiaryUpdate
 const saveDiaryUpdateBtn = document.getElementById("saveDiaryUpdate");
 const putDiaryBtn = document.getElementById("putDiaryBtn");
 const diaryTextUpdate = document.getElementById("diaryTextUpdate");
-
-
-
-
-
+const diaryCard = document.querySelector(".diary-card");
+const diaryHistoryDialog = document.getElementById("diaryHistoryDialog");
+const diaryHistoryList = document.getElementById("diaryHistoryList");
+const closeDiaryHistoryBtn = document.getElementById("closeDiaryHistory");
+const diaryDate = document.getElementById("diaryDate");
+const diaryMood = document.getElementById("diaryMood");
+const diaryWeight = document.getElementById("diaryWeight");
+const diarySleep = document.getElementById("diarySleep");
 
 
 
 
 ///////////////////////////////////////////////////
+diaryCard.addEventListener("click", async(e) => {
+  if (e.target.tagName === "BUTTON") return;
+
+  await renderDiaryHistory();
+  diaryHistoryDialog.showModal();
+  overlay.style.display = "block";
+});
+
+closeDiaryHistoryBtn.addEventListener("click", () => {
+  diaryHistoryDialog.close();
+  overlay.style.display = "none";
+});
 
 
 addDiaryBtn.addEventListener("click", () => {
@@ -93,6 +107,84 @@ putDiaryBtn.addEventListener("click", async () => {
     console.error("Virhe merkintöjä haettaessa:", err);
   }
 });
+
+//Diary history dialog
+async function renderDiaryHistory() {
+  try {
+    const result = await fetchDiaryEntries();
+    const data = Array.isArray(result) ? result : [result];
+
+    diaryHistoryList.innerHTML = "";
+
+    if (data.length === 0) {
+      diaryHistoryList.innerHTML = "<p>Ei päiväkirjamerkintöjä vielä.</p>";
+      return;
+    }
+
+    data.forEach((row) => {
+      const li = document.createElement("li");
+
+      // --- EDIT BUTTON ---
+      const editBtn = document.createElement("button");
+      editBtn.textContent = "Muokkaa";
+      editBtn.addEventListener("click", () => {
+        fillDiaryForm(row);
+        // diaryHistoryDialog.close();  // sulje vain jos haluat
+      });
+
+      // --- DELETE BUTTON ---
+     // --- DELETE BUTTON ---
+const deleteBtn = document.createElement("button");
+deleteBtn.textContent = "Poista";
+
+deleteBtn.addEventListener("click", async () => {
+  if (!confirm("Haluatko varmasti poistaa tämän merkinnän?")) return;
+
+  try {
+    const response = await fetch("http://localhost:3000/api/entries", {
+  method: "DELETE",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${localStorage.getItem("token")}`,
+  },
+  body: JSON.stringify({
+    entry_id: row.entry_id,
+    user_id: myUserId,
+  }),
+});
+
+    if (!response.ok) {
+      throw new Error("Poisto epäonnistui");
+    }
+
+    await renderDiaryHistory();
+    await renderDiary();
+
+  } catch (err) {
+    console.error("Poisto epäonnistui:", err);
+    alert("Merkinnän poisto epäonnistui.");
+  }
+});
+
+      // --- CONTENT ---
+      li.innerHTML = `
+        Luotu: <strong>${formatDateClock(row.entry_date) || "-"}</strong><br><br>
+        Päivä: ${formatDateClock(row.entry_date) || "-"}<br><br>
+      `;
+
+      li.appendChild(editBtn);
+      li.appendChild(deleteBtn);
+
+      diaryHistoryList.appendChild(li);
+    });
+  } catch (err) {
+    console.error(err);
+    diaryHistoryList.innerHTML = "<p>Merkintöjä ei voitu ladata.</p>";
+  }
+}
+
+
+
 
 
 
@@ -169,36 +261,31 @@ function fillDiaryForm(row) {
 }
 
 // 🔹 Renderöinti
+// 🔹 Renderöinti korttiin: vain viimeisin merkintä
 async function renderDiary() {
   try {
-    const result = await fetchDiaryEntries();
-    const data = Array.isArray(result) ? result : [result];
+    const latest = await fetchLatestDiaryEntry();
 
     diaryEntries.innerHTML = "";
 
-    if (data.length === 0) {
+    if (!latest) {
       diaryEntries.innerHTML = "<p>Ei päiväkirjamerkintöjä vielä.</p>";
       return;
     }
 
-    data.forEach((row) => {
-      const li = document.createElement("li");
-
-      li.innerHTML = `
-        Luotu: <strong>${formatDateClock(row.created_at) || "-"}</strong><br><br>
-        Päivä: ${formatDateClock(row.entry_date) || "-"}<br>
-        Paino nyt: ${row.weight_now || "-"} kg<br>
-        Uni: ${row.sleep_hours || "-"} tuntia<br>
-        Olotila: ${row.mood || "-"}<br>
-        Muistiinpanot: ${row.notes || ""}<br><br>
-      `;
-
-      diaryEntries.appendChild(li);
-    });
-
+    diaryEntries.innerHTML = `
+      <div class="diary-entry">
+        Luotu: <strong>${formatDateClock(latest.created_at) || "-"}</strong><br><br>
+        Päivä: ${formatDateClock(latest.entry_date) || "-"}<br>
+        Paino nyt: ${latest.weight_now || "-"} kg<br>
+        Uni: ${latest.sleep_hours || "-"} tuntia<br>
+        Olotila: ${latest.mood || "-"}<br>
+        Muistiinpanot: ${latest.notes || ""}<br><br>
+      </div>
+    `;
   } catch (err) {
     console.error(err);
-    diaryEntries.innerHTML = "<p>Merkintöjä ei voitu ladata.</p>";
+    diaryEntries.innerHTML = "<p>Merkintää ei voitu ladata.</p>";
   }
 }
 

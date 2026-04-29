@@ -1,10 +1,31 @@
 import { fetchData } from './fetch';
 
+const fetchLatestDiaryEntry = async () => {
+  console.log("Viimeisimmän päiväkirjamerkinnän haku");
+
+  const url = `http://localhost:3000/api/entries/latest/${localStorage.getItem("userId")}`;
+  const token = localStorage.getItem("token");
+
+  const options = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  const entryData = await fetchData(url, options);
+
+  if (entryData.error) {
+    console.log("Viimeisimmän merkinnän haku epäonnistui");
+    return;
+  }
+
+  return entryData;
+};
+
+
 
 const fetchDiaryEntries = async () => {
   console.log('Päiväkirjamerkinnän haku Tietokannasta');
 
-  const url = `http://localhost:3000/api/entries/latest/${localStorage.getItem('userId')}`;
+  const url = `http://localhost:3000/api/entries/${localStorage.getItem('userId')}`;
   const token = localStorage.getItem('token');
   const user_id = localStorage.getItem('userId');
   console.log('User ID:', user_id);
@@ -21,6 +42,8 @@ const fetchDiaryEntries = async () => {
   console.log(entryData);
   return entryData;
 };
+
+
 
 
 
@@ -73,4 +96,4 @@ const updateEntry = async (userId, updatedEntry) => {
 
 
 
-export { fetchDiaryEntries,postEntry, updateEntry };
+export { fetchDiaryEntries,fetchLatestDiaryEntry,postEntry, updateEntry };
