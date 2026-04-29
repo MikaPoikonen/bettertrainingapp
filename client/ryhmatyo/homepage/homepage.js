@@ -489,6 +489,11 @@ const headerBtn = document.getElementById("SettingDialog");
 const headerDialog = document.getElementById("headerDialog");
 const closeHeaderDialog = document.getElementById("closeHeaderDialog");
 const overlay = document.getElementById("dialogOverlay");
+const saveSettings = document.getElementById("saveSettings");
+const emailInput = document.getElementById("settingsEmail");
+const passwordInput = document.getElementById("settingsPassword");
+const startWeightInput = document.querySelector("input[name='start_weight']");
+const birthYearInput = document.querySelector("input[name='birth_year']");
 
 // Avaa dialogi
 headerBtn.addEventListener("click", () => {
@@ -500,6 +505,56 @@ headerBtn.addEventListener("click", () => {
 closeHeaderDialog.addEventListener("click", () => {
     headerDialog.close();
     overlay.style.display ="none";
+});
+
+// Tallenna asetukset
+saveSettings.addEventListener("click", async () => {
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("user_id");
+
+  const payload = {};
+
+    if (emailInput.value.trim() !== "") {
+        payload.email = emailInput.value.trim();
+    }
+
+    if (passwordInput.value.trim() !== "") {
+        payload.password = passwordInput.value.trim();
+    }
+
+    if (startWeightInput.value !== "") {
+        payload.start_weight = startWeightInput.value;
+    }
+
+    if (birthYearInput.value.trim() !== "") {
+        payload.birth_year = birthYearInput.value;
+    }
+
+  try {
+    const response = await fetch(`http://localhost:3000/api/users/${localStorage.getItem('userId')}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error("Virhe tallennuksessa:", data);
+      return;
+    }
+
+    console.log("Asetukset tallennettu:", data);
+
+    headerDialog.close();
+    overlay.style.display = "none";
+    
+  } catch (err) {
+      console.error("Virhe tallennuspyynnössä:", err);
+  }
 });
 
 

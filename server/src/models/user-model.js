@@ -79,17 +79,53 @@ const addUserKubios = async (user) => {
 
 
 const putUser = async (user) => {
-    const {user_id,username,password,email, start_weight, birth_year} = user;
-    const sql = 'UPDATE users SET  username = ?, password = ?, email = ?, start_weight = ?, birth_year = ? WHERE user_id = ?'
-    const params = [username,password,email,start_weight,birth_year,user_id];
-    try {
-    const rows = await promisePool.execute(sql,params);
-        return {rows}; 
+  const { user_id, username, password, email, start_weight, birth_year } = user;
+
+  const fields = [];
+  const params = [];
+
+  if (username !== undefined) {
+    fields.push("username = ?");
+    params.push(username);
+  }
+
+  if (password !== undefined) {
+    fields.push("password = ?");
+    params.push(password);
+  }
+
+  if (email !== undefined) {
+    fields.push("email = ?");
+    params.push(email);
+  }
+
+  if (start_weight !== undefined) {
+    fields.push("start_weight = ?");
+    params.push(start_weight);
+  }
+
+  if (birth_year !== undefined) {
+    fields.push("birth_year = ?");
+    params.push(birth_year);
+  }
+
+  // Jos ei mitään päivitettävää
+  if (fields.length === 0) {
+    return { error: "No fields to update" };
+  }
+
+  const sql = `UPDATE users SET ${fields.join(", ")} WHERE user_id = ?`;
+  params.push(user_id);
+
+  try {
+    const [rows] = await promisePool.execute(sql, params);
+    return { rows };
   } catch (e) {
-    console.error('error', e.message);
-    return {error: e.message};
+    console.error("error", e.message);
+    return { error: e.message };
   }
 };
+
 
 const deleteUser = async (user_id) => {
     const sql = 'DELETE FROM users WHERE user_id = ?'
