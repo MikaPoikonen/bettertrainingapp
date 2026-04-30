@@ -135,8 +135,9 @@ async function renderDiaryHistory() {
       const editBtn = document.createElement("button");
       editBtn.textContent = "Muokkaa";
       editBtn.addEventListener("click", () => {
+        if (diaryHistoryDialog.open) diaryHistoryDialog.close();
+
         fillDiaryForm(row);
-        // diaryHistoryDialog.close();  // sulje vain jos haluat
       });
 
       // --- DELETE BUTTON ---
