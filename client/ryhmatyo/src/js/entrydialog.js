@@ -52,6 +52,21 @@ const diaryWeight = document.getElementById("diaryWeight");
 const diarySleep = document.getElementById("diarySleep");
 
 
+function openDialog(dialog) {
+  dialog.show();
+  overlay.style.display = "block";
+}
+
+function closeAllDialogs() {
+  if (diaryDialog.open) diaryDialog.close();
+  if (diaryDialogUpdate.open) diaryDialogUpdate.close();
+  if (diaryHistoryDialog.open) diaryHistoryDialog.close();
+
+  overlay.style.display = "none";
+}
+
+overlay.addEventListener("click", closeAllDialogs);
+
 
 
 ///////////////////////////////////////////////////
@@ -59,31 +74,23 @@ diaryCard.addEventListener("click", async(e) => {
   if (e.target.tagName === "BUTTON") return;
 
   await renderDiaryHistory();
-  diaryHistoryDialog.showModal();
+  openDialog(diaryHistoryDialog);
   overlay.style.display = "block";
 });
 
-closeDiaryHistoryBtn.addEventListener("click", () => {
-  diaryHistoryDialog.close();
-  overlay.style.display = "none";
-});
 
 
 addDiaryBtn.addEventListener("click", () => {
   diaryText.value = "";
-  diaryDialog.showModal();
+  openDialog(diaryDialog);
   overlay.style.display = "block";
 });
 
-cancelDiaryBtn.addEventListener("click", () => {
-  diaryDialog.close();
-  overlay.style.display = "none";
-});
+cancelDiaryBtn.addEventListener("click", closeAllDialogs);
 
-cancelDiaryUpdateBtn.addEventListener("click", () => {
-  diaryDialogUpdate.close();
-  overlay.style.display = "none";
-});
+cancelDiaryUpdateBtn.addEventListener("click", closeAllDialogs);
+
+closeDiaryHistoryBtn.addEventListener("click", closeAllDialogs);
 
 putDiaryBtn.addEventListener("click", async () => {
   try {
@@ -243,10 +250,7 @@ saveDiaryBtn.addEventListener("click", async () => {
   overlay.style.display = "none";
   renderDiary();
 });
-overlay.addEventListener("click", () => {
-  diaryDialog.close();
-  overlay.style.display = "none";
-});
+
 
 
 
@@ -260,8 +264,9 @@ function fillDiaryForm(row) {
 
   diaryDialogUpdate.dataset.entryId = row.entry_id;
 
-  diaryDialogUpdate.showModal();
   overlay.style.display = "block";
+
+  openDialog(diaryDialogUpdate);
 }
 
 // 🔹 Renderöinti
