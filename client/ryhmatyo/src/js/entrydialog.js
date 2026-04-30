@@ -170,6 +170,10 @@ deleteBtn.addEventListener("click", async () => {
       li.innerHTML = `
         Luotu: <strong>${formatDateClock(row.entry_date) || "-"}</strong><br><br>
         Päivä: ${formatDateClock(row.entry_date) || "-"}<br><br>
+        Paino nyt: ${row.weight_now || "-"} kg<br>
+        Uni: ${row.sleep_hours || "-"} tuntia<br>
+        Mieliala: ${row.mood || "-"}<br>
+        Muistiinpanot: ${row.notes || ""}<br><br>
       `;
 
       li.appendChild(editBtn);
@@ -279,7 +283,7 @@ async function renderDiary() {
         Päivä: ${formatDateClock(latest.entry_date) || "-"}<br>
         Paino nyt: ${latest.weight_now || "-"} kg<br>
         Uni: ${latest.sleep_hours || "-"} tuntia<br>
-        Olotila: ${latest.mood || "-"}<br>
+        Mieliala: ${latest.mood || "-"}<br>
         Muistiinpanot: ${latest.notes || ""}<br><br>
       </div>
     `;

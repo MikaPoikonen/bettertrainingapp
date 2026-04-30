@@ -3,7 +3,7 @@ import promisePool from '../utils/database.js';
 // listAllEntriesById
 const listAllEntriesById = async (id) => {
   try {
-    const sql = 'SELECT * FROM DiaryEntries WHERE user_id = ?';
+    const sql = 'SELECT * FROM DiaryEntries WHERE user_id  = ? ORDER BY created_at DESC';
     const [rows] = await promisePool.execute(sql, [id]);
     return rows;
   } catch (e) {
