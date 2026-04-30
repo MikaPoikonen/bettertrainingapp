@@ -1,57 +1,251 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.4.2 (Python 3.13.7 on win32)" generated="2026-04-07T12:03:11.710568" rpa="false" schemaversion="5">
-<suite id="s1" name="Registertest" source="C:\Users\mikap\OneDrive\Asiakirjat\Metropolia opiskelu\Terveysteknologia\Bettertrainingapp\bettertrainingapp\tests\registertest.robot">
-<test id="s1-t1" name="Avaa kissaselain" line="5">
+<robot generator="Robot 7.4.2 (Python 3.13.7 on win32)" generated="2026-04-30T11:43:12.016988" rpa="false" schemaversion="5">
+<suite id="s1" name="Logintest" source="C:\Users\mikap\OneDrive\Asiakirjat\Metropolia opiskelu\Terveysteknologia\Bettertrainingapp\bettertrainingapp\tests\logintest.robot">
+<test id="s1-t1" name="Avaa kissaselain" line="11">
 <kw name="New Browser" owner="Browser">
-<msg time="2026-04-07T12:03:12.213678" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Users\\mikap\\OneDrive\\Asiakirjat\\Metropolia opiskelu\\Terveysteknologia\\Bettertrainingapp\\bettertrainingapp\\browser\\traces\\temp\\490a394b-1cb5-41ad-a983-c2f686f4a2f6"}</msg>
-<msg time="2026-04-07T12:03:12.293103" level="INFO">Starting Browser process C:\Users\mikap\OneDrive\Asiakirjat\Metropolia opiskelu\Terveysteknologia\Bettertrainingapp\bettertrainingapp\.venv\Lib\site-packages\Browser\wrapper\index.js using at 127.0.0.1:57315</msg>
-<msg time="2026-04-07T12:03:14.289944" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Users\\mikap\\OneDrive\\Asiakirjat\\Metropolia opiskelu\\Terveysteknologia\\Bettertrainingapp\\bettertrainingapp\\browser\\traces\\temp\\490a394b-1cb5-41ad-a983-c2f686f4a2f6"}</msg>
+<msg time="2026-04-30T11:43:12.630623" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Users\\mikap\\OneDrive\\Asiakirjat\\Metropolia opiskelu\\Terveysteknologia\\Bettertrainingapp\\bettertrainingapp\\browser\\traces\\temp\\ce510a2d-8f2e-4ce8-b55e-81b2d90a90c8"}</msg>
+<msg time="2026-04-30T11:43:12.691265" level="INFO">Starting Browser process C:\Users\mikap\OneDrive\Asiakirjat\Metropolia opiskelu\Terveysteknologia\Bettertrainingapp\bettertrainingapp\.venv\Lib\site-packages\Browser\wrapper\index.js using at 127.0.0.1:61105</msg>
+<msg time="2026-04-30T11:43:15.284695" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Users\\mikap\\OneDrive\\Asiakirjat\\Metropolia opiskelu\\Terveysteknologia\\Bettertrainingapp\\bettertrainingapp\\browser\\traces\\temp\\ce510a2d-8f2e-4ce8-b55e-81b2d90a90c8"}</msg>
 <arg>chromium</arg>
 <arg>headless=False</arg>
 <tag>BrowserControl</tag>
 <tag>Setter</tag>
 <doc>Create a new playwright Browser with specified options.</doc>
-<status status="PASS" start="2026-04-07T12:03:12.211753" elapsed="2.078643"/>
+<status status="PASS" start="2026-04-30T11:43:12.629220" elapsed="2.655922"/>
 </kw>
 <kw name="New Page" owner="Browser">
-<msg time="2026-04-07T12:03:14.750543" level="INFO">Successfully initialized new page object and opened url: http://localhost:5173/</msg>
-<msg time="2026-04-07T12:03:14.750708" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<msg time="2026-04-30T11:43:17.611571" level="INFO">Successfully initialized new page object and opened url: http://localhost:5173/</msg>
+<msg time="2026-04-30T11:43:17.611730" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
 <arg>http://localhost:5173/</arg>
 <tag>BrowserControl</tag>
 <tag>Setter</tag>
 <doc>Open a new Page.</doc>
-<status status="PASS" start="2026-04-07T12:03:14.291287" elapsed="0.459680"/>
+<status status="PASS" start="2026-04-30T11:43:15.286229" elapsed="2.326015"/>
 </kw>
 <kw name="Get Title" owner="Browser">
-<msg time="2026-04-07T12:03:14.826734" level="INFO">Title: 'Better Training App'</msg>
+<msg time="2026-04-30T11:43:17.629486" level="INFO">Title: 'Better Training App'</msg>
 <arg>==</arg>
 <arg>Better Training App</arg>
 <tag>Assertion</tag>
 <tag>Getter</tag>
 <tag>PageContent</tag>
 <doc>Returns the title of the current page.</doc>
-<status status="PASS" start="2026-04-07T12:03:14.752016" elapsed="0.074887"/>
+<status status="PASS" start="2026-04-30T11:43:17.613062" elapsed="0.016612"/>
+</kw>
+<kw name="Type Text" owner="Browser">
+<msg time="2026-04-30T11:43:17.631597" level="INFO">Types the text 'mikapoi@metropolia.fi' in the given field.</msg>
+<arg>id=loginusername</arg>
+<arg>${Username}</arg>
+<arg>delay=0.05s</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2026-04-30T11:43:17.630092" elapsed="1.576358"/>
+</kw>
+<kw name="Type Text" owner="Browser">
+<msg time="2026-04-30T11:43:19.207882" level="INFO">Types the text 'R3n3gad3!' in the given field.</msg>
+<arg>id=loginpassword</arg>
+<arg>${Password}</arg>
+<arg>delay=0.05s</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2026-04-30T11:43:19.206970" elapsed="0.591124"/>
 </kw>
 <kw name="Click" owner="Browser">
-<msg time="2026-04-07T12:03:14.828685" level="INFO">Clicks the element 'id=open_register_dialog'.</msg>
-<arg>id=open_register_dialog</arg>
+<msg time="2026-04-30T11:43:19.799349" level="INFO">Clicks the element 'id=loginbutton'.</msg>
+<arg>id=loginbutton</arg>
 <tag>PageContent</tag>
 <tag>Setter</tag>
 <doc>Simulates mouse click on the element found by ``selector``.</doc>
-<status status="PASS" start="2026-04-07T12:03:14.827496" elapsed="0.311305"/>
+<status status="PASS" start="2026-04-30T11:43:19.798590" elapsed="0.037346"/>
 </kw>
 <kw name="Sleep" owner="BuiltIn">
-<msg time="2026-04-07T12:03:20.141096" level="INFO">Slept 5 seconds.</msg>
-<arg>5s</arg>
+<msg time="2026-04-30T11:43:22.837826" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
 <doc>Pauses the test executed for the given time.</doc>
-<status status="PASS" start="2026-04-07T12:03:15.139386" elapsed="5.002236"/>
+<status status="PASS" start="2026-04-30T11:43:19.836450" elapsed="3.001597"/>
 </kw>
-<msg time="2026-04-07T12:03:20.178924" level="INFO">Switching context to context=b0e47ca8-af40-4cff-8a09-dd27e52e19e7 in CURRENT</msg>
-<msg time="2026-04-07T12:03:20.187368" level="INFO">Successfully changed active context: context=b0e47ca8-af40-4cff-8a09-dd27e52e19e7</msg>
-<msg time="2026-04-07T12:03:20.202946" level="INFO">Successfully closed Context</msg>
-<status status="PASS" start="2026-04-07T12:03:12.205476" elapsed="7.937214"/>
+<kw name="Click" owner="Browser">
+<msg time="2026-04-30T11:43:22.839506" level="INFO">Clicks the element 'id=hrvchart'.</msg>
+<arg>id=hrvchart</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-04-30T11:43:22.838671" elapsed="0.427474"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-04-30T11:43:25.271176" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-04-30T11:43:23.270136" elapsed="2.001205"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2026-04-30T11:43:25.273313" level="INFO">Clicks the element 'id=closeHrvDialog'.</msg>
+<arg>id=closeHrvDialog</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-04-30T11:43:25.272169" elapsed="0.176729"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-04-30T11:43:27.451207" level="INFO">Slept 2 seconds.</msg>
+<arg>2s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-04-30T11:43:25.449389" elapsed="2.001983"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2026-04-30T11:43:27.453413" level="INFO">Clicks the element 'id=addDiaryBtn'.</msg>
+<arg>id=addDiaryBtn</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-04-30T11:43:27.451915" elapsed="0.070540"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-04-30T11:43:28.523898" level="INFO">Slept 1 second.</msg>
+<arg>1s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-04-30T11:43:27.522966" elapsed="1.001114"/>
+</kw>
+<kw name="Type Text" owner="Browser">
+<msg time="2026-04-30T11:43:28.525989" level="INFO">Types the text '30-03-2026' in the given field.</msg>
+<arg>id=entry_date</arg>
+<arg>30-03-2026</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2026-04-30T11:43:28.524691" elapsed="0.082075"/>
+</kw>
+<kw name="Type Text" owner="Browser">
+<msg time="2026-04-30T11:43:28.609845" level="INFO">Types the text '4' in the given field.</msg>
+<arg>id=mood</arg>
+<arg>4</arg>
+<arg>delay=0.05s</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2026-04-30T11:43:28.608579" elapsed="0.099667"/>
+</kw>
+<kw name="Type Text" owner="Browser">
+<msg time="2026-04-30T11:43:28.709545" level="INFO">Types the text '100' in the given field.</msg>
+<arg>id=weight_now</arg>
+<arg>100</arg>
+<arg>delay=0.05s</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2026-04-30T11:43:28.708720" elapsed="0.212506"/>
+</kw>
+<kw name="Type Text" owner="Browser">
+<msg time="2026-04-30T11:43:28.922586" level="INFO">Types the text '7' in the given field.</msg>
+<arg>id=sleep_hours</arg>
+<arg>7</arg>
+<arg>delay=0.05s</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2026-04-30T11:43:28.921735" elapsed="0.093352"/>
+</kw>
+<kw name="Type Text" owner="Browser">
+<msg time="2026-04-30T11:43:29.016791" level="INFO">Types the text 'Kissaselain' in the given field.</msg>
+<arg>id=diaryText</arg>
+<arg>${NOTE}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2026-04-30T11:43:29.015933" elapsed="0.095048"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2026-04-30T11:43:29.112746" level="INFO">Clicks the element 'id=saveDiary'.</msg>
+<arg>id=saveDiary</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-04-30T11:43:29.111443" elapsed="0.031057"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-04-30T11:43:32.144146" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-04-30T11:43:29.142960" elapsed="3.001385"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2026-04-30T11:43:32.145889" level="INFO">Clicks the element 'id=putDiaryBtn'.</msg>
+<arg>id=putDiaryBtn</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-04-30T11:43:32.144878" elapsed="0.038293"/>
+</kw>
+<kw name="Type Text" owner="Browser">
+<msg time="2026-04-30T11:43:32.185909" level="INFO">Types the text '30-03-2026' in the given field.</msg>
+<arg>id=diaryDate</arg>
+<arg>30-03-2026</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2026-04-30T11:43:32.184556" elapsed="0.141589"/>
+</kw>
+<kw name="Type Text" owner="Browser">
+<msg time="2026-04-30T11:43:32.331758" level="INFO">Types the text '1' in the given field.</msg>
+<arg>id=diaryMood</arg>
+<arg>1</arg>
+<arg>delay=0.05s</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2026-04-30T11:43:32.330098" elapsed="0.114548"/>
+</kw>
+<kw name="Type Text" owner="Browser">
+<msg time="2026-04-30T11:43:32.446052" level="INFO">Types the text '75' in the given field.</msg>
+<arg>id=diaryWeight</arg>
+<arg>75</arg>
+<arg>delay=0.05s</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2026-04-30T11:43:32.445141" elapsed="0.153194"/>
+</kw>
+<kw name="Type Text" owner="Browser">
+<msg time="2026-04-30T11:43:32.599674" level="INFO">Types the text '3' in the given field.</msg>
+<arg>id=diarySleep</arg>
+<arg>3</arg>
+<arg>delay=0.05s</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2026-04-30T11:43:32.598834" elapsed="0.093550"/>
+</kw>
+<kw name="Type Text" owner="Browser">
+<msg time="2026-04-30T11:43:32.694299" level="INFO">Types the text 'Kissa' in the given field.</msg>
+<arg>id=diaryTextUpdate</arg>
+<arg>${NOTEUP}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2026-04-30T11:43:32.693229" elapsed="0.114542"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2026-04-30T11:43:32.809818" level="INFO">Clicks the element 'id=saveDiaryUpdate'.</msg>
+<arg>id=saveDiaryUpdate</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-04-30T11:43:32.808592" elapsed="0.047448"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-04-30T11:43:35.859004" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-04-30T11:43:32.857523" elapsed="3.001628"/>
+</kw>
+<msg time="2026-04-30T11:43:35.884777" level="INFO">Switching context to context=d6029366-b530-4529-91c7-f1dbd0864411 in CURRENT</msg>
+<msg time="2026-04-30T11:43:35.899818" level="INFO">Successfully changed active context: context=d6029366-b530-4529-91c7-f1dbd0864411</msg>
+<msg time="2026-04-30T11:43:35.937876" level="INFO">Successfully closed Context</msg>
+<status status="PASS" start="2026-04-30T11:43:12.624374" elapsed="23.235243"/>
 </test>
-<status status="PASS" start="2026-04-07T12:03:11.714049" elapsed="8.490548"/>
+<status status="PASS" start="2026-04-30T11:43:12.019926" elapsed="23.919899"/>
 </suite>
 <statistics>
 <total>
@@ -60,9 +254,10 @@
 <tag>
 </tag>
 <suite>
-<stat name="Registertest" id="s1" pass="1" fail="0" skip="0">Registertest</stat>
+<stat name="Logintest" id="s1" pass="1" fail="0" skip="0">Logintest</stat>
 </suite>
 </statistics>
 <errors>
+<msg time="2026-04-30T11:43:12.618587" level="WARN">Error in file 'C:\Users\mikap\OneDrive\Asiakirjat\Metropolia opiskelu\Terveysteknologia\Bettertrainingapp\bettertrainingapp\tests\logintest.robot' on line 4: Suite 'Logintest' has already imported library 'Browser' with different arguments. This import is ignored.</msg>
 </errors>
 </robot>

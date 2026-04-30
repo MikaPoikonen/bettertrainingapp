@@ -1,3 +1,3 @@
 *** Variables ***
-${Username}     somebody@example.com
-${Password}     SuperSecret!
+${Username}     mikapoi@metropolia.fi      
+${Password}     R3n3gad3!

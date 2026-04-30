@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.13.7 on win32)" generated="2026-04-30T11:00:27.169454" rpa="false" schemaversion="5">
+<suite id="s1" name="Logintest" source="C:\Users\mikap\OneDrive\Asiakirjat\Metropolia opiskelu\Terveysteknologia\Bettertrainingapp\bettertrainingapp\tests\logintest.robot">
+<test id="s1-t1" name="Avaa kissaselain" line="6">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-04-30T11:00:27.704942" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Users\\mikap\\OneDrive\\Asiakirjat\\Metropolia opiskelu\\Terveysteknologia\\Bettertrainingapp\\bettertrainingapp\\outputs\\browser\\traces\\temp\\32d28862-d26d-4656-97b8-83bdd360c936"}</msg>
+<msg time="2026-04-30T11:00:27.771941" level="INFO">Starting Browser process C:\Users\mikap\OneDrive\Asiakirjat\Metropolia opiskelu\Terveysteknologia\Bettertrainingapp\bettertrainingapp\.venv\Lib\site-packages\Browser\wrapper\index.js using at 127.0.0.1:59568</msg>
+<msg time="2026-04-30T11:00:29.822740" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Users\\mikap\\OneDrive\\Asiakirjat\\Metropolia opiskelu\\Terveysteknologia\\Bettertrainingapp\\bettertrainingapp\\outputs\\browser\\traces\\temp\\32d28862-d26d-4656-97b8-83bdd360c936"}</msg>
+<arg>chromium</arg>
+<arg>headless=False</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-04-30T11:00:27.702929" elapsed="2.120381"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-04-30T11:00:32.123517" level="INFO">Successfully initialized new page object and opened url: http://localhost:5173/</msg>
+<msg time="2026-04-30T11:00:32.123728" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<arg>http://localhost:5173/</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-04-30T11:00:29.824613" elapsed="2.299569"/>
+</kw>
+<kw name="Get Title" owner="Browser">
+<msg time="2026-04-30T11:00:32.139197" level="INFO">Title: 'Better Training App'</msg>
+<arg>==</arg>
+<arg>Better Training App</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2026-04-30T11:00:32.125276" elapsed="0.014103"/>
+</kw>
+<kw name="Type Text" owner="Browser">
+<msg time="2026-04-30T11:00:32.141476" level="INFO">Types the text 'mikapoi@metropolia.fi' in the given field.</msg>
+<msg time="2026-04-30T11:00:33.121777" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="browser/screenshot/fail-screenshot-1.png" target="_blank"&gt;&lt;img src="browser/screenshot/fail-screenshot-1.png" width="800px"/&gt;&lt;/a&gt;</msg>
+<msg time="2026-04-30T11:00:33.122204" level="INFO">See also file:///C:/Users/mikap/OneDrive/Asiakirjat/Metropolia%20opiskelu/Terveysteknologia/Bettertrainingapp/bettertrainingapp/outputs/playwright-log.txt for additional details.</msg>
+<msg time="2026-04-30T11:00:33.123311" level="FAIL">Error: locator.fill: Unknown engine "name" while parsing selector name=username
+Call log:
+  - waiting for locator('name=username')
+</msg>
+<arg>name=username</arg>
+<arg>${Username}</arg>
+<arg>delay=0.05s</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="FAIL" start="2026-04-30T11:00:32.139973" elapsed="0.994176">Error: locator.fill: Unknown engine "name" while parsing selector name=username
+Call log:
+  - waiting for locator('name=username')
+</status>
+</kw>
+<kw name="Type Text" owner="Browser">
+<arg>name=password</arg>
+<arg>${Password}</arg>
+<arg>delay=0.5s</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="NOT RUN" start="2026-04-30T11:00:33.134765" elapsed="0.000212"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" start="2026-04-30T11:00:33.135500" elapsed="0.000235"/>
+</kw>
+<msg time="2026-04-30T11:00:33.166731" level="INFO">Switching context to context=3a627f52-27aa-47cf-aa87-3091cdcb381e in CURRENT</msg>
+<msg time="2026-04-30T11:00:33.179448" level="INFO">Successfully changed active context: context=3a627f52-27aa-47cf-aa87-3091cdcb381e</msg>
+<msg time="2026-04-30T11:00:33.231802" level="INFO">Successfully closed Context</msg>
+<status status="FAIL" start="2026-04-30T11:00:27.700156" elapsed="5.436106">Error: locator.fill: Unknown engine "name" while parsing selector name=username
+Call log:
+  - waiting for locator('name=username')
+</status>
+</test>
+<status status="FAIL" start="2026-04-30T11:00:27.172572" elapsed="6.060812"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Logintest" id="s1" pass="0" fail="1" skip="0">Logintest</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
