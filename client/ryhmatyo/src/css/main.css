@@ -256,13 +256,17 @@ html, body {
 
 .inner_box {
   position: absolute;
-  top: 81%;
-  left: 26%;
+  top: 80%;
+  left: 30%;
   transform: translate(-50%, -50%);
+
   color: white;
-  font-size: 50px;
+  text-align: center;
+
+  font-size: clamp(20px, 5vw, 50px);  /* 🔥 tärkein */
+  padding: 0 10px;
+
   text-shadow: 2px 2px 6px black;
-  margin-top: 20px;
 }
 
 .h2 {
