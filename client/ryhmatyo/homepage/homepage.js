@@ -6,38 +6,15 @@ import * as am5xy from "@amcharts/amcharts5/xy";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import am5themes_Responsive from "@amcharts/amcharts5/themes/Responsive";
 import * as am5radar from "@amcharts/amcharts5/radar";
-
 const data = await getUserDataSqlLatest();
 const readinessData = data.readiness_data;
 const stressData = data.stress_data;
 const physiologicalData = data.physiological_age;
 const allData = await getUserDataSqlAll();
 const userInfo = await getUserData();
-// const entryData = await fetchDiaryEntries();
-// console.log(entryData)
+console.log(userInfo);
+console.log(userInfo.age);
 
-
-//Päivien formatointidunktiot
-function formatDate(iso) {
-  const d = new Date(iso);
-  return d.toLocaleString("fi-FI", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-}
-// Tekoälyltä haettu tieto formatointitapoihin ja itse sovellettu
-// Formatoidaan päivämäärä ilman kellonaikaa
-function formatDateClock(iso) {
-  const d = new Date(iso);
-  return d.toLocaleString("fi-FI", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  });
-}
 
 
 
@@ -763,5 +740,162 @@ printHRV.addEventListener("click", () => {
 
 
 
-///////HUOM HUOM HUOM!  Siirretty diaryentries entrydialog.js:ään
-/// jotta vähemmän koodia yhdessä tiedostossa ja helpompi hallita
+
+
+
+/* Uusi päiväkirjamekintä -dialogi */
+
+const diaryDialog = document.getElementById("diaryDialog");
+const addDiaryBtn = document.getElementById("addDiaryBtn");
+const saveDiaryBtn = document.getElementById("saveDiary");
+const cancelDiaryBtn = document.getElementById("cancelDiary");
+const diaryText = document.getElementById("diaryText");
+const diaryEntries = document.getElementById("diaryEntries");
+const overlay = document.getElementById("dialogOverlay");
+const localDiaryEntries = [];
+
+addDiaryBtn.addEventListener("click", () => {
+  diaryText.value = "";
+  diaryDialog.showModal();
+  overlay.style.display = "block";
+});
+
+cancelDiaryBtn.addEventListener("click", () => {
+  diaryDialog.close();
+  overlay.style.display = "none";
+});
+
+saveDiaryBtn.addEventListener("click", async () => {
+  const notes = diaryText.value.trim();
+  // if (!notes) return;
+
+  const entry = {
+    entry_date: new Date().toISOString().split("T")[0],
+    mood: null,
+    weight_now: null,
+    sleep_hours: null,
+    notes,
+  };
+
+  /*
+  try {
+    await createDiaryEntry(entry);
+    diaryDialog.close();
+    overlay.style.display = "none";
+    await renderDiary();
+  } catch (err) {
+    console.error(err);
+    //alert("Merkinnän tallennus epäonnistui");
+  }
+    */
+
+  localDiaryEntries.unshift(entry);
+
+  diaryDialog.close();
+  overlay.style.display = "none";
+
+  renderDiary();
+});
+
+overlay.addEventListener("click", () => {
+  diaryDialog.close();
+  overlay.style.display = "none";
+});
+
+/*
+async function renderDiary() {
+  try {
+    const entries = await fetchDiaryEntries();
+    diaryEntries.innerHTML = "";
+
+    entries.slice(0, 2).forEach((entry) => {
+      const div = document.createElement("div");
+      div.className = "diary-entry";
+
+      const dateLabel = new Date(entry.entry_date).toLocaleDateString("fi-FI", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+      });
+
+      div.innerHTML = `
+        <div class="diary-date">${dateLabel}</div>
+        <div class="diary-text">${entry.notes}</div>
+      `;
+
+      diaryEntries.appendChild(div);
+    });
+  } catch (err) {
+    console.error(err);
+    diaryEntries.innerHTML = "<p>Merkintöjä ei voitu ladata.</p>";
+  }
+}
+*/
+
+/* Testi funktio mikä renderöi paikallisesti tallennetut merkinnät ilman backend-kutsua */
+
+function renderDiary() {
+  diaryEntries.innerHTML = "";
+
+  if (localDiaryEntries.length === 0) {
+    diaryEntries.innerHTML = "<p>Ei päiväkirjamerkintöjä vielä.</p>";
+    return;
+  }
+
+  localDiaryEntries.slice(0, 2).forEach((entry) => {
+    const div = document.createElement("div");
+    div.className = "diary-entry";
+
+    const dateLabel = new Date(entry.entry_date).toLocaleDateString("fi-FI", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+
+    div.innerHTML = `
+      <div class="diary-date">${dateLabel}</div>
+      <div class="diary-text">${entry.notes}</div>
+    `;
+
+    diaryEntries.appendChild(div);
+  });
+}
+
+
+// Headerin dialogi
+const headerBtn = document.getElementById("SettingDialog");
+const headerDialog = document.getElementById("headerDialog");
+const closeHeaderDialog = document.getElementById("closeHeaderDialog");
+//const overlay = document.getElementById("dialogOverlay");
+
+// Avaa dialogi
+headerBtn.addEventListener("click", () => {
+    headerDialog.showModal();
+    overlay.style.display = "block";
+});
+
+// Sulje dialogi napista
+closeHeaderDialog.addEventListener("click", () => {
+    headerDialog.close();
+    overlay.style.display = "none";
+});
+
+// Sulje klikkaamalla overlayta
+overlay.addEventListener("click", () => {
+    headerDialog.close();
+    overlay.style.display = "none";
+});
+
+// headerin username
+const usernameSpan = document.getElementById("headerUsername");
+
+if (userInfo && userInfo.username) {
+  usernameSpan.textContent = userInfo.username;
+} else {
+  usernameSpan.textContent = "User"; // fallback
+}
+
+
+
+
+/* renderDiary(); */
