@@ -3,7 +3,7 @@ Better Training App
 <img width="250" height="250" alt="bettertrainngapplogo_nobackground" src="https://github.com/user-attachments/assets/23424215-1ec1-4e62-b465-b67ac2997ed2" />
 
 Better Training App on web-sovellus, joka auttaa käyttäjää seuraamaan kehon palautumista ja harjoituskuormitusta sykevälivaihtelun (HRV) avulla. Sovellus hyödyntää Kubios HRV -sovelluksella mitattua dataa ja hakee analyysit Kubios Cloud -pilvipalvelusta. Käyttäjä voi tarkastella mittaushistoriaa, seurata kehitystä sekä tehdä päiväkirjamerkintöjä. Sovelluksen tavoitteena on optimoida harjoittelua ja parantaa suorituskykyä mitatun datan avulla.
-
+----------------------------------------------------
 
 Sovelluksen käyttöliittymä
 
@@ -19,9 +19,7 @@ Sovelluksen käyttöliittymä
 
 <img width="500" height="350" alt="image" src="https://github.com/user-attachments/assets/46651a68-5510-479c-8855-72ac8158e478" />
 
-
-
-
+-----------------------------------------
 Keskeiset ominaisuudet:
 
 - HRV-datan seuranta ja analysointi
@@ -29,19 +27,17 @@ Keskeiset ominaisuudet:
 - Päiväkirja harjoittelun ja hyvinvoinnin kirjaamiseen
 - Harjoitussuositukset datan perusteella
 - Mahdollisuus jakaa tietoja ammattilaisille (esim. valmentajalle tai lääkärille)
-
+---------------------------------------
 Linkki sovellukseen 
 - #tähän linkki
-
+---------------------------------------
 Linkki sovelluksen rautalankamalliin
 - https://www.figma.com/make/6pFLq7NPH3mu0e3sYubO37/HRV-Data-Analysis-App?t=0ktJrJ4etgj82vnG-1
-
+--------------------------------------
 Linkki sovelluksen automaatiotestauksen outputs-kansioon
 - https://github.com/MikaPoikonen/bettertrainingapp/tree/main/outputs
-
+--------------------------------------
 Sovelluksen tietokanta
-
-
 
 ```mermaid
 erDiagram
@@ -85,7 +81,87 @@ KUBIOS_PAYLOAD {
 USERS ||--o{ DIARY_ENTRIES : writes
 USERS ||--o{ KUBIOS_PAYLOAD : measures
 ```
+--------------------------------------
+Sovelluksen Api-dokumentaatio
 
+Listaus api toiminnoista
+GET Pyynnöt
+GET/users/:ID
+GET/entries/:ID
+GET/entries/latest/:ID
+GET/kubios/user-data
+GET/kubios/sql/:ID
+GET pyynnöt tarvitsevat käyttäjän ID:n
+
+POST Pyynnöt
+POST/users
+POST/users/login
+POST/entries
+POST/kubios/sql
+POST pyynnöt tarvitsevat käyttäjä tai päiväkirjamerkintään tarvittavat tiedot, 
+login pyyntö tarvitsee käyttäjänimen ja salasanan
+
+PUT Pyynnöt
+PUT/users/:ID
+PUT/entries/:ID
+PUT pyynnöt tarvitsevat id:n ja tiedot joita haluat muokata
+
+DELETE Pyynnöt
+DELETE/users/:ID
+DELETE/entries
+Päiväkirja merkinnän poistossa tarvitsee käyttäjän ja merkinnän id:t
+
+Esimerkki vastauksia
+POST user json vastaus
+ res.status(201).json({ message: "new user added", user_id: newUserId });
+
+POST login json vastaus
+return res.json({ message: "login ok", user, token });
+
+Esimerkkikutsuja
+GET user by id
+GET {{apiurl}}/users/19
+Authorization: Bearer {{token}}
+
+POST user
+POST {{apiurl}}/users
+Content-Type: application/json
+
+{
+    "username": "logintesti",
+    "password": "Salasana123",
+    "email": "login@testi.fi",
+    "start_weight": 90,
+    "birth_year": "2000-02-02"
+}
+
+
+########### User logIn
+POST {{apiurl}}/users/login
+Content-Type: application/json
+
+{
+  "username": "",
+  "password": ""
+}
+
+
+PUT user
+PUT {{apiurl}}/users/17
+Content-Type: application/json
+
+{
+"username": "muutettu",
+"password": "Salasana123",
+"email": "muutettu@muutettu11.fi",
+"start_weight": 90,
+"birth_year": "2000-02-02"
+} 
+
+
+Delete user by id
+DELETE {{apiurl}}/users/3
+----------------------------------------
 AI:n hyödyntäminen projektissa
 
 Projektissa on hyödynnetty tekoälyä ohjelmoinnin tukena. Tekoälyä käytettiin esimerkiksi:
@@ -97,7 +173,7 @@ Projektissa on hyödynnetty tekoälyä ohjelmoinnin tukena. Tekoälyä käytetti
 Lisäksi AI:n käyttöä merkitty erikseen kommentteihin.
 
 Ai:lla luotu myös sovelluksen logo.
-
+------------------------------------------------
 Referenssit ja kirjastot:
 
 - https://www.w3schools.com/
