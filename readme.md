@@ -5,6 +5,22 @@ Better Training App
 Better Training App on web-sovellus, joka auttaa käyttäjää seuraamaan kehon palautumista ja harjoituskuormitusta sykevälivaihtelun (HRV) avulla. Sovellus hyödyntää Kubios HRV -sovelluksella mitattua dataa ja hakee analyysit Kubios Cloud -pilvipalvelusta. Käyttäjä voi tarkastella mittaushistoriaa, seurata kehitystä sekä tehdä päiväkirjamerkintöjä. Sovelluksen tavoitteena on optimoida harjoittelua ja parantaa suorituskykyä mitatun datan avulla.
 
 
+Sovelluksen käyttöliittymä
+
+<img width="500" height="350" alt="image" src="https://github.com/user-attachments/assets/6c3dfcdc-8907-41cb-9f33-cd60d311b83b" />
+
+<img width="500" height="350" alt="image" src="https://github.com/user-attachments/assets/f0ac28d5-57d2-45bb-b4cd-cf9a18fb707f" />
+
+<img width="500" height="350" alt="image" src="https://github.com/user-attachments/assets/d4a542ca-883d-4df5-8d22-f6576fc61417" />
+
+<img width="500" height="350" alt="image" src="https://github.com/user-attachments/assets/980e6f13-2adb-454e-8654-359e7ea9fa9a" />
+
+<img width="500" height="350" alt="image" src="https://github.com/user-attachments/assets/e4f1a1cb-06d1-4fd9-af1d-0bc42e452f68" />
+
+<img width="500" height="350" alt="image" src="https://github.com/user-attachments/assets/46651a68-5510-479c-8855-72ac8158e478" />
+
+
+
 
 Keskeiset ominaisuudet:
 
@@ -19,6 +35,9 @@ Linkki sovellukseen
 
 Linkki sovelluksen rautalankamalliin
 - https://www.figma.com/make/6pFLq7NPH3mu0e3sYubO37/HRV-Data-Analysis-App?t=0ktJrJ4etgj82vnG-1
+
+Linkki sovelluksen automaatiotestauksen outputs-kansioon
+- #tähän linkki
 
 Sovelluksen tietokanta
 
@@ -66,6 +85,26 @@ KUBIOS_PAYLOAD {
 USERS ||--o{ DIARY_ENTRIES : writes
 USERS ||--o{ KUBIOS_PAYLOAD : measures
 ```
+
+AI:n hyödyntäminen projektissa
+
+Projektissa on hyödynnetty tekoälyä ohjelmoinnin tukena. Tekoälyä käytettiin esimerkiksi:
+- virheiden etsimisen tukemiseen ja selittämiseen tarvittaessa miksi esim. koodi meni rikki. yksittäisiä parametrejä tai undefinied / null ongelmia
+- erilaisten css ulkoasujen suunnitteluun. Mitä vaihtoehtoja olisi käyttää tai saada esim laatikoille hyvät shadow.
+- Azure serverin pystyttämisessä. Matin ohjeissa olevaa linux serveriä esim ei ollut enää. Lisäksi tuli ongelmia regionin kanssa että pystyi käyttämään esim halvinta 8 dollarin serveriä joka oli nyt 2 luokan alla.
+- Tekoäly ei tuottanut valmista projektia kokonaan, vaan sitä käytettiin oppimisen tukena ja yksittäisten ongelmien pienten osien ratkaisemiseen.
+
+Lisäksi AI:n käyttöä merkitty erikseen kommentteihin.
+
+Ai:lla luotu myös sovelluksen logo.
+
+Referenssit ja kirjastot:
+
+- https://www.w3schools.com/
+- https://www.amcharts.com/demos/gauge-with-bands/
+- https://www.amcharts.com/demos/control-chart/
+- Oppimisessa on käytettu Ulla Söderlöf ja Matti Peltoniemi Githubin opetusmateriaalia niin fron-endissä kuin back-endissä.
+- Oppimateriaalia on osittain käytetty suoraan apuna ja myös muokattu projektiin sopivaksi
 
 
 
