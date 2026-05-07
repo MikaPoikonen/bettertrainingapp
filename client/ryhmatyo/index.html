@@ -1,114 +1,106 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Better Training App</title>
-</head>
+  </head>
 
-<body>
-    
-   <div id="dialog_overlay" class="dialog-overlay"></div>
-   
-   <dialog id="register_form">
+  <body>
+    <div id="dialog_overlay" class="dialog-overlay"></div>
 
-        <h2>Create a new user</h2>
+    <dialog id="register_form">
+      <h2>Create a new user</h2>
 
-        <button type="button" id="close_register_dialog">×</button>
+      <button type="button" id="close_register_dialog">×</button>
 
-        <form class="registerform">
+      <form class="registerform">
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
 
-            <div class="form-row">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
-            </div>
+        <div class="form-row">
+          <label for="reg_username">Username</label>
+          <input type="text" id="reg_username" name="username" required />
+        </div>
 
-            <div class="form-row">
-                <label for="reg_username">Username</label>
-                <input type="text" id="reg_username" name="username" required>
-            </div>
+        <div class="form-row">
+          <label for="reg_password">Password</label>
+          <input type="password" id="reg_password" name="password" required />
+        </div>
 
-            <div class="form-row">
-                <label for="reg_password">Password</label>
-                <input type="password" id="reg_password" name="password" required>
-            </div>
+        <div class="form-row">
+          <label for="birth_year">Year of Birth</label>
 
-            <div class="form-row">
-                <label for="birth_year">Year of Birth</label>
+          <input type="date" id="birth_year" name="birth_year" required />
+        </div>
 
-                
-                <input type="date" id="birth_year" name="birth_year" required/>
-            </div>
+        <div class="form-row">
+          <label for="start_weight">Starting Weight (kg)</label>
+          <input type="number" id="start_weight" name="start_weight" required />
+        </div>
 
-            <div class="form-row">
-                <label for="start_weight">Starting Weight (kg)</label>
-                <input type="number" id="start_weight" name="start_weight" required>
-            </div>
-
-            <div class="button-row">
-                <button class="register_button">Rekisteröidy</button>
-            </div>
-
-        </form>
-
+        <div class="button-row">
+          <button class="register_button">Rekisteröidy</button>
+        </div>
+      </form>
     </dialog>
 
     <div class="layout">
+      <div class="right">
+        <header class="header">
+          <img
+            id="better_training_logo"
+            src="public/img/bettertrainngapplogo_nobackground.jpg"
+            alt="Better Training Logo"
+          />
+          <span class="app-name">Better Training App</span>
+        </header>
 
-        <div class="right">
+        <main class="content">
+          <div class="hero">
+            <div class="inner_box">Welcome to Better Training App</div>
+            <img
+              id="olympiakuva"
+              src="public/img/olympiakuva.jpg"
+              alt="Olympic image"
+            />
+          </div>
 
-            <header class="header">
-                <img id="better_training_logo" src="public/img/bettertrainngapplogo_nobackground.jpg" alt="Better Training Logo">
-                <span class="app-name">Better Training App</span>
-            </header>
+          <form class="loginform">
+            <h2>Login</h2>
 
-            <main class="content">
+            <div class="form-row">
+              <label>Username</label>
+              <input name="username" id="loginusername" required />
+            </div>
 
-                <div class="hero">
-                    <div class="inner_box">Welcome to Better Training App</div>
-                    <img id="olympiakuva" src="public/img/olympiakuva.jpg" alt="Olympic image">
-                </div>
+            <div class="form-row">
+              <label>Password</label>
+              <input
+                name="password"
+                id="loginpassword"
+                type="password"
+                required
+              />
+            </div>
 
-                
+            <div class="button-row">
+              <button class="login_button" id="loginbutton">
+                Kirjaudu sisään
+              </button>
+            </div>
+          </form>
+        </main>
 
-                <form class="loginform">
-
-                    <h2>Login</h2>
-
-                    <div class="form-row">
-                        <label>Username</label>
-                        <input name="username" id="loginusername" required>
-                    </div>
-
-                    <div class="form-row">
-                        <label>Password</label>
-                        <input name="password" id="loginpassword" type="password" required>
-                    </div>
-
-                    <div class="button-row">
-                        <button class="login_button" id="loginbutton">Kirjaudu sisään</button>
-                        <!-- <button type="button" class="register_button" id="open_register_dialog"> 
-                            Rekisteröidy
-                        </button> -->
-                    </div>
-
-                </form>
-
-            </main>
-
-            <footer class="footer">
-                Footer
-            </footer>
-
-        </div>
-
+        <footer class="footer">© 2023 Better Training App. All rights reserved.</footer>
+      </div>
     </div>
 
     <script type="module" src="/src/main.js"></script>
     <script type="module" src="/src/js/register.js"></script>
     <script type="module" src="/src/js/login.js"></script>
-
-</body>
+  </body>
 </html>
-``
+

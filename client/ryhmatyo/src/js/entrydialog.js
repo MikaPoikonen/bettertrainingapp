@@ -1,8 +1,12 @@
-import { fetchDiaryEntries, fetchLatestDiaryEntry, postEntry, updateEntry } from "./entry.js";
+import {
+  fetchDiaryEntries,
+  fetchLatestDiaryEntry,
+  postEntry,
+  updateEntry,
+} from "./entry.js";
 import "../../homepage/homepage.css";
-
+// Paikallinen tilamuuttuja päiväkirjamerkinnöille
 const myUserId = localStorage.getItem("userId");
-
 
 //Päivien formatointidunktiot
 function formatDate(iso) {
@@ -26,7 +30,7 @@ function formatDateClock(iso) {
   });
 }
 
-const diaryForm = document.querySelector('#add-entry-form');
+const diaryForm = document.querySelector("#add-entry-form");
 
 /* Uusi päiväkirjamekintä -dialogi */
 
@@ -38,7 +42,8 @@ const diaryText = document.getElementById("diaryText");
 const diaryEntries = document.getElementById("diaryEntries");
 const overlay = document.getElementById("dialogOverlay");
 const diaryDialogUpdate = document.getElementById("diaryDialogUpdate");
-const cancelDiaryUpdateBtn = diaryDialogUpdate.querySelector("#cancelDiaryUpdate");
+const cancelDiaryUpdateBtn =
+  diaryDialogUpdate.querySelector("#cancelDiaryUpdate");
 const saveDiaryUpdateBtn = document.getElementById("saveDiaryUpdate");
 const putDiaryBtn = document.getElementById("putDiaryBtn");
 const diaryTextUpdate = document.getElementById("diaryTextUpdate");
@@ -50,7 +55,6 @@ const diaryDate = document.getElementById("diaryDate");
 const diaryMood = document.getElementById("diaryMood");
 const diaryWeight = document.getElementById("diaryWeight");
 const diarySleep = document.getElementById("diarySleep");
-
 
 function openDialog(dialog) {
   dialog.show();
@@ -67,18 +71,14 @@ function closeAllDialogs() {
 
 overlay.addEventListener("click", closeAllDialogs);
 
-
-
-///////////////////////////////////////////////////
-diaryCard.addEventListener("click", async(e) => {
+// Kortin klikkaus avaa dialogin, jossa näkyy kaikki merkinnät
+diaryCard.addEventListener("click", async (e) => {
   if (e.target.tagName === "BUTTON") return;
 
   await renderDiaryHistory();
   openDialog(diaryHistoryDialog);
   overlay.style.display = "block";
 });
-
-
 
 addDiaryBtn.addEventListener("click", () => {
   diaryText.value = "";
@@ -91,6 +91,7 @@ cancelDiaryBtn.addEventListener("click", closeAllDialogs);
 cancelDiaryUpdateBtn.addEventListener("click", closeAllDialogs);
 
 closeDiaryHistoryBtn.addEventListener("click", closeAllDialogs);
+// Muokkausnappi hakee viimeisimmän merkinnän ja täyttää formiin
 
 putDiaryBtn.addEventListener("click", async () => {
   try {
@@ -109,7 +110,6 @@ putDiaryBtn.addEventListener("click", async () => {
     console.log("Muokataan merkintää:", entry);
 
     fillDiaryForm(entry);
-
   } catch (err) {
     console.error("Virhe merkintöjä haettaessa:", err);
   }
@@ -141,40 +141,38 @@ async function renderDiaryHistory() {
       });
 
       // --- DELETE BUTTON ---
-     // --- DELETE BUTTON ---
-const deleteBtn = document.createElement("button");
-deleteBtn.textContent = "Poista";
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Poista";
 
-deleteBtn.addEventListener("click", async () => {
-  if (!confirm("Haluatko varmasti poistaa tämän merkinnän?")) return;
+      deleteBtn.addEventListener("click", async () => {
+        if (!confirm("Haluatko varmasti poistaa tämän merkinnän?")) return;
 
-  try {
-    const response = await fetch("http://localhost:3000/api/entries", {
-  method: "DELETE",
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
-  },
-  body: JSON.stringify({
-    entry_id: row.entry_id,
-    user_id: myUserId,
-  }),
-});
+        try {
+          const response = await fetch("http://localhost:3000/api/entries", {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify({
+              entry_id: row.entry_id,
+              user_id: myUserId,
+            }),
+          });
 
-    if (!response.ok) {
-      throw new Error("Poisto epäonnistui");
-    }
+          if (!response.ok) {
+            throw new Error("Poisto epäonnistui");
+          }
 
-    await renderDiaryHistory();
-    await renderDiary();
+          await renderDiaryHistory();
+          await renderDiary();
+        } catch (err) {
+          console.error("Poisto epäonnistui:", err);
+          alert("Merkinnän poisto epäonnistui.");
+        }
+      });
 
-  } catch (err) {
-    console.error("Poisto epäonnistui:", err);
-    alert("Merkinnän poisto epäonnistui.");
-  }
-});
-
-      // --- CONTENT ---
+      // Li-elementti ja sen sisältö
       li.innerHTML = `
         Luotu: <strong>${formatDateClock(row.entry_date) || "-"}</strong><br><br>
         Päivä: ${formatDateClock(row.entry_date) || "-"}<br><br>
@@ -194,28 +192,21 @@ deleteBtn.addEventListener("click", async () => {
     diaryHistoryList.innerHTML = "<p>Merkintöjä ei voitu ladata.</p>";
   }
 }
-
-
-
-
-
-
+// Tallennusnappi lähettää päivitetyt tiedot backendiin
 saveDiaryUpdateBtn.addEventListener("click", async (e) => {
   e.preventDefault();
 
   const entryId = diaryDialogUpdate.dataset.entryId;
   const userId = localStorage.getItem("userId");
 
-
   const updatedEntry = {
-  entry_date: diaryDate.value,
-  mood: diaryMood.value,
-  weight_now: diaryWeight.value,
-  sleep_hours: diarySleep.value,
-  notes: diaryTextUpdate.value,
-  entry_id: entryId
-};
-
+    entry_date: diaryDate.value,
+    mood: diaryMood.value,
+    weight_now: diaryWeight.value,
+    sleep_hours: diarySleep.value,
+    notes: diaryTextUpdate.value,
+    entry_id: entryId,
+  };
 
   try {
     await updateEntry(userId, updatedEntry);
@@ -224,13 +215,10 @@ saveDiaryUpdateBtn.addEventListener("click", async (e) => {
     overlay.style.display = "none";
 
     renderDiary(); // Päivitä lista
-
   } catch (err) {
     console.error("Päivitys epäonnistui", err);
   }
 });
-
-
 
 saveDiaryBtn.addEventListener("click", async () => {
   const notes = diaryText.value.trim();
@@ -244,7 +232,6 @@ saveDiaryBtn.addEventListener("click", async () => {
     notes,
   };
 
-
   localDiaryEntries.unshift(entry);
 
   diaryDialog.close();
@@ -252,10 +239,7 @@ saveDiaryBtn.addEventListener("click", async () => {
   renderDiary();
 });
 
-
-
-
-// 🔹 Täyttää formiin arvot
+// Funktio hakee kaikki päiväkirjamerkinnät tietokannasta ja laittaa formiin
 function fillDiaryForm(row) {
   diaryDate.value = row.entry_date?.split("T")[0] || "";
   diaryMood.value = row.mood || "";
@@ -269,9 +253,7 @@ function fillDiaryForm(row) {
 
   openDialog(diaryDialogUpdate);
 }
-
-// 🔹 Renderöinti
-// 🔹 Renderöinti korttiin: vain viimeisin merkintä
+// Funktio hakee viimeisimmän päiväkirjamerkinnän tietokannasta
 async function renderDiary() {
   try {
     const latest = await fetchLatestDiaryEntry();
@@ -299,48 +281,35 @@ async function renderDiary() {
   }
 }
 
-
-
-
 renderDiary();
 
-
-
-
-
-
-
-
-
-
-
 // Uuden päiväkirjamerkinnän renderöinti
-diaryForm.addEventListener('submit', async (event) => 
-  {event.preventDefault(); 
-    const ent = new FormData(diaryForm); 
+diaryForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const ent = new FormData(diaryForm);
 
-const payload = Object.fromEntries(ent.entries()); 
-   //Numerokenttien muutokset: 
-    payload.weight_now;
-    payload.sleep_hours;
-    payload.mood;
-    payload.notes;
-    payload.entry_date;
+  const payload = Object.fromEntries(ent.entries());
+  //Numerokenttien muutokset:
+  payload.weight_now;
+  payload.sleep_hours;
+  payload.mood;
+  payload.notes;
+  payload.entry_date;
 
-    let body ={
-  "user_id":myUserId,
-  "weight_now": Number(payload.weight_now),
-  "mood": payload.mood,
-  "sleep_hours": payload.sleep_hours,
-  "notes": payload.notes,
-  "entry_date": payload.entry_date,
-}
+  let body = {
+    user_id: myUserId,
+    weight_now: Number(payload.weight_now),
+    mood: payload.mood,
+    sleep_hours: payload.sleep_hours,
+    notes: payload.notes,
+    entry_date: payload.entry_date,
+  };
 
-    console.log(body)
+  console.log(body);
 
-  await postEntry(body); 
-   diaryForm.reset();
-   diaryDialog.close();
-    overlay.style.display = "none"; 
-   await renderDiary();
-    })
+  await postEntry(body);
+  diaryForm.reset();
+  diaryDialog.close();
+  overlay.style.display = "none";
+  await renderDiary();
+});

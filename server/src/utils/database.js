@@ -1,6 +1,6 @@
-import mysql from 'mysql2/promise';
-import 'dotenv/config';
-
+import mysql from "mysql2/promise";
+import "dotenv/config";
+// database.js: MySQL-tietokantayhteyden hallinta, joka käyttää yhteyspoolia ja uudelleenyhdistämislogiikkaa
 const connectionConfig = {
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -23,20 +23,20 @@ const getPool = () => {
 
   return pool;
 };
-
+// shouldReconnect: Funktio tarkistaa, onko tietokantavirhe sellainen, joka vaatii uudelleenyhdistämistä
 const shouldReconnect = (error) => {
   const reconnectCodes = new Set([
-    'ECONNRESET',
-    'EPIPE',
-    'PROTOCOL_CONNECTION_LOST',
-    'PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR',
-    'PROTOCOL_ENQUEUE_AFTER_QUIT',
+    "ECONNRESET",
+    "EPIPE",
+    "PROTOCOL_CONNECTION_LOST",
+    "PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR",
+    "PROTOCOL_ENQUEUE_AFTER_QUIT",
   ]);
 
   return (
     reconnectCodes.has(error?.code) ||
-    error?.message?.includes('closed state') ||
-    error?.message?.includes('Pool is closed')
+    error?.message?.includes("closed state") ||
+    error?.message?.includes("Pool is closed")
   );
 };
 
@@ -52,7 +52,7 @@ const resetPool = async () => {
   pool = createPool();
   return pool;
 };
-
+// runWithReconnect: Funktio suorittaa tietokantakyselyn ja yrittää uudelleen, jos yhteys on katkennut
 const runWithReconnect = async (method, sql, params) => {
   try {
     return await getPool()[method](sql, params);
@@ -66,13 +66,13 @@ const runWithReconnect = async (method, sql, params) => {
     return getPool()[method](sql, params);
   }
 };
-
+// Function to get user data from Kubios API using SQL endpoint
 const database = {
   execute(sql, params) {
-    return runWithReconnect('execute', sql, params);
+    return runWithReconnect("execute", sql, params);
   },
   query(sql, params) {
-    return runWithReconnect('query', sql, params);
+    return runWithReconnect("query", sql, params);
   },
   async end() {
     if (!pool) {

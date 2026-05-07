@@ -1,5 +1,6 @@
-import { fetchData } from './fetch';
+import { fetchData } from "./fetch";
 
+// Funktio hakee viimeisimmän päiväkirjamerkinnän tietokannasta
 const fetchLatestDiaryEntry = async () => {
   console.log("Viimeisimmän päiväkirjamerkinnän haku");
 
@@ -20,15 +21,14 @@ const fetchLatestDiaryEntry = async () => {
   return entryData;
 };
 
-
-
+// Funktio hakee kaikki päiväkirjamerkinnät tietokannasta
 const fetchDiaryEntries = async () => {
-  console.log('Päiväkirjamerkinnän haku Tietokannasta');
+  console.log("Päiväkirjamerkinnän haku Tietokannasta");
 
-  const url = `http://localhost:3000/api/entries/${localStorage.getItem('userId')}`;
-  const token = localStorage.getItem('token');
-  const user_id = localStorage.getItem('userId');
-  console.log('User ID:', user_id);
+  const url = `http://localhost:3000/api/entries/${localStorage.getItem("userId")}`;
+  const token = localStorage.getItem("token");
+  const user_id = localStorage.getItem("userId");
+  console.log("User ID:", user_id);
   const headers = { Authorization: `Bearer ${token}` };
   const options = {
     headers: headers,
@@ -36,51 +36,52 @@ const fetchDiaryEntries = async () => {
   const entryData = await fetchData(url, options);
 
   if (entryData.error) {
-    console.log('Päiväkirjamerkinnän haku Tietokannasta epäonnistui');
+    console.log("Päiväkirjamerkinnän haku Tietokannasta epäonnistui");
     return;
   }
   console.log(entryData);
   return entryData;
 };
 
-
-
-
-
+// Funktio lähettää uuden päiväkirjamerkinnän tietokantaan
 const postEntry = async (payload) => {
   const url = `http://localhost:3000/api/entries`;
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const headers = {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
   };
   const options = {
-    method: 'POST',
+    method: "POST",
     headers: headers,
     body: JSON.stringify(payload),
   };
- const entryPost = await fetchData(url, options);
+  const entryPost = await fetchData(url, options);
 
   if (entryPost.error) {
-    console.log('Päiväkirjamerkinnän lähetys Tietokantaan epäonnistui');
+    console.log("Päiväkirjamerkinnän lähetys Tietokantaan epäonnistui");
     return;
   }
   console.log(entryPost);
   return entryPost;
 };
 
+// Funktio päivittää olemassa olevan päiväkirjamerkinnän tietokannassa
 const updateEntry = async (userId, updatedEntry) => {
   try {
     const token = localStorage.getItem("token");
 
-    const response = await fetch(`http://localhost:3000/api/entries/${userId}`, {
-      method: "PUT",
-      headers: { 
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
+    const response = await fetch(
+      `http://localhost:3000/api/entries/${userId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(updatedEntry),
       },
-      body: JSON.stringify(updatedEntry),
-    });
+    );
 
     if (!response.ok) {
       throw new Error("Päivitys epäonnistui");
@@ -93,7 +94,4 @@ const updateEntry = async (userId, updatedEntry) => {
   }
 };
 
-
-
-
-export { fetchDiaryEntries,fetchLatestDiaryEntry,postEntry, updateEntry };
+export { fetchDiaryEntries, fetchLatestDiaryEntry, postEntry, updateEntry };

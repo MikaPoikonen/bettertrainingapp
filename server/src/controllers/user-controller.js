@@ -1,58 +1,62 @@
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 import {
-    getUserById, addUser,putUser,deleteUser,findUserByUserName
-} from '../models/user-model.js';
+  getUserById,
+  addUser,
+  putUser,
+  deleteUser,
+  findUserByUserName,
+} from "../models/user-model.js";
 
+// User controllerit: käyttäjään liittyvät toiminnot, kuten haku, lisäys, päivitys, poisto ja login
 const getUserByIdController = async (req, res) => {
-    const entry = await getUserById(req.params.id);
-    if (entry) {
-        res.json(entry);
-    } else {
-        res.sendstatus(404);
-    }
+  const entry = await getUserById(req.params.id);
+  if (entry) {
+    res.json(entry);
+  } else {
+    res.sendstatus(404);
+  }
 };
 
 // POST - add user
 const addUserController = async (req, res) => {
-    const newUser = req.body;
+  const newUser = req.body;
 
-    if (!(newUser.username && newUser.password && newUser.email)) {
-        return res.status(400).json({error: 'required fields missing'});
-    }
+  if (!(newUser.username && newUser.password && newUser.email)) {
+    return res.status(400).json({ error: "required fields missing" });
+  }
 
-    const hash = await bcrypt.hash(newUser.password, 10);
-    newUser.password = hash;
-    const newUserId = await addUser(newUser);
-    res.status(201).json({message: 'new user added', user_id: newUserId});
+  const hash = await bcrypt.hash(newUser.password, 10);
+  newUser.password = hash;
+  const newUserId = await addUser(newUser);
+  res.status(201).json({ message: "new user added", user_id: newUserId });
 };
-
 
 // PUT USER
 const updateUserController = async (req, res) => {
-const user_id = req.params.id;
-const { username, password, email, start_weight, birth_year } = req.body;
+  const user_id = req.params.id;
+  const { username, password, email, start_weight, birth_year } = req.body;
 
-
-  const result = await putUser ({
+  const result = await putUser({
     user_id,
     username,
     password,
     email,
     start_weight,
-    birth_year
+    birth_year,
   });
-     if (!result.error) {
-      res.status(200).json({ message: 'Entry updated.', result });
-    } else {
-      res.status(500).json(result);
-    }
+  if (!result.error) {
+    res.status(200).json({ message: "Entry updated.", result });
+  } else {
+    res.status(500).json(result);
+  }
 };
 
+// DELETE USER
 const deleteUserController = async (req, res) => {
   try {
-    const user_id = req.params.id;  // <-- tämä puuttui
+    const user_id = req.params.id; // <-- tämä puuttui
 
     const result = await deleteUser(user_id);
 
@@ -61,16 +65,15 @@ const deleteUserController = async (req, res) => {
     res.status(500).json({
       error: {
         message: error.message,
-        details: null
-      }
+        details: null,
+      },
     });
   }
 };
 
-
 // Login controlleri // ei laitettu roter
 const postLogin = async (req, res) => {
-  const {username, password} = req.body;
+  const { username, password } = req.body;
 
   const user = await findUserByUserName(username);
   console.log(user);
@@ -82,22 +85,23 @@ const postLogin = async (req, res) => {
     if (await bcrypt.compare(password, user.password)) {
       delete user.password;
       // TÄssä kohtaa luodaan JWT token käyttämällä sercret fron .env file
-const token = jwt.sign(
-  { userId: user.user_id, username: user.username, email: user.email },
-  process.env.JWT_SECRET,
-  { expiresIn: process.env.JWT_EXPIRES_IN }
-);
- // tehdään muuttuja, jwt käyttöön. Haetaan user, procress ja metodi. Aika kauanko voimassa
-      return res.json({message: 'login ok', user, token});
+      const token = jwt.sign(
+        { userId: user.user_id, username: user.username, email: user.email },
+        process.env.JWT_SECRET,
+        { expiresIn: process.env.JWT_EXPIRES_IN },
+      );
+      // tehdään muuttuja, jwt käyttöön. Haetaan user, procress ja metodi. Aika kauanko voimassa
+      return res.json({ message: "login ok", user, token });
     }
-    return res.status(403).json({error: 'invalid password'});
+    return res.status(403).json({ error: "invalid password" });
   }
-  res.status(404).json({error: 'user not found'});
+  res.status(404).json({ error: "user not found" });
 };
 
-
-
-
-
-
-export {getUserByIdController, addUserController,updateUserController, deleteUserController,postLogin};
+export {
+  getUserByIdController,
+  addUserController,
+  updateUserController,
+  deleteUserController,
+  postLogin,
+};

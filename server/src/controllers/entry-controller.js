@@ -1,20 +1,29 @@
-import { listAllEntriesById, addEntry,removeEntryById, getEntryById, putEntry } from '../models/entry-model.js';
+import {
+  listAllEntriesById,
+  addEntry,
+  removeEntryById,
+  getEntryById,
+  putEntry,
+} from "../models/entry-model.js";
+// Päiväkirjamerkinnöiden controllerit: merkinnän haku, lisäys, päivitys ja poisto
+
+// Funktio hakee kaikki päiväkirjamerkinnät tietokannasta käyttäjään liittyen
 
 const getEntriesById = async (req, res) => {
-    const result = await listAllEntriesById(req.user.userId);
-    if (!result.error) {
-        res.json(result);
-    } else {
-        res.status(500);
-        res.json(result);
-    }
-}; 
+  const result = await listAllEntriesById(req.user.userId);
+  if (!result.error) {
+    res.json(result);
+  } else {
+    res.status(500);
+    res.json(result);
+  }
+};
 
-// addEntry
+// Itse merkinnän haku
 const addEntryController = async (req, res) => {
-    const {entry_date, mood, weight_now, sleep_hours, notes} = req.body;
-    const user_id = req.user.userId;
-   if (!entry_date || !user_id) {
+  const { entry_date, mood, weight_now, sleep_hours, notes } = req.body;
+  const user_id = req.user.userId;
+  if (!entry_date || !user_id) {
     return res.sendStatus(400);
   }
 
@@ -22,19 +31,20 @@ const addEntryController = async (req, res) => {
     return res.sendStatus(400);
   }
 
-  // Lisää entry
+  //
   const result = await addEntry({ user_id, ...req.body });
 
   if (result.entry_id) {
     return res.status(201).json({
       message: "New entry added",
-      ...result
+      ...result,
     });
   } else {
     return res.status(500).json(result);
   }
 };
 
+// Viimeisimmän merkinnän haku
 const getEntryByIdController = async (req, res) => {
   const result = await getEntryById(req.user.userId);
   if (!result.error) {
@@ -45,30 +55,27 @@ const getEntryByIdController = async (req, res) => {
   }
 };
 
+// Merkinnän päivitys
 const updateEntryController = async (req, res) => {
-const user_id = req.params.id;
-const { entry_date, mood, weight_now, sleep_hours, notes, entry_id } = req.body;
+  const user_id = req.params.id;
+  const { entry_date, mood, weight_now, sleep_hours, notes, entry_id } =
+    req.body;
 
-
-  const result = await putEntry ({
+  const result = await putEntry({
     user_id,
     entry_id,
     entry_date,
     mood,
     weight_now,
     sleep_hours,
-    notes
+    notes,
   });
-     if (!result.error) {
-      res.status(200).json({ message: 'Entry updated.', result });
-    } else {
-      res.status(500).json(result);
-    }
+  if (!result.error) {
+    res.status(200).json({ message: "Entry updated.", result });
+  } else {
+    res.status(500).json(result);
+  }
 };
-
-
-
-
 
 // Delete entry
 const deleteEntryByIdController = async (req, res) => {
@@ -76,11 +83,11 @@ const deleteEntryByIdController = async (req, res) => {
   const user_id = req.body.user_id;
 
   if (entry_id === undefined) {
-    return res.status(400).json({ error: 'entry_id missing' });
+    return res.status(400).json({ error: "entry_id missing" });
   }
 
   if (user_id === undefined) {
-    return res.status(400).json({ error: 'user_id missing' });
+    return res.status(400).json({ error: "user_id missing" });
   }
 
   const result = await removeEntryById(entry_id, user_id);
@@ -92,5 +99,10 @@ const deleteEntryByIdController = async (req, res) => {
   return res.json({ deleted: result });
 };
 
-
-export {getEntriesById, addEntryController,deleteEntryByIdController, getEntryByIdController, updateEntryController};
+export {
+  getEntriesById,
+  addEntryController,
+  deleteEntryByIdController,
+  getEntryByIdController,
+  updateEntryController,
+};

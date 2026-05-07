@@ -1,15 +1,11 @@
-import { fetchData } from './fetch';
-
-// 1. hae data
-// 2. muotoile data
-// 3. anna muotoiltu data graafikirjastolle
+import { fetchData } from "./fetch";
 
 // Function to test and get user info from kubios API
 const getUserInfo = async () => {
-  console.log('Käyttäjän INFO Kubioksesta');
+  console.log("Käyttäjän INFO Kubioksesta");
 
-  const url = 'http://localhost:3000/api/kubios/user-info';
-  const token = localStorage.getItem('token');
+  const url = "http://localhost:3000/api/kubios/user-info";
+  const token = localStorage.getItem("token");
   const headers = { Authorization: `Bearer ${token}` };
   const options = {
     headers: headers,
@@ -17,20 +13,18 @@ const getUserInfo = async () => {
   const userData = await fetchData(url, options);
 
   if (userData.error) {
-    console.log('Käyttäjän tietojen haku Kubioksesta epäonnistui');
     return;
   }
-  console.log(userData);
 };
 
 // Function to get more actual data from Kubios API
 const getUserDataSqlLatest = async () => {
-  console.log('Käyttäjän DATA Kubioksesta');
+  console.log("Käyttäjän DATA Kubioksesta");
 
-  const url = `http://localhost:3000/api/kubios/sql/${localStorage.getItem('userId')}`;
-  const token = localStorage.getItem('token');
-  const user_id = localStorage.getItem('userId');
-  console.log('User ID:', user_id);
+  const url = `http://localhost:3000/api/kubios/sql/${localStorage.getItem("userId")}`;
+  const token = localStorage.getItem("token");
+  const user_id = localStorage.getItem("userId");
+  console.log("User ID:", user_id);
   const headers = { Authorization: `Bearer ${token}` };
   const options = {
     headers: headers,
@@ -38,21 +32,20 @@ const getUserDataSqlLatest = async () => {
   const userData = await fetchData(url, options);
 
   if (userData.error) {
-    console.log('Käyttäjän tietojen haku Kubioksesta epäonnistui');
     return;
   }
-  console.log(userData[0]);
+
   return userData[0];
 };
 
-
+//  Function to get all user data from Kubios API
 const getUserDataSqlAll = async () => {
-  console.log('Käyttäjän DATA Kubioksesta');
+  console.log("Käyttäjän DATA Kubioksesta");
 
-  const url = `http://localhost:3000/api/kubios/sql/${localStorage.getItem('userId')}`;
-  const token = localStorage.getItem('token');
-  const user_id = localStorage.getItem('userId');
-  console.log('User ID:', user_id);
+  const url = `http://localhost:3000/api/kubios/sql/${localStorage.getItem("userId")}`;
+  const token = localStorage.getItem("token");
+  const user_id = localStorage.getItem("userId");
+  console.log("User ID:", user_id);
   const headers = { Authorization: `Bearer ${token}` };
   const options = {
     headers: headers,
@@ -60,19 +53,17 @@ const getUserDataSqlAll = async () => {
   const userData = await fetchData(url, options);
 
   if (userData.error) {
-    console.log('Käyttäjän tietojen haku Kubioksesta epäonnistui');
     return;
   }
-  console.log(userData);
+
   return userData;
 };
 
-
-
+// Function to get user data from Kubios API and calculate age
 const getUserData = async () => {
   console.log("Käyttäjän DATA Kubioksesta");
 
-  const url = `http://localhost:3000/api/users/${localStorage.getItem('userId')}`;
+  const url = `http://localhost:3000/api/users/${localStorage.getItem("userId")}`;
   const token = localStorage.getItem("token");
   const user_id = localStorage.getItem("userId");
   console.log("User ID:", user_id);
@@ -85,11 +76,8 @@ const getUserData = async () => {
   const usersData = await fetchData(url, options);
 
   if (usersData.error) {
-    console.log("Käyttäjän tietojen haku Kubioksesta epäonnistui");
     return;
   }
-
-  console.log("Tässä tiedot käyttäjästä", usersData);
 
   const birthDate = usersData.birth_year;
   const today = new Date();
@@ -99,23 +87,15 @@ const getUserData = async () => {
 
   if (
     today.getMonth() < birth.getMonth() ||
-    (today.getMonth() === birth.getMonth() &&
-      today.getDate() < birth.getDate())
+    (today.getMonth() === birth.getMonth() && today.getDate() < birth.getDate())
   ) {
     age--;
   }
-
-  console.log("Ikä:", age);
 
   return {
     ...usersData,
     age: age,
   };
 };
-
-
-
-
-
 
 export { getUserDataSqlLatest, getUserInfo, getUserDataSqlAll, getUserData };

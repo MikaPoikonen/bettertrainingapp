@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
 }
@@ -12,50 +13,29 @@ html, body {
   overflow: visible;
 }
 
-/* Vasen navigaatio 
-.sidebar {
-  width: 220px;
-  background: linear-gradient(to bottom, rgb(43, 43, 223), rgb(129, 129, 207));
-  padding: 15px;
-  list-style: none;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  
-}
-
-.sidebar ul {
-    display: flex;
-  list-style: none;
-  font-size: 30px;
-  flex-direction: column;
-  gap: 40px;
-  
-} */
-
-
 /* Oikea puoli = pystysuuntainen flex */
 .right {
   flex: 1;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
-
 
 /* Header */
 .header {
   background: linear-gradient(to right, rgb(43, 43, 223), rgb(60, 163, 248));
   display: flex;
-  align-items: center;          
-  justify-content: flex-start; 
-  height: 70px;                 
-  padding: 0 16px;              
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  align-items: center;
+  justify-content: flex-start;
+  height: 70px;
+  padding: 0 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .branding {
   display: flex;
   align-items: center;
-  gap: 0; 
+  gap: 0;
 }
 
 /* Tekstin tyyli */
@@ -87,13 +67,13 @@ html, body {
 .header button:hover {
   background: rgb(60, 163, 248);
   cursor: pointer;
-  transform: scale(1.10);
+  transform: scale(1.1);
 }
 
 /* Logo vasemmalle*/
 #better_training_logo {
-  height: 127px;               
-  width: auto;                
+  height: 127px;
+  width: auto;
   object-fit: contain;
   display: block;
   margin: 0;
@@ -101,7 +81,6 @@ html, body {
   margin-top: 9px;
   padding: 0;
 }
-
 
 /* Content täyttää välin */
 .content {
@@ -125,7 +104,7 @@ html, body {
 /*Login formi*/
 .loginform {
   background: linear-gradient(to right, rgb(43, 43, 223), rgb(60, 163, 248));
-  color:white;
+  color: white;
   width: 375px;
   height: auto;
   padding: 45px;
@@ -133,9 +112,9 @@ html, body {
   border-radius: 15px;
   margin-bottom: 150px;
   box-shadow:
-        0 2px 4px rgba(0, 0, 0, 0.08),
-        0 8px 16px rgba(0, 0, 0, 0.12),
-        0 24px 48px rgba(0, 0, 0, 0.2);
+    0 2px 4px rgba(0, 0, 0, 0.08),
+    0 8px 16px rgba(0, 0, 0, 0.12),
+    0 24px 48px rgba(0, 0, 0, 0.2);
 }
 
 .loginform form {
@@ -165,14 +144,14 @@ html, body {
 
 .form-row {
   display: flex;
-  align-items: center;   
+  align-items: center;
   gap: 10px;
-  margin-bottom: 8px;             
+  margin-bottom: 8px;
 }
 
 .form-row label {
-  width: 120px;          
-  font-size: 28px;       
+  width: 120px;
+  font-size: 28px;
 }
 
 .button-row {
@@ -191,7 +170,7 @@ html, body {
   width: 400px;
 }
 
-#register_form {  
+#register_form {
   padding: 40px 40px 20px 40px;
   border-radius: 8px;
   overflow: visible;
@@ -211,7 +190,7 @@ html, body {
 #close_register_dialog:hover {
   background: black;
   color: white;
-  transform: scale(1.10);
+  transform: scale(1.1);
 }
 
 .form-row {
@@ -222,7 +201,7 @@ html, body {
 }
 
 .form-row label {
-  width: 150px;  
+  width: 150px;
   font-size: 20px;
 }
 
@@ -244,7 +223,6 @@ html, body {
   position: relative;
   display: inline-block;
   overflow: visible;
-  
 }
 
 .hero img {
@@ -263,7 +241,7 @@ html, body {
   color: white;
   text-align: center;
 
-  font-size: clamp(20px, 5vw, 50px);  /* 🔥 tärkein */
+  font-size: clamp(20px, 5vw, 50px); /* 🔥 tärkein */
   padding: 0 10px;
 
   text-shadow: 2px 2px 6px black;
@@ -273,7 +251,6 @@ html, body {
   padding-top: 10px;
   justify-content: center;
   display: flex;
-
 }
 
 dialog {
@@ -295,10 +272,10 @@ dialog {
 .dialog-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(9, 173, 243, 0.5);     
-  backdrop-filter: blur(10px);        
+  background: rgba(9, 173, 243, 0.5);
+  backdrop-filter: blur(10px);
   z-index: 99999;
-  display: none;                      
+  display: none;
 }
 
 select {
@@ -306,52 +283,49 @@ select {
   z-index: 20000;
 }
 
-
 /* Tyylikkäämmät nappulat */
 
 .login_button,
 .register_button {
-    border-radius: 25px;
-    min-width: 140px;
-    height: 45px;
-    font-size: 14px;
-    font-weight: 600;
-    padding: 10px 22px;
-    cursor: pointer;
-    transition:
-        background 0.25s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        color 0.2s ease;
+  border-radius: 25px;
+  min-width: 140px;
+  height: 45px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 22px;
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    color 0.2s ease;
 }
 
 /* Kirjaudu sisään */
 .login_button {
-    background: linear-gradient(to right, #ffffff, #f1f1f1);
-    color: #2b2bdd;
-    border: none;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(to right, #ffffff, #f1f1f1);
+  color: #2b2bdd;
+  border: none;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
 }
 
 .login_button:hover {
-    background: linear-gradient(to right, #f1f1f1, #ffffff);
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(to right, #f1f1f1, #ffffff);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.4);
 }
 
 /* Rekisteröidy */
 .register_button {
-    background: transparent;
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.85);
+  background: transparent;
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.85);
 }
 
 .register_button:hover {
   background: linear-gradient(to right, #2b2bdd, #3ca3f8);
   color: white;
 }
-
-
 
 /* Rekisteröitymis dialogin uudet nappulat */
 
@@ -360,20 +334,17 @@ dialog .login_button {
   background: linear-gradient(to right, #2b2bdd, #3ca3f8);
   color: white;
   border: none;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
 }
 
 dialog .register_button:hover,
 dialog .login_button:hover {
   background: linear-gradient(to right, #3ca3f8, #2b2bdd);
   transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 10px 22px rgba(0,0,0,0.35);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.35);
 }
 
 dialog .button-row {
   justify-content: flex-end;
   margin-top: 30px;
 }
-
-
-

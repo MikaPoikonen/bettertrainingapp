@@ -1,9 +1,9 @@
 import promisePool from "../utils/database.js";
-
+// Kubios model: tietokantakyselyt Kubios API:sta haetulle datalle, kuten datan tallennus ja datan haku sql:stä
 
 // Kubios Cloudista
 const KubiosResult = async (payload) => {
-    const sql = `INSERT INTO Kubios_payload 
+  const sql = `INSERT INTO Kubios_payload 
     (user_id, 
     hrv_data, 
     readiness_data, 
@@ -14,17 +14,17 @@ const KubiosResult = async (payload) => {
     entry_date )
     VALUES (?,?,?,?,?,?,?,?)`;
 
-    const params = [
-        payload.user_id,
-        payload.hrv_data,
-        payload.readiness_data,
-        payload.stress_data, 
-        payload.physiological_age,
-        payload.bpm,  
-        payload.kubios_id, 
-        payload.entry_date
-    ];
-    try {
+  const params = [
+    payload.user_id,
+    payload.hrv_data,
+    payload.readiness_data,
+    payload.stress_data,
+    payload.physiological_age,
+    payload.bpm,
+    payload.kubios_id,
+    payload.entry_date,
+  ];
+  try {
     const [result] = await promisePool.execute(sql, params);
     return { entry_id: result.insertId };
   } catch (e) {
@@ -32,8 +32,6 @@ const KubiosResult = async (payload) => {
     return { error: e.message };
   }
 };
-
-
 
 // Get Kubios data from sql
 const getKubiosDataSql = async (user_id) => {
@@ -55,6 +53,4 @@ const getKubiosDataSql = async (user_id) => {
   }
 };
 
-
-
-export {KubiosResult, getKubiosDataSql}
+export { KubiosResult, getKubiosDataSql };
