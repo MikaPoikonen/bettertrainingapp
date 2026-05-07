@@ -37,7 +37,7 @@ Linkki sovelluksen rautalankamalliin
 - https://www.figma.com/make/6pFLq7NPH3mu0e3sYubO37/HRV-Data-Analysis-App?t=0ktJrJ4etgj82vnG-1
 
 Linkki sovelluksen automaatiotestauksen outputs-kansioon
-- #tähän linkki
+- https://github.com/MikaPoikonen/bettertrainingapp/tree/main/outputs
 
 Sovelluksen tietokanta
 
