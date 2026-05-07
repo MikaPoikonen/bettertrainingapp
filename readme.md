@@ -169,10 +169,8 @@ Projektissa on hyödynnetty tekoälyä ohjelmoinnin tukena. Tekoälyä käytetti
 - erilaisten css ulkoasujen suunnitteluun. Mitä vaihtoehtoja olisi käyttää tai saada esim laatikoille hyvät shadow.
 - Azure serverin pystyttämisessä. Matin ohjeissa olevaa linux serveriä esim ei ollut enää. Lisäksi tuli ongelmia regionin kanssa että pystyi käyttämään esim halvinta 8 dollarin serveriä joka oli nyt 2 luokan alla.
 - Tekoäly ei tuottanut valmista projektia kokonaan, vaan sitä käytettiin oppimisen tukena ja yksittäisten ongelmien pienten osien ratkaisemiseen.
+- Lisäksi AI:n käyttöä merkitty erikseen kommentteihin ja sillä on luotu myös sovelluksen logo.
 
-Lisäksi AI:n käyttöä merkitty erikseen kommentteihin.
-
-Ai:lla luotu myös sovelluksen logo.
 ------------------------------------------------
 Referenssit ja kirjastot:
 
