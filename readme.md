@@ -161,6 +161,7 @@ Content-Type: application/json
 
 Delete user by id
 DELETE {{apiurl}}/users/3
+
 ----------------------------------------
 AI:n hyödyntäminen projektissa
 
