@@ -198,5 +198,4 @@ Referenssit ja kirjastot:
 
 
 
-KISSAELÄIN
-https://mikapoikonen.github.io/bettertrainingapp/
+
